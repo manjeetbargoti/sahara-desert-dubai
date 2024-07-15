@@ -21,5 +21,5 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         return view('admin.dashboard');
     })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
-    Route::post('logout', [App\Http\Controllers\Admin\Auth\LoginController::class, 'destroy'])->name('admin.logout');
+    Route::match(['get', 'post'],'logout', [App\Http\Controllers\Admin\Auth\LoginController::class, 'destroy'])->name('admin.logout');
 });

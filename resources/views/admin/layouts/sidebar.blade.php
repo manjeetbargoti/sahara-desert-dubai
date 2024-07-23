@@ -28,7 +28,7 @@
                         <h6 class="overline-title text-primary-alt">User Management</h6>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
+                        <a href="{{ route('users.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
                             <span class="nk-menu-text">Users</span>
                         </a>
@@ -46,7 +46,7 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Roles</span></a>
+                                <a href="{{ route('roles.index') }}" class="nk-menu-link"><span class="nk-menu-text">Roles</span></a>
                             </li>
                             <li class="nk-menu-item">
                                 <a href="{{ route('permissions.index') }}" class="nk-menu-link"><span class="nk-menu-text">Permissions</span></a>

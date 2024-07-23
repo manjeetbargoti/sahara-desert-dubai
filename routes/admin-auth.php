@@ -19,8 +19,19 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         return view('admin.dashboard');
     })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
-    // Permission Route
+    // Permission Routes
     Route::resource('permissions', App\Http\Controllers\Admin\PermissionController::class);
+    Route::get('permissions/{id}/delete', [App\Http\Controllers\Admin\PermissionController::class, 'destroy'])->name('admin.permission.delete');
 
+    // Role Routes
+    Route::resource('roles', App\Http\Controllers\Admin\RoleController::class);
+    Route::get('roles/{id}/delete', [App\Http\Controllers\Admin\RoleController::class, 'destroy'])->name('admin.role.delete');
+    Route::get('roles/{id}/add-permissions', [App\Http\Controllers\Admin\RoleController::class, 'addPermissionsToRole'])->name('admin.role.add.permissions');
+    Route::put('roles/{id}/give-permissions', [App\Http\Controllers\Admin\RoleController::class, 'givePermissionsToRole'])->name('admin.role.give.permissions');
+
+    // User Routes
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+
+    // Admin Logout
     Route::match(['get', 'post'],'logout', [App\Http\Controllers\Admin\Auth\LoginController::class, 'destroy'])->name('admin.logout');
 });

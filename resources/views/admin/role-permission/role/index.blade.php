@@ -6,10 +6,10 @@
         <div class="nk-block-head">
             <div class="nk-block-between">
                 <div class="nk-block-head-content">
-                    <h4 class="nk-block-title">Permissions List</h4>
+                    <h4 class="nk-block-title">Roles List</h4>
                 </div>
                 <div class="nk-block-head-content">
-                    <a href="{{ route('permissions.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Permission</span></a>
+                    <a href="{{ route('roles.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Role</span></a>
                 </div>
             </div>
         </div>
@@ -42,22 +42,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($permissions as $key => $permission)
+                    @foreach($roles as $key => $role)
                     <tr class="tb-tnx-item">
                         <td class="tb-tnx-id">
-                            <span>{{ ($key+1) + ($permissions->currentPage() - 1)*$permissions->perPage() }}</span>
+                            <span>{{ ($key+1) + ($roles->currentPage() - 1)*$roles->perPage() }}</span>
                         </td>
                         <td class="tb-tnx-info">
                             <div class="tb-tnx-desc">
-                                <span class="title">{{ @$permission->name }}</span>
+                                <span class="title">{{ @$role->name }}</span>
                             </div>
                             <div class="tb-tnx-desc">
-                                <span class="title">{{ @$permission->guard_name }}</span>
+                                <span class="title">{{ @$role->guard_name }}</span>
                             </div>
                         </td>
                         <td class="tb-tnx-amount is-alt">
                             <div class="tb-tnx-status">
-                                <span class="badge badge-dot badge-success">Active</span>
+                                <span class="badge badge-dot badge-success">{{ __('Active') }}</span>
                             </div>
                         </td>
                         <td class="tb-tnx-action">
@@ -65,9 +65,9 @@
                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                     <ul class="link-list-plain">
-                                        {{-- <li><a href="#" class="text-warning">View</a></li> --}}
-                                        <li><a href="{{ route('permissions.edit', @$permission->id) }}" class="text-primary">Edit</a></li>
-                                        <li><a href="{{ route('admin.permission.delete', @$permission->id) }}" class="text-danger">Delete</a></li>
+                                        <li><a href="{{ route('admin.role.add.permissions', encrypt(@$role->id)) }}" class="text-info">{{ __('Add/Edit Permission') }}</a></li>
+                                        <li><a href="{{ route('roles.edit', encrypt(@$role->id)) }}" class="text-primary">{{ __('Edit') }}</a></li>
+                                        <li><a href="{{ route('admin.role.delete', encrypt(@$role->id)) }}" class="text-danger">{{ __('Delete') }}</a></li>
                                     </ul>
                                 </div>
                             </div>

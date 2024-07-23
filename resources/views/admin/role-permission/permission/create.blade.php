@@ -10,7 +10,7 @@
                         <div class="card-head">
                             <h5 class="card-title">Add New Permission</h5>
                         </div>
-                        <form action="{{ url('admin/permissions') }}" method="POST">
+                        <form action="{{ route('permissions.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label" for="full-name">Permission Name</label>
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-    </div><!-- .nk-block -->
-</div><!-- .components-preview -->
+    </div>
+</div>
 
 @endsection

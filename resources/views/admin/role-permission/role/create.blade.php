@@ -8,19 +8,18 @@
                 <div class="card card-bordered h-100">
                     <div class="card-inner">
                         <div class="card-head">
-                            <h5 class="card-title">Edit Permission</h5>
+                            <h5 class="card-title">Add New Role</h5>
                         </div>
-                        <form action="{{ route('permissions.update',$permission->id) }}" method="POST">
+                        <form action="{{ route('roles.store') }}" method="POST">
                             @csrf
-                            @method('PUT')
                             <div class="form-group">
-                                <label class="form-label" for="full-name">Permission Name</label>
+                                <label class="form-label" for="full-name">Role Name</label>
                                 <div class="form-control-wrap">
-                                    <input type="text" class="form-control" name="name" value="{{ @$permission->name }}" id="permissionName">
+                                    <input type="text" class="form-control" name="name" id="roleName">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-lg btn-primary">Update Permission</button>
+                                <button type="submit" class="btn btn-lg btn-primary">Save Role</button>
                             </div>
                         </form>
                     </div>

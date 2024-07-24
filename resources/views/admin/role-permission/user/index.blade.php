@@ -29,6 +29,11 @@
                             <span class="tb-tnx-desc">
                                 <span>Name</span>
                             </span>
+                        </th>
+                        <th>
+                            <span class="tb-tnx-desc">
+                                <span>Role</span>
+                            </span>
                             <span class="tb-tnx-desc">
                                 <span>Email</span>
                             </span>
@@ -51,6 +56,15 @@
                             <div class="tb-tnx-desc">
                                 <span class="title">{{ @$user->name }}</span>
                             </div>
+                        </td>
+                        <td>
+                            <div class="tb-tnx-desc">
+                                @if(!empty(@$user->getRoleNames()))
+                                    @foreach (@$user->getRoleNames() as $roleName)
+                                    <span class="badge badge-dim badge-outline-primary">{{ @$roleName }}</span>
+                                    @endforeach
+                                @endif
+                            </div>
                             <div class="tb-tnx-desc">
                                 <span class="title">{{ @$user->email }}</span>
                             </div>
@@ -66,8 +80,8 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                     <ul class="link-list-plain">
                                         <li><a href="#" class="text-info">{{ __('View') }}</a></li>
-                                        <li><a href="{{ route('users.edit', encrypt(@$role->id)) }}" class="text-primary">{{ __('Edit') }}</a></li>
-                                        {{-- <li><a href="{{ route('admin.role.delete', encrypt(@$role->id)) }}" class="text-danger">{{ __('Delete') }}</a></li> --}}
+                                        <li><a href="{{ route('users.edit', @$user->id) }}" class="text-primary">{{ __('Edit') }}</a></li>
+                                        <li><a href="{{ route('admin.user.delete', @$user->id) }}" class="text-danger">{{ __('Delete') }}</a></li>
                                     </ul>
                                 </div>
                             </div>

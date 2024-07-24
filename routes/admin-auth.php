@@ -31,6 +31,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
     // User Routes
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+    Route::get('users/{id}/delete', [App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.user.delete');
 
     // Admin Logout
     Route::match(['get', 'post'],'logout', [App\Http\Controllers\Admin\Auth\LoginController::class, 'destroy'])->name('admin.logout');

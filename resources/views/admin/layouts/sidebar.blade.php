@@ -16,7 +16,7 @@
             <div class="nk-sidebar-menu" data-simplebar>
                 <ul class="nk-menu">
                     <li class="nk-menu-heading">
-                        <h6 class="overline-title text-primary-alt">Use-Case Preview</h6>
+                        {{-- <h6 class="overline-title text-primary-alt">Use-Case Preview</h6> --}}
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
                         <a href="{{ route('admin.dashboard') }}" class="nk-menu-link">

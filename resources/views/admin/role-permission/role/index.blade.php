@@ -9,14 +9,19 @@
                     <h4 class="nk-block-title">Roles List</h4>
                 </div>
                 <div class="nk-block-head-content">
-                    <a href="{{ route('roles.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Role</span></a>
+                    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Role</span></a>
                 </div>
             </div>
         </div>
 
-        @if(session('status'))
+        @if(session('success'))
         <div class="alert alert-success alert-icon">
-            <em class="icon ni ni-check-circle"></em> {{ session('status') }}
+            <em class="icon ni ni-check-circle"></em> {{ session('success') }}
+        </div>
+        @endif
+        @if(session('error'))
+        <div class="alert alert-danger alert-icon">
+            <em class="icon ni ni-check-circle"></em> {{ session('error') }}
         </div>
         @endif
 
@@ -30,7 +35,7 @@
                                 <span>Name</span>
                             </span>
                             <span class="tb-tnx-desc">
-                                <span>Guard</span>
+                                <span>User Type</span>
                             </span>
                         </th>
                         <th class="tb-tnx-amount is-alt">
@@ -52,12 +57,16 @@
                                 <span class="title">{{ @$role->name }}</span>
                             </div>
                             <div class="tb-tnx-desc">
-                                <span class="title">{{ @$role->guard_name }}</span>
+                                <span class="title">{{ @$role->user_type }}</span>
                             </div>
                         </td>
                         <td class="tb-tnx-amount is-alt">
                             <div class="tb-tnx-status">
+                                @if(@$role->status == 1)
                                 <span class="badge badge-dot badge-success">{{ __('Active') }}</span>
+                                @else
+                                <span class="badge badge-dot badge-danger">{{ __('Inactive') }}</span>
+                                @endif
                             </div>
                         </td>
                         <td class="tb-tnx-action">
@@ -65,9 +74,9 @@
                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                     <ul class="link-list-plain">
-                                        <li><a href="{{ route('admin.role.add.permissions', encrypt(@$role->id)) }}" class="text-info">{{ __('Add/Edit Permission') }}</a></li>
-                                        <li><a href="{{ route('roles.edit', encrypt(@$role->id)) }}" class="text-primary">{{ __('Edit') }}</a></li>
-                                        <li><a href="{{ route('admin.role.delete', encrypt(@$role->id)) }}" class="text-danger">{{ __('Delete') }}</a></li>
+                                        {{-- <li><a href="{{ route('admin.role.add.permissions', encrypt(@$role->id)) }}" class="text-info">{{ __('Add/Edit Permission') }}</a></li> --}}
+                                        <li><a href="{{ route('admin.roles.edit', @$role->id) }}" class="text-primary">{{ __('Edit') }}</a></li>
+                                        <li><a href="{{ route('admin.role.delete', @$role->id) }}" class="text-danger">{{ __('Delete') }}</a></li>
                                     </ul>
                                 </div>
                             </div>

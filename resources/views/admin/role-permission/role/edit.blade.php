@@ -10,13 +10,22 @@
                         <div class="card-head">
                             <h5 class="card-title">Edit Role</h5>
                         </div>
-                        <form action="{{ route('roles.update',$role->id) }}" method="POST">
+                        <form action="{{ route('admin.roles.edit',$role->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
                                 <label class="form-label" for="full-name">Role Name</label>
                                 <div class="form-control-wrap">
                                     <input type="text" class="form-control" name="name" value="{{ @$role->name }}" id="roleName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="full-name">Status</label>
+                                <div class="form-control-wrap">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="status" id="roleStatus" {{ @$role->status == 1 ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="roleStatus"></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

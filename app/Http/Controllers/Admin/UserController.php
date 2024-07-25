@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -16,8 +15,8 @@ class UserController extends Controller
     }
 
     public function create(){
-        $roles = Role::pluck('name','name')->all();
-        return view('admin.role-permission.user.create', compact('roles'));
+        // $roles = Role::pluck('name','name')->all();
+        // return view('admin.role-permission.user.create', compact('roles'));
     }
 
     public function store(Request $request){
@@ -34,15 +33,15 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $user->syncRoles($request->roles);
+        // $user->syncRoles($request->roles);
 
         return redirect()->route('users.index')->with('status', 'User Created Successfully!');
     }
 
     public function edit(User $user){
-        $roles = Role::pluck('name','name')->all();
-        $userRoles = $user->roles->pluck('name','name')->all();
-        return view('admin.role-permission.user.edit', compact('user','roles','userRoles'));
+        // $roles = Role::pluck('name','name')->all();
+        // $userRoles = $user->roles->pluck('name','name')->all();
+        // return view('admin.role-permission.user.edit', compact('user','roles','userRoles'));
     }
 
     public function update(Request $request, User $user){
@@ -64,7 +63,7 @@ class UserController extends Controller
         }
 
         $user->update($data);
-        $user->syncRoles($request->roles);
+        // $user->syncRoles($request->roles);
 
         return redirect()->route('users.index')->with('status', 'User Updated Successfully!');
     }

@@ -59,11 +59,11 @@
                         </td>
                         <td>
                             <div class="tb-tnx-desc">
-                                @if(!empty(@$user->getRoleNames()))
+                                {{-- @if(!empty(@$user->getRoleNames()))
                                     @foreach (@$user->getRoleNames() as $roleName)
                                     <span class="badge badge-dim badge-outline-primary">{{ @$roleName }}</span>
                                     @endforeach
-                                @endif
+                                @endif --}}
                             </div>
                             <div class="tb-tnx-desc">
                                 <span class="title">{{ @$user->email }}</span>

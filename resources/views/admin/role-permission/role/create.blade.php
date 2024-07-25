@@ -10,7 +10,7 @@
                         <div class="card-head">
                             <h5 class="card-title">Add New Role</h5>
                         </div>
-                        <form action="{{ route('roles.store') }}" method="POST">
+                        <form action="{{ route('admin.roles.create') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label class="form-label" for="full-name">Role Name</label>

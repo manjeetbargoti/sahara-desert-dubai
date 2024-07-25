@@ -4,60 +4,76 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
     // Display list of all roles
     public function index(){
-        $roles = Role::paginate(25);
+        $roles = Role::latest()->paginate(25);
         return view('admin.role-permission.role.index', compact('roles'));
     }
 
-    // Display create new role form
-    public function create(){
+    // Create new role
+    public function create(Request $request){
+        if($request->isMethod('post')){
+            $request->validate([
+                'name' => ['required','string','unique:roles,name']
+            ]);
+
+            $role = New Role();
+            $role->name = $request->name;
+            $role->display_name = $request->name;
+            $role->user_type = strtolower($request->name);
+            $role->status = 1;
+            
+            $role->save();
+    
+            return redirect()->route('admin.roles.index')->with('success', 'Role Created Successfully!');
+        }
+
         return view('admin.role-permission.role.create');
     }
 
-    // Create new role with information
-    public function store(Request $request){
-        $request->validate([
-            'name' => ['required','string','unique:roles,name']
-        ]);
-
-        Role::create([
-            'name' => $request->name
-        ]);
-
-        return redirect()->route('roles.index')->with('status', 'Role Created Successfully!');
-    }
-
-    // Display form for edit role
-    public function edit(Role $role){
-        return view('admin.role-permission.role.edit', compact('role'));
-    }
-
     // Update role information
-    public function update(Request $request, Role $role){
-        $request->validate([
-            'name' => ['required','string','unique:roles,name,'.$role->id]
-        ]);
+    public function edit(Request $request, $id){
+        $role = Role::findOrfail($id);
+        
+        if($request->isMethod('PUT')){
+            $request->validate([
+                'name' => ['required','string']
+            ]);
 
-        $role->update([
-            'name' => $request->name
-        ]);
+            if(!empty($role->name)){
+                if($request->status == 'on'){
+                    $status = 1;
+                }else{
+                    $status = 0;
+                }
+                
+                $role->name = $request->name;
+                $role->display_name = $request->name;
+                $role->user_type = strtolower($request->name);
+                $role->status = $status;
+                
+                $role->save();
+        
+                return redirect()->route('admin.roles.index')->with('success', 'Role Updated Successfully!');
+            }else{
+                return redirect()->route('admin.roles.index')->with('error', 'Something went wrong!');
+            }
+        }
 
-        return redirect()->route('roles.index')->with('status', 'Role Updated Successfully!');
+        return view('admin.role-permission.role.edit', compact('role'));
     }
 
     // Delete role
     public function destroy($id){
-        $roleId = decrypt($id);
-        $role = Role::find($roleId);
+        $role = Role::find($id);
         $role->delete();
-        return redirect()->route('roles.index')->with('status', 'Role Deleted Successfully!');
+        return redirect()->route('admin.roles.index')->with('success', 'Role Deleted Successfully!');
     }
 
     // Add permissions to role
@@ -82,6 +98,6 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         $role->syncPermissions($request->permission);
 
-        return redirect()->back()->with('status', 'Permissions added to Role Successfully!');
+        return redirect()->back()->with('success', 'Permissions added to Role Successfully!');
     }
 }

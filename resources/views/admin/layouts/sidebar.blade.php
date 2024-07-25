@@ -46,10 +46,10 @@
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="{{ route('roles.index') }}" class="nk-menu-link"><span class="nk-menu-text">Roles</span></a>
+                                <a href="{{ route('admin.roles.index') }}" class="nk-menu-link"><span class="nk-menu-text">Roles</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="{{ route('permissions.index') }}" class="nk-menu-link"><span class="nk-menu-text">Permissions</span></a>
+                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Permissions</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->

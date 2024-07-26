@@ -9,7 +9,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' =>'admin', '
     Route::post('register', 'Auth\RegisteredUserController@store');
 
     // Login Route
-    // Route::get('login', [App\Http\Controllers\Admin\Auth\LoginController::class, 'create'])->name('admin.login');
     Route::get('login', 'Auth\LoginController@create')->name('admin.login');
     Route::post('login', 'Auth\LoginController@store');
 });

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('role_id')->default(0);  
             $table->string('permission_type',100);
-            $table->text('controller',255);
+            $table->text('namespace');
+            $table->text('controller');
             $table->text('actions')->nullable();  
             $table->timestamps();
         });

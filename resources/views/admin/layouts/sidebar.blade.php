@@ -25,12 +25,12 @@
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-heading">
-                        <h6 class="overline-title text-primary-alt">User Management</h6>
+                        <h6 class="overline-title text-primary-alt">Staff Management</h6>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="{{ route('users.index') }}" class="nk-menu-link">
+                        <a href="{{ route('admin.staff.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-user-list"></em></span>
-                            <span class="nk-menu-text">Users</span>
+                            <span class="nk-menu-text">Staff</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
@@ -47,9 +47,6 @@
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
                                 <a href="{{ route('admin.roles.index') }}" class="nk-menu-link"><span class="nk-menu-text">Roles</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Permissions</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->

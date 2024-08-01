@@ -74,7 +74,7 @@
                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                     <ul class="link-list-plain">
-                                        {{-- <li><a href="{{ route('admin.role.add.permissions', encrypt(@$role->id)) }}" class="text-info">{{ __('Add/Edit Permission') }}</a></li> --}}
+                                        <li><a href="{{ route('admin.permissions.update', @$role->id) }}" class="text-info">{{ __('Update Permissions') }}</a></li>
                                         <li><a href="{{ route('admin.roles.edit', @$role->id) }}" class="text-primary">{{ __('Edit') }}</a></li>
                                         <li><a href="{{ route('admin.role.delete', @$role->id) }}" class="text-danger">{{ __('Delete') }}</a></li>
                                     </ul>

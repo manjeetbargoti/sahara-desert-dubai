@@ -9,7 +9,7 @@
                     <h4 class="nk-block-title">Users List</h4>
                 </div>
                 <div class="nk-block-head-content">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add User</span></a>
+                    <a href="{{ route('admin.staff.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Staff</span></a>
                 </div>
             </div>
         </div>
@@ -47,26 +47,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $key => $user)
+                    @foreach($staffs as $key => $staff)
                     <tr class="tb-tnx-item">
                         <td class="tb-tnx-id">
-                            <span>{{ ($key+1) + ($users->currentPage() - 1)*$users->perPage() }}</span>
+                            <span>{{ ($key+1) + ($staffs->currentPage() - 1)*$staffs->perPage() }}</span>
                         </td>
                         <td class="tb-tnx-info">
                             <div class="tb-tnx-desc">
-                                <span class="title">{{ @$user->name }}</span>
+                                <span class="title">{{ @$staff->name }}</span>
                             </div>
                         </td>
                         <td>
                             <div class="tb-tnx-desc">
-                                {{-- @if(!empty(@$user->getRoleNames()))
-                                    @foreach (@$user->getRoleNames() as $roleName)
+                                {{-- @if(!empty(@$staff->getRoleNames()))
+                                    @foreach (@$staff->getRoleNames() as $roleName)
                                     <span class="badge badge-dim badge-outline-primary">{{ @$roleName }}</span>
                                     @endforeach
                                 @endif --}}
+                                <span class="badge badge-dim badge-outline-primary">{{ @$staff->role->display_name }}</span>
                             </div>
                             <div class="tb-tnx-desc">
-                                <span class="title">{{ @$user->email }}</span>
+                                <span class="title">{{ @$staff->email }}</span>
                             </div>
                         </td>
                         <td class="tb-tnx-amount is-alt">
@@ -80,8 +81,8 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                     <ul class="link-list-plain">
                                         <li><a href="#" class="text-info">{{ __('View') }}</a></li>
-                                        <li><a href="{{ route('users.edit', @$user->id) }}" class="text-primary">{{ __('Edit') }}</a></li>
-                                        <li><a href="{{ route('admin.user.delete', @$user->id) }}" class="text-danger">{{ __('Delete') }}</a></li>
+                                        <li><a href="{{ route('admin.staff.edit', @$staff->id) }}" class="text-primary">{{ __('Edit') }}</a></li>
+                                        <li><a href="{{ route('admin.staff.delete', @$staff->id) }}" class="text-danger">{{ __('Delete') }}</a></li>
                                     </ul>
                                 </div>
                             </div>

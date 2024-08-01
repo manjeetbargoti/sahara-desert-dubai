@@ -13,26 +13,28 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' =>'admin', '
     Route::post('login', 'Auth\LoginController@store');
 });
 
-Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware('auth:admin')->group(function () {
+Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['auth:admin','role-permission'])->group(function () {
     // Dashboard
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->middleware(['auth', 'verified'])->name('admin.dashboard');
 
     // Permission Routes
-    Route::any('permissions/{id}', 'PermissionController@update')->name('admin.permissions.update');
+    Route::any('permissions/{id}/update', 'PermissionController@update')->name('admin.permissions.update');
 
     // Role Routes
     Route::match(['get','post'], 'roles', 'RoleController@index')->name('admin.roles.index');
     Route::match(['get','post'], 'roles/create', 'RoleController@create')->name('admin.roles.create');
     Route::any('roles/{id}/edit', 'RoleController@edit')->name('admin.roles.edit');
     Route::get('roles/{id}/delete', 'RoleController@destroy')->name('admin.role.delete');
-    Route::get('roles/{id}/add-permissions', 'RoleController@addPermissionsToRole')->name('admin.role.add.permissions');
-    Route::put('roles/{id}/give-permissions', 'RoleController@givePermissionsToRole')->name('admin.role.give.permissions');
+    // Route::get('roles/{id}/add-permissions', 'RoleController@addPermissionsToRole')->name('admin.role.add.permissions');
+    // Route::put('roles/{id}/give-permissions', 'RoleController@givePermissionsToRole')->name('admin.role.give.permissions');
 
-    // User Routes
-    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
-    Route::get('users/{id}/delete', 'UserController@destroy')->name('admin.user.delete');
+    // Staff Routes
+    Route::match(['get','post'], 'staff', 'StaffController@index')->name('admin.staff.index');
+    Route::match(['get','post'], 'staff/create', 'StaffController@createStaff')->name('admin.staff.create');
+    Route::match(['get','post','put'], 'staff/{id}/edit', 'StaffController@editStaff')->name('admin.staff.edit');
+    Route::get('staff/{id}/delete', 'StaffController@staffDelete')->name('admin.staff.delete');
 
     // Admin Logout
     Route::match(['get', 'post'],'logout', 'Auth\LoginController@destroy')->name('admin.logout');

@@ -2,9 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
+
+Route::namespace('App\Http\Controllers\Site')->group(function() {
+    Route::get('/', 'HomepageController@index')->name('home');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

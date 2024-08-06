@@ -2,7 +2,7 @@
 <header id="header" class="u-header u-header--dark-nav-links-xl u-header--static-xl u-header--show-hide-xl" data-header-fix-moment="500" data-header-fix-effect="slide">
     <div class="u-header__section u-header__shadow-on-show-hide py-4 py-xl-0">
         <!-- Topbar -->
-        <div class="bg-gray u-header__hide-content u-header__topbar u-header__topbar-lg border-bottom border-color-white">
+        <div class="container-fluid u-header__hide-content u-header__topbar u-header__topbar-lg border-bottom border-color-8">
              <div class="container-fluid">
                 <div class="d-flex align-items-center">
                     <ul class="list-inline list-inline-dark u-header__topbar-nav-divider mb-0">
@@ -53,7 +53,7 @@
             </div>
         </div>
         <!-- End Topbar -->
-        <div id="logoAndNav" class="container-fluid pt-xl-2 pb-xl-3 mb-xl-1">
+        <div id="logoAndNav" class="container-fluid py-xl-2 border-bottom-xl">
             <!-- Nav -->
             <nav class="js-mega-menu navbar navbar-expand-xl u-header__navbar u-header__navbar--no-space">
                 <!-- Logo -->

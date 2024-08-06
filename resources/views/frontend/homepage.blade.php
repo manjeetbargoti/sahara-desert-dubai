@@ -171,7 +171,7 @@
                         <header class="w-100 d-flex justify-content-between mb-3">
                             <div>
                                 <div class="pb-3 text-lh-1">
-                                    <a href="#" class="text-white font-weight-bold font-size-21">United Kingdom</a>
+                                    <a href="{{ route('tour.detail', 'test-route') }}" class="text-white font-weight-bold font-size-21">United Kingdom</a>
                                 </div>
                                 <div class="d-inline-flex px-3 py-1 rounded-pill bg-white">
                                     <a href="#" class="font-size-14">15 Tour</a>

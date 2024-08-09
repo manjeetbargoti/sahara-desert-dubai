@@ -33,7 +33,7 @@
                             </li>
                         </ul>
                         <div class="position-relative px-3 u-header__topbar-divider">
-                            <a href="#" class="d-flex align-items-center text-dark">
+                            <a href="{{ route('login') }}" class="d-flex align-items-center text-dark">
                                 <i class="flaticon-user mr-2 ml-1"></i>
                                 <span class="d-inline-block font-size-14 mr-1">Sign in or Register</span>
                             </a>

@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\Route;
 // })->name('home');
 
 Route::namespace('App\Http\Controllers\Site')->group(function() {
+    // Homepage Route
     Route::get('/', 'HomepageController@index')->name('home');
-    Route::match(['get','post'], '{slug}','HomepageController@tourDetail')->name('tour.detail');
+
+    // Tour Detail Route
+    Route::match(['get','post'], 'tours/{slug}','HomepageController@tourDetail')->name('tour.detail');
 });
 
 Route::get('/dashboard', function () {

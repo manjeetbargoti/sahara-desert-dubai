@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('category')->unsigned();
             $table->text('name');
             $table->text('subtitle')->nullable();
-            $table->text('text');
+            $table->text('slug');
             $table->double('original_price',8,2)->nullable();
             $table->double('sell_price',8,2)->nullable();
             $table->double('child_price',8,2)->nullable();

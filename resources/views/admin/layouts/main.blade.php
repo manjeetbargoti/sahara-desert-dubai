@@ -14,6 +14,7 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/dashlite.css?ver='.env('APP_VERSION')) }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/admin/assets/css/theme.css?ver='.env('APP_VERSION')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/editors/summernote.css?ver='.env('APP_VERSION')) }}">
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -62,6 +63,8 @@
     <script src="{{ asset('assets/admin/assets/js/bundle.js?ver='.env('APP_VERSION')) }}"></script>
     <script src="{{ asset('assets/admin/assets/js/scripts.js?ver='.env('APP_VERSION')) }}"></script>
     <script src="{{ asset('assets/admin/assets/js/charts/gd-default.js?ver='.env('APP_VERSION')) }}"></script>
+    <script src="{{ asset('assets/admin/assets/js/libs/editors/summernote.js?ver='.env('APP_VERSION')) }}"></script>
+    <script src="{{ asset('assets/admin/assets/js/editors.js?ver='.env('APP_VERSION')) }}"></script>
 </body>
 
 </html>

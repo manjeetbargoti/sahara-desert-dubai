@@ -65,6 +65,8 @@
     <script src="{{ asset('assets/admin/assets/js/charts/gd-default.js?ver='.env('APP_VERSION')) }}"></script>
     <script src="{{ asset('assets/admin/assets/js/libs/editors/summernote.js?ver='.env('APP_VERSION')) }}"></script>
     <script src="{{ asset('assets/admin/assets/js/editors.js?ver='.env('APP_VERSION')) }}"></script>
+
+    @yield('custom-script')
 </body>
 
 </html>

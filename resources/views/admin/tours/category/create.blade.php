@@ -49,6 +49,9 @@
                                                 @error('thumbnail_img')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
+                                                <div class="image-preview mt-1">
+                                                    <img id="thumbImagePreview" class="img-thumbnail" src="https://placehold.co/600x400/EEE/31343C" alt="preview image" width="60">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -71,6 +74,9 @@
                                                 @error('banner')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
+                                                <div class="image-preview mt-1">
+                                                    <img id="bannerImagePreview" class="img-thumbnail" src="https://placehold.co/1920x1080/EEE/31343C" alt="preview image" width="150">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -113,5 +119,27 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('custom-script')
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $('#thumbnailImage').change(function(){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                $('#thumbImagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+
+            $('#bannerImage').change(function(){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                $('#bannerImagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+        });
+    </script>
 @endsection
 

@@ -109,4 +109,9 @@ class TourCategoryController extends Controller
 
         return view('admin.tours.category.create');
     }
+
+    public function edit(Request $request){
+        $category = TourCategory::where('id', $request->id)->first();
+        return view('admin.tours.category.edit', compact('category'));
+    }
 }

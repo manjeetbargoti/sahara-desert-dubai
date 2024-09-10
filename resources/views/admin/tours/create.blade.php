@@ -4,12 +4,17 @@
         <div class="nk-block nk-block-lg">
             <div class="row g-gs">
                 <div class="col-lg-12 mx-auto">
+                    @if(session('error'))
+                    <div class="alert alert-danger alert-icon">
+                        <em class="icon ni ni-check-circle"></em> {{ session('error') }}
+                    </div>
+                    @endif
                     <div class="card card-bordered">
                         <div class="card-inner">
                             <div class="card-head">
                                 <h5 class="card-title">Add New Tour</h5>
                             </div>
-                            <form action="{{ route('admin.tours.create') }}" method="POST" class="gy-3">
+                            <form action="{{ route('admin.tours.create') }}" method="POST" class="gy-3" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
@@ -32,6 +37,29 @@
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
+                                            <label class="form-label">Tour Transfer Type</label>
+                                            <span class="form-note">Please select a tour transfer type.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <select name="type" class="form-select @error('type') is-invalid @enderror" id="tourTransferType" data-search="on" data-placeholder="Please select tour transfer type">
+                                                    <option value=""></option>
+                                                    <option value="1">Shared Transfer</option>
+                                                    <option value="2">Private Transfer</option>
+                                                    <option value="3">Without Transfer</option>
+                                                </select>
+                                                @error('type')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
                                             <label class="form-label">Category</label>
                                             <span class="form-note">Please select a Category.</span>
                                         </div>
@@ -40,9 +68,7 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <select name="category" class="form-select @error('category') is-invalid @enderror" data-search="on" data-placeholder="Please Select a Role">
-                                                    <option value="">Please Select a Category</option>
-                                                    <option value="1">Category 1</option>
-                                                    <option value="2">Category 2</option>
+                                                    <option value=""></option>
                                                     @foreach ($tourCategories as $tourCategory)
                                                     <option value="{{ @$tourCategory->id }}">{{ @$tourCategory->name }}</option>
                                                     @endforeach
@@ -147,6 +173,42 @@
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
+                                            <label class="form-label" for="fixedCharges">Fixed Charges Amount <small class="text-info"><i>(including vat)</i></small></label>
+                                            <span class="form-note">Enter fixed charges.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="number" name="fixed_charges" value="{{ old('fixed_charges') }}" class="form-control @error('fixed_charges') is-invalid @enderror" min="0.00" step="0.10" id="fixedCharges">
+                                                @error('fixed_charges')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="fixedChargesText">Fixed Charges Text <small class="text-info"><i>(including vat)</i></small></label>
+                                            <span class="form-note">Enter fixed charges text.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="text" name="fixed_charges_text" value="{{ old('fixed_charges_text') }}" class="form-control @error('fixed_charges_text') is-invalid @enderror" min="0.00" step="0.10" id="fixedChargesText">
+                                                @error('fixed_charges_text')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
                                             <label class="form-label" for="shortDescription">Short Description</label>
                                             <span class="form-note">Write short description.</span>
                                         </div>
@@ -174,6 +236,24 @@
                                             <div class="form-control-wrap">
                                                 <textarea name="description" class="form-control @error('description') is-invalid @enderror summernote-basic" id="tourDescription" rows="10">{{ old('description') }}</textarea>
                                                 @error('description')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="tourInclusion">Tour Inclusion</label>
+                                            <span class="form-note">Write is included in this tour?</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <textarea name="tour_inclusion" class="form-control @error('tour_inclusion') is-invalid @enderror summernote-basic" id="tourInclusion" rows="10">{{ old('tour_inclusion') }}</textarea>
+                                                @error('tour_inclusion')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
                                             </div>
@@ -366,16 +446,22 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="thumbnailImage">Thumbnail Image</label>
-                                            <span class="form-note">Please upload thumbnail image.</span>
+                                            <span class="form-note">Please upload thumbnail image (300x230).</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="form-group">
                                             <div class="form-control-wrap">
-                                                <input type="file" name="thumbnail_img" value="{{ old('thumbnail_img') }}" class="form-control @error('thumbnail_img') is-invalid @enderror" id="thumbnailImage">
+                                                <div class="custom-file">
+                                                    <input type="file" name="thumbnail_img" value="{{ old('thumbnail_img') }}" class="custom-file-input @error('thumbnail_img') is-invalid @enderror" id="thumbnailImage">
+                                                    <label class="custom-file-label" for="thumbnailImage">Choose file</label>
+                                                </div>
                                                 @error('thumbnail_img')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
+                                                <div class="image-preview mt-1">
+                                                    <img id="thumbImagePreview" class="img-thumbnail" src="https://placehold.co/300x230/EEE/31343C" alt="preview image" width="60">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -384,16 +470,22 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="galleryImages">Gallery Images</label>
-                                            <span class="form-note">Please upload Gallery image.</span>
+                                            <span class="form-note">Please upload Gallery image (960x490).</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="form-group">
                                             <div class="form-control-wrap">
-                                                <input type="file" multiple name="photos[]" value="{{ old('photos') }}" class="form-control @error('photos') is-invalid @enderror" id="galleryImages">
+                                                <div class="custom-file">
+                                                    <input type="file" name="photos" value="{{ old('photos') }}" class="custom-file-input @error('photos') is-invalid @enderror" id="galleryImages">
+                                                    <label class="custom-file-label" for="galleryImages">Choose file</label>
+                                                </div>
                                                 @error('photos')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
+                                                <div class="image-preview mt-1">
+                                                    <img id="gallImagePreview" class="img-thumbnail" src="https://placehold.co/960x490/EEE/31343C" alt="preview image" width="60">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -402,16 +494,22 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="bannerImage">Banner</label>
-                                            <span class="form-note">Please upload banner image.</span>
+                                            <span class="form-note">Please upload banner image (1920x600).</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="form-group">
                                             <div class="form-control-wrap">
-                                                <input type="file" name="banner" value="{{ old('banner') }}" class="form-control @error('banner') is-invalid @enderror" id="bannerImage">
+                                                <div class="custom-file">
+                                                    <input type="file" name="banner" value="{{ old('banner') }}" class="custom-file-input @error('banner') is-invalid @enderror" id="bannerImage">
+                                                    <label class="custom-file-label" for="bannerImage">Choose file</label>
+                                                </div>
                                                 @error('banner')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
+                                                <div class="image-preview mt-1">
+                                                    <img id="bannerImagePreview" class="img-thumbnail" src="https://placehold.co/1920x600/EEE/31343C" alt="preview image" width="100">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -590,8 +688,30 @@
                                     <div class="col-lg-8">
                                         <div class="form-group">
                                             <div class="form-control-wrap">
-                                                <input type="text" name="is_slot" value="{{ old('is_slot') }}" class="form-control @error('is_slot') is-invalid @enderror" id="isSlot">
+                                                <select name="is_slot" class="form-select form-control @error('is_slot') is-invalid @enderror" data-search="off" id="isSlot" data-placeholder="Please select slot option">
+                                                    <option value=""></option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
                                                 @error('is_slot')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="cutOffTime">Cut-Off Time</label>
+                                            <span class="form-note">Please add cut-off time in hours.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="text" name="cut_off_time" value="{{ old('cut_off_time') }}" class="form-control @error('cut_off_time') is-invalid @enderror" id="cutOffTime">
+                                                @error('cut_off_time')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
                                             </div>
@@ -778,3 +898,32 @@
     </div>
 @endsection
 
+@section('custom-script')
+    <script type="text/javascript">
+        $(document).ready(function (e) {
+            $('#thumbnailImage').change(function(){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                $('#thumbImagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+
+            $('#galleryImages').change(function(){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                $('#gallImagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+
+            $('#bannerImage').change(function(){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                $('#bannerImagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+        });
+    </script>
+@endsection

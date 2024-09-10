@@ -45,8 +45,13 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['au
     // Tour Category Routes
     Route::match(['get','post'], '/tour/category', 'TourCategoryController@index')->name('admin.tours.category.index');
     Route::match(['get','post'], '/tour/category/create', 'TourCategoryController@create')->name('admin.tours.category.create');
-    Route::match(['get','post', 'put'], '/tour/category/{id}/edit', 'TourCategoryController@edit')->name('admin.tours.category.edit');
+    Route::match(['get','post'], '/tour/category/{id}/edit', 'TourCategoryController@edit')->name('admin.tours.category.edit');
     Route::get('/tour/category{id}/delete', 'TourCategoryController@delete')->name('admin.tours.category.delete');
+
+    // Website Setting Routes
+    Route::match(['get', 'post'], 'website-settings','WebsiteSettingController@index')->name('admin.website.setting.index');
+    Route::match(['get', 'post'], 'website-settings/general','WebsiteSettingController@generalSettings')->name('admin.website.setting.general');
+    Route::match(['get', 'post'], 'website-settings/general/update','WebsiteSettingController@updateGeneral')->name('admin.website.setting.general.update');
 
     // Admin Logout
     Route::match(['get', 'post'],'logout', 'Auth\LoginController@destroy')->name('admin.logout');

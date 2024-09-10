@@ -7,14 +7,14 @@
         <div class="d-md-flex align-items-lg-center text-center">
             <div class="row justify-content-md-center w-100 pt-4">
                 <!-- Info -->
-                <div class="mx-3 mb-xl-3 mt-xl-4 mb-2">
+                {{-- <div class="mx-3 mb-xl-3 mt-xl-4 mb-2">
                   <h1 class="font-size-60 font-size-xs-30 text-white font-weight-bold  mb-0">Find Next Place To Visit</h1>
                   <p class="font-size-20 font-weight-normal text-white ml-3">Discover amzaing places at exclusive deals</p>
-                </div>
+                </div> --}}
                 <!-- End Info -->
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card border-0">
                     <div class="card-body">
@@ -109,7 +109,7 @@
                 </div>
                 <!-- End Search Jobs Form -->
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 <!-- ========== END HERO ========== -->
@@ -159,7 +159,7 @@
 <!-- End Icon Block v1 -->
 
 <!-- Destinantion v5 -->
-<div class="destination-block destination-v5 border-bottom border-color-8">
+{{-- <div class="destination-block destination-v5 border-bottom border-color-8">
     <div class="container space-1">
         <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-5 mt-3">
             <h2 class="section-title text-black font-size-30 font-weight-bold mb-0">Popular Destination</h2>
@@ -289,9 +289,10 @@
             <!-- End Card Block -->
         </div>
     </div>
-</div>
+</div> --}}
 <!-- End Destinantion v5 -->
 
+@if(!empty($popularTours))
 <!-- Product Cards -->
 <div class="product-card-block product-card-v1 border-bottom border-color-8">
     <div class="container space-1">
@@ -299,38 +300,47 @@
             <h2 class="section-title text-black font-size-30 font-weight-bold mb-0">Popular Tours</h2>
         </div>
         <div class="js-slick-carousel u-slick u-slick--equal-height u-slick--gutters-3 mb-4" data-slides-show="4" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-classic--v2 u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-chevron-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-xl-n8" data-arrow-right-classes="fas fa-chevron-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-xl-n8" data-pagi-classes="d-lg-none text-center u-slick__pagination mt-4" data-responsive='[ { "breakpoint": 1025, "settings": { "slidesToShow": 3 } }, { "breakpoint": 992, "settings": { "slidesToShow": 2 } }, { "breakpoint": 768, "settings": { "slidesToShow": 1 } }, { "breakpoint": 554, "settings": { "slidesToShow": 1 } } ]'>
+            @foreach($popularTours as $key => $tour)
             <div class="js-slide mt-5">
                 <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
                     <div class="position-relative mb-2">
-                        <a href="#" class="d-block gradient-overlay-half-bg-gradient-v5">
-                            <img class="card-img-top" src="{{ asset('assets/frontend/img/300x230/img1.jpg') }}" alt="Image Description">
+                        <a href="{{ route('tour.detail', @$tour->slug) }}" class="d-block gradient-overlay-half-bg-gradient-v5">
+                            <img class="card-img-top" src="{{ uploaded_asset(@$tour->thumbnail_img) }}" alt="{{ @$tour->name }}">
                         </a>
                         <div class="position-absolute top-0 left-0 pt-5 pl-3">
-                            <a href="#">
+                            @if(@$tour->featured == 1)
+                            <a href="{{ route('tour.detail', @$tour->slug) }}">
                                 <span class="badge badge-pill bg-white text-primary px-4 py-2 font-size-14 font-weight-normal">Featured</span>
                             </a>
-                            <a href="#">
-                            <span class="badge badge-pill bg-white text-danger px-3 ml-3 py-2 font-size-14 font-weight-normal">%25</span>
+                            @endif
+                            @if(@$tour->discount > 1)
+                            <a href="{{ route('tour.detail', @$tour->slug) }}">
+                            <span class="badge badge-pill bg-white text-danger px-3 ml-3 py-2 font-size-14 font-weight-normal">{{ @$tour->discount }}% OFF</span>
                             </a>
+                            @endif
                         </div>
-                        <div class="position-absolute top-0 right-0 pt-5 pr-3">
+                        {{-- <div class="position-absolute top-0 right-0 pt-5 pr-3">
                           <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
                             <span class="flaticon-heart-1 font-size-20"></span>
                           </button>
-                        </div>
+                        </div> --}}
                         <div class="position-absolute bottom-0 left-0 right-0">
                             <div class="px-3 pb-2">
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>£350.00</h2>
+                                @if(@$tour->child_price > 1)
+                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>{{ single_price(@$tour->child_price) }}</h2>
+                                @else
+                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>{{ single_price(@$tour->sell_price) }}</h2>
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="card-body px-4 pt-2 pb-3">
-                        <a href="#" class="d-block">
+                        <a href="{{ route('tour.detail', @$tour->slug) }}" class="d-block">
                             <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
-                                <i class="icon flaticon-placeholder mr-2 font-size-20"></i> Greater London, United Kingdom
+                                <span class="fas fa-cloud-sun-rain"></span>&nbsp; {{ @$tour->season }}
                             </div>
                         </a>
-                        <a href="#" class="card-title font-size-17 font-weight-bold mb-0 text-dark">Stonehenge, Windsor Castle,<br>and Bath from London</a>
+                        <a href="{{ route('tour.detail', @$tour->slug) }}" class="card-title font-size-17 font-weight-bold mb-0 text-dark">{{ @$tour->name }}</a>
                         <div class="my-2">
                             <div class="d-inline-flex align-items-center font-size-13 text-lh-1 text-primary">
                                 <div class="green-lighter mr-2">
@@ -344,333 +354,17 @@
                             </div>
                         </div>
                         <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> 3 hours 45 minutes
+                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> {{ @$tour->duration }}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="js-slide mt-5">
-                <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
-                    <div class="position-relative mb-2">
-                        <a href="#" class="d-block gradient-overlay-half-bg-gradient-v5">
-                            <img class="card-img-top" src="{{ asset('assets/frontend/img/300x230/img2.jpg') }}" alt="Image Description">
-                        </a>
-                        <div class="position-absolute top-0 left-0 pt-5 pl-3">
-                        <a href="#">
-                            <span class="badge badge-pill bg-white text-danger px-3 py-2 font-size-14 font-weight-normal">%25</span>
-                        </a>
-                        </div>
-                        <div class="position-absolute top-0 right-0 pt-5 pr-3">
-                          <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
-                            <span class="flaticon-heart-1 font-size-20"></span>
-                          </button>
-                        </div>
-                        <div class="position-absolute bottom-0 left-0 right-0">
-                            <div class="px-3 pb-2">
-                                <span class="text-color-13 font-weight-normal font-size-16 mb-1 d-block">Multi-day Tours</span>
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>£899.00</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-4 pt-2 pb-3">
-                        <a href="#" class="d-block">
-                            <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
-                                <i class="icon flaticon-placeholder mr-2 font-size-20"></i> Istanbul, Turkey
-                            </div>
-                        </a>
-                        <a href="#" class="card-title text-dark font-size-17 font-weight-bold">Bosphorus Strait and Black Sea Half-Day Cruise from Istanbul</a>
-                        <div class="my-2">
-                            <div class="d-inline-flex align-items-center font-size-13 text-lh-1">
-                                <div class="green-lighter mr-2">
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                </div>
-                                <span class="text-secondary font-size-14 mt-1">48 Reviews</span>
-                            </div>
-                        </div>
-                        <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> 3 hours 45 minutes
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="js-slide mt-5">
-                <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
-                    <div class="position-relative mb-2">
-                        <a href="#" class="d-block gradient-overlay-half-bg-gradient-v5">
-                            <img class="card-img-top" src="{{ asset('assets/frontend/img/300x230/img3.jpg') }}" alt="Image Description">
-                        </a>
-                        <div class="position-absolute top-0 right-0 pt-5 pr-3">
-                          <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
-                            <span class="flaticon-heart-1 font-size-20"></span>
-                          </button>
-                        </div>
-                        <div class="position-absolute bottom-0 left-0 right-0">
-                            <div class="px-3 pb-2">
-                                <span class="text-color-13 font-weight-normal font-size-16 mb-1 d-block">Attraction Tickets</span>
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>£590.00</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-4 pt-2 pb-3">
-                        <a href="#" class="d-block">
-                            <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
-                                <i class="icon flaticon-placeholder mr-2 font-size-20"></i> Istanbul, Turkey
-                            </div>
-                        </a>
-                        <a href="#" class="card-title text-dark font-size-17 font-weight-bold">NYC One World Observatory Skip-the-Line Ticket</a>
-                        <div class="my-2">
-                            <div class="d-inline-flex align-items-center font-size-13 text-lh-1">
-                                <div class="green-lighter mr-2">
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                </div>
-                                <span class="text-secondary font-size-14 mt-1">48 Reviews</span>
-                            </div>
-                        </div>
-                        <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> 3 hours 45 minutes
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="js-slide mt-5">
-                <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
-                    <div class="position-relative mb-2">
-                        <a href="#" class="d-block gradient-overlay-half-bg-gradient-v5">
-                            <img class="card-img-top" src="{{ asset('assets/frontend/img/300x230/img4.jpg') }}" alt="Image Description">
-                        </a>
-                        <div class="position-absolute top-0 right-0 pt-5 pr-3">
-                              <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
-                                <span class="flaticon-heart-1 font-size-20"></span>
-                              </button>
-                        </div>
-                        <div class="position-absolute bottom-0 left-0 right-0">
-                            <div class="px-3 pb-2">
-                                <span class="text-color-13 font-weight-normal font-size-16 mb-1 d-block">Culturals Tours</span>
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>£550.00</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-4 pt-2 pb-3">
-                        <a href="#" class="d-block">
-                            <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
-                                <i class="icon flaticon-placeholder mr-2 font-size-20"></i> Istanbul, Turkey
-                            </div>
-                        </a>
-                        <a href="#" class="card-title text-dark font-size-17 font-weight-bold">Small-Group Blue Mountains Day Trip from Sydney with River Cruise</a>
-                        <div class="my-2">
-                            <div class="d-inline-flex align-items-center font-size-13 text-lh-1">
-                                <div class="green-lighter mr-2">
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                </div>
-                                <span class="text-secondary font-size-14 mt-1">48 Reviews</span>
-                            </div>
-                        </div>
-                        <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> 3 hours 45 minutes
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="js-slide mt-5">
-                <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
-                    <div class="position-relative mb-2">
-                        <a href="#" class="d-block gradient-overlay-half-bg-gradient-v5">
-                            <img class="card-img-top" src="{{ asset('assets/frontend/img/300x230/img5.jpg') }}" alt="Image Description">
-                        </a>
-                        <div class="position-absolute top-0 left-0 pt-5 pl-3">
-                        <a href="#">
-                            <span class="badge badge-pill bg-white text-primary px-4 py-2 font-size-14 font-weight-normal">Featured</span>
-                        </a>
-                        <a href="#">
-                            <span class="badge badge-pill bg-white text-danger px-3 ml-3 py-2 font-size-14 font-weight-normal">%25</span>
-                        </a>
-                        </div>
-                        <div class="position-absolute top-0 right-0 pt-5 pr-3">
-                            <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
-                                <span class="flaticon-heart-1 font-size-20"></span>
-                            </button>
-                        </div>
-                        <div class="position-absolute bottom-0 left-0 right-0">
-                            <div class="px-3 pb-2">
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>£350.00</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-4 pt-2 pb-3">
-                        <a href="#" class="d-block">
-                            <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
-                                <i class="icon flaticon-placeholder mr-2 font-size-20"></i> Istanbul, Turkey
-                            </div>
-                        </a>
-                        <a href="#" class="card-title text-dark font-size-17 font-weight-bold">Windsor Castle, Stonehenge, and Oxford Day Trip from London</a>
-                        <div class="my-2">
-                            <div class="d-inline-flex align-items-center font-size-13 text-lh-1">
-                                <div class="green-lighter mr-2">
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                </div>
-                                <span class="text-secondary font-size-14 mt-1">48 Reviews</span>
-                            </div>
-                        </div>
-                        <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> 3 hours 45 minutes
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="js-slide mt-5">
-                <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
-                    <div class="position-relative mb-2">
-                        <a href="#" class="d-block gradient-overlay-half-bg-gradient-v5">
-                            <img class="card-img-top" src="{{ asset('assets/frontend/img/300x230/img6.jpg') }}" alt="Image Description">
-                        </a>
-                        <div class="position-absolute top-0 left-0 pt-5 pl-3">
-                        <a href="#">
-                            <span class="badge badge-pill bg-white text-danger px-3 py-2 font-size-14 font-weight-normal">%25</span>
-                        </a>
-                        </div>
-                        <div class="position-absolute top-0 right-0 pt-5 pr-3">
-                            <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
-                                <span class="flaticon-heart-1 font-size-20"></span>
-                            </button>
-                        </div>
-                        <div class="position-absolute bottom-0 left-0 right-0">
-                            <div class="px-3 pb-2">
-                                <span class="text-color-13 font-weight-normal font-size-16 mb-1 d-block">Multi-day Tours</span>
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>£899.00</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-4 pt-2 pb-3">
-                        <a href="#" class="d-block">
-                            <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
-                                <i class="icon flaticon-placeholder mr-2 font-size-20"></i> Istanbul, Turkey
-                            </div>
-                        </a>
-                        <a href="#" class="card-title text-dark font-size-17 font-weight-bold">Snaefellsnes Peninsula Classic Day Tour from Reykjavik</a>
-                        <div class="my-2">
-                            <div class="d-inline-flex align-items-center font-size-13 text-lh-1">
-                                <div class="green-lighter mr-2">
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                </div>
-                                <span class="text-secondary font-size-14 mt-1">48 Reviews</span>
-                            </div>
-                        </div>
-                        <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> 3 hours 45 minutes
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="js-slide mt-5">
-                <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
-                    <div class="position-relative mb-2">
-                        <a href="#" class="d-block gradient-overlay-half-bg-gradient-v5">
-                            <img class="card-img-top" src="{{ asset('assets/frontend/img/300x230/img7.jpg') }}" alt="Image Description">
-                        </a>
-                        <div class="position-absolute top-0 right-0 pt-5 pr-3">
-                          <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
-                            <span class="flaticon-heart-1 font-size-20"></span>
-                          </button>
-                        </div>
-                        <div class="position-absolute bottom-0 left-0 right-0">
-                            <div class="px-3 pb-2">
-                                <span class="text-color-13 font-weight-normal font-size-16 mb-1 d-block">Attraction Tickets</span>
-                                <a href="#" class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>£590.00</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-4 pt-2 pb-3">
-                        <a href="#" class="d-block">
-                            <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
-                                <i class="icon flaticon-placeholder mr-2 font-size-20"></i> Istanbul, Turkey
-                            </div>
-                        </a>
-                        <a href="#" class="card-title text-dark font-size-17 font-weight-bold">Giverny and Versailles Small Group Day Trip</a>
-                        <div class="my-2">
-                            <div class="d-inline-flex align-items-center font-size-13 text-lh-1">
-                                <div class="green-lighter mr-2">
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                </div>
-                                <span class="text-secondary font-size-14 mt-1">48 Reviews</span>
-                            </div>
-                        </div>
-                        <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> 3 hours 45 minutes
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="js-slide mt-5">
-                <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
-                    <div class="position-relative mb-2">
-                        <a href="#" class="d-block gradient-overlay-half-bg-gradient-v5">
-                            <img class="card-img-top" src="{{ asset('assets/frontend/img/300x230/img8.jpg') }}" alt="Image Description">
-                        </a>
-                        <div class="position-absolute top-0 right-0 pt-5 pr-3">
-                              <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
-                                <span class="flaticon-heart-1 font-size-20"></span>
-                              </button>
-                        </div>
-                        <div class="position-absolute bottom-0 left-0 right-0">
-                            <div class="px-3 pb-2">
-                                <span class="text-color-13 font-weight-normal font-size-16 mb-1 d-block">Culturals Tours</span>
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>£550.00</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body px-4 pt-2 pb-3">
-                        <a href="#" class="d-block">
-                            <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
-                                <i class="icon flaticon-placeholder mr-2 font-size-20"></i> Istanbul, Turkey
-                            </div>
-                        </a>
-                        <a href="#" class="card-title text-dark font-size-17 font-weight-bold">Two Hour Walking Tour of Manhattan</a>
-                        <div class="my-2">
-                            <div class="d-inline-flex align-items-center font-size-13 text-lh-1">
-                                <div class="green-lighter mr-2">
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                </div>
-                                <span class="text-secondary font-size-14 mt-1">48 Reviews</span>
-                            </div>
-                        </div>
-                        <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> 3 hours 45 minutes
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
 <!-- End Product Cards -->
+@endif
 
 <!--Banner v4-->
 <div class="banner-block banner-v4 gradient-overlay-half-bg-blue-light bg-img-hero space-3 space-top-lg-4 space-bottom-lg-3" style="background-image: url({{ asset('assets/frontend/img/1920x500/img5.jp') }}g);">

@@ -23,57 +23,46 @@
         <div class="card card-bordered card-preview">
             <table class="table table-tranx">
                 <thead>
-                    <tr class="tb-tnx-head">
-                        <th class="tb-tnx-id"><span class="">#</span></th>
-                        <th class="tb-tnx-info">
-                            <span class="tb-tnx-desc">
-                                <span>Name</span>
-                            </span>
-                        </th>
-                        <th>
-                            <span class="tb-tnx-desc">
-                                <span>Category</span>
-                            </span>
-                            <span class="tb-tnx-desc">
-                                <span>Price</span>
-                            </span>
-                        </th>
-                        <th class="tb-tnx-amount is-alt">
-                            <span class="tb-tnx-status d-none d-md-inline-block">Status</span>
-                        </th>
-                        <th class="tb-tnx-action">
-                            <span>&nbsp;</span>
-                        </th>
+                    <tr>
+                        <th width="5%">{{ __('#') }}</th>
+                        <th width="30%">{{  __('Tour Info') }}</th>
+                        <th width="15%">{{  __('Category') }}</th>
+                        <th width="10%">{{  __('Price') }}</th>
+                        <th width="10%">{{  __('Status') }}</th>
+                        <th width="10%"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($tours as $key => $tour)
                     <tr class="tb-tnx-item">
-                        <td class="tb-tnx-id">
+                        <td>
                             <span>{{ ($key+1) + ($tours->currentPage() - 1)*$tours->perPage() }}</span>
                         </td>
-                        <td class="tb-tnx-info">
-                            <div class="tb-tnx-desc">
-                                <span class="title">{{ @$tour->name }}</span>
+                        <td>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <img src="{{ uploaded_asset($tour->thumbnail_img) }}" alt="{{ @$tour->name }}" width="60">
+                                </div>
+                                <div class="col-sm-10">
+                                    <span class="title">{{ @$tour->name }}</span><br>
+                                    @if(@$tour->type == 3)
+                                    <span class="badge badge-dim badge-outline-info">{{ __('Without Transfer') }}</span>
+                                    @elseif (@$tour->type == 2)
+                                    <span class="badge badge-dim badge-outline-info">{{ __('Private Transfer') }}</span>
+                                    @elseif (@$tour->type == 1)
+                                    <span class="badge badge-dim badge-outline-info">{{ __('Shared Transfer') }}</span>
+                                    @endif
+                                </div>
                             </div>
                         </td>
                         <td>
-                            <div class="tb-tnx-desc">
-                                {{-- @if(!empty(@$staff->getRoleNames()))
-                                    @foreach (@$staff->getRoleNames() as $roleName)
-                                    <span class="badge badge-dim badge-outline-primary">{{ @$roleName }}</span>
-                                    @endforeach
-                                @endif --}}
-                                <span class="badge badge-dim badge-outline-primary">{{ @$tour->category }}</span>
-                            </div>
-                            <div class="tb-tnx-desc">
-                                <span class="title">{{ @$tour->price }}</span>
-                            </div>
+                            <span class="badge badge-dim badge-outline-primary">{{ @$tour->tour_category->name }}</span>
                         </td>
-                        <td class="tb-tnx-amount is-alt">
-                            <div class="tb-tnx-status">
-                                <span class="badge badge-dot badge-success">{{ __('Active') }}</span>
-                            </div>
+                        <td>
+                            <span class="title text-info">{{ single_price(@$tour->sell_price) }}</span>
+                        </td>
+                        <td>
+                            <span class="badge badge-dot badge-success">{{ __('Active') }}</span>
                         </td>
                         <td class="tb-tnx-action">
                             <div class="dropdown">

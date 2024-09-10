@@ -4,6 +4,11 @@
         <div class="nk-block nk-block-lg">
             <div class="row g-gs">
                 <div class="col-lg-12 mx-auto">
+                    @if(session('error'))
+                    <div class="alert alert-danger alert-icon">
+                        <em class="icon ni ni-check-circle"></em> {{ session('error') }}
+                    </div>
+                    @endif
                     <div class="card card-bordered">
                         <div class="card-inner">
                             <div class="card-head">
@@ -43,17 +48,15 @@
                                             <div class="form-control-wrap">
                                                 <div class="custom-file">
                                                     <input type="file" name="thumbnail_img" value="{{ old('thumbnail_img') }}" class="custom-file-input @error('thumbnail_img') is-invalid @enderror" id="thumbnailImage">
+                                                    <input type="hidden" name="thumbnail_img_old" value="{{ $category->thumbnail_img }}">
                                                     <label class="custom-file-label" for="thumbnailImage">Choose file</label>
                                                 </div>
-                                                {{-- <input type="file" name="thumbnail_img" value="{{ old('thumbnail_img') }}" class="form-control @error('thumbnail_img') is-invalid @enderror" id="thumbnailImage"> --}}
                                                 @error('thumbnail_img')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
-                                                @if(!empty($category->thumbnail_img))
                                                 <div class="image-preview mt-1">
                                                     <img id="thumbImagePreview" src="{{ uploaded_asset($category->thumbnail_img) }}" class="img-thumbnail" alt="{{ $category->name }}" width="60">
                                                 </div>
-                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -69,18 +72,16 @@
                                         <div class="form-group">
                                             <div class="form-control-wrap">
                                                 <div class="custom-file">
-                                                    <input type="file" name="banner" value="{{ old('banner') }}" class="custom-file-input @error('banner') is-invalid @enderror" id="bannerImage">
+                                                    <input type="file" name="banner" value="{{ @$category->banner }}" class="custom-file-input @error('banner') is-invalid @enderror" id="bannerImage">
+                                                    <input type="hidden" name="banner_old" value="{{ $category->banner }}">
                                                     <label class="custom-file-label" for="bannerImage">Choose file</label>
                                                 </div>
-                                                {{-- <input type="file" name="banner" value="{{ old('banner') }}" class="form-control @error('banner') is-invalid @enderror" id="bannerImage"> --}}
                                                 @error('banner')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
-                                                @if(!empty($category->banner))
                                                 <div class="image-preview mt-1">
                                                     <img id="bannerImagePreview" src="{{ uploaded_asset($category->banner) }}" class="img-thumbnail" alt="{{ $category->name }}" width="150">
                                                 </div>
-                                                @endif
                                             </div>
                                         </div>
                                     </div>

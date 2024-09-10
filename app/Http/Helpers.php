@@ -2,8 +2,10 @@
 
 use App\Models\Role;
 use App\Models\Upload;
+use App\Models\WebsiteSettings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 function activeGuard($except = array()){
 
@@ -61,5 +63,61 @@ if (! function_exists('my_asset')) {
 
             return $url;
         }
+    }
+}
+
+if (! function_exists('single_price')) {
+    function single_price($price)
+    {
+        return format_price(convert_price($price));
+    }
+}
+
+//formats currency
+if (! function_exists('format_price')) {
+    function format_price($price)
+    {
+        // if(BusinessSetting::where('type', 'symbol_format')->first()->value == 1){
+        //     return currency_symbol().' '.number_format($price, 2);
+        // }
+        // return number_format($price, 2).currency_symbol();
+        return currency_symbol().' '.number_format($price, 2);
+    }
+}
+
+//converts currency to home default currency
+if (! function_exists('convert_price')) {
+    function convert_price($price)
+    {
+        $price = floatval($price);
+
+        return $price;
+    }
+}
+
+if (! function_exists('currency_symbol')) {
+    function currency_symbol()
+    {
+        if(Session::has('locale')){
+            $locale = Session::get('locale', Config::get('app.locale'));
+            if($locale == 'ae') {
+                $currency_symbol = 'درهم';
+            }else{
+                $currency_symbol = 'AED';
+            }
+        }
+        else{
+            $currency_symbol = 'AED';
+        }
+
+        return $currency_symbol;
+    }
+}
+
+if (!function_exists('get_setting')) {
+    function get_setting($key, $default = null)
+    {
+        $setting = WebsiteSettings::where('type', $key)->first();
+        return $setting == null ? $default : $setting->value;
     }
 }

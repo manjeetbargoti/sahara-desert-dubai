@@ -19,6 +19,11 @@
             <em class="icon ni ni-check-circle"></em> {{ session('success') }}
         </div>
         @endif
+        @if(session('error'))
+        <div class="alert alert-danger alert-icon">
+            <em class="icon ni ni-check-circle"></em> {{ session('error') }}
+        </div>
+        @endif
 
         <div class="card card-bordered card-preview">
             <table class="table table-tranx">

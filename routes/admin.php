@@ -49,7 +49,8 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['au
     Route::get('/tour/category{id}/delete', 'TourCategoryController@delete')->name('admin.tours.category.delete');
 
     // Website Setting Routes
-    Route::match(['get', 'post'], 'website-settings','WebsiteSettingController@index')->name('admin.website.setting.index');
+    Route::match(['get', 'post'], 'website-settings/images/update','WebsiteSettingController@imagesUpdate')->name('admin.website.setting.images.update');
+    Route::match(['get', 'post'], 'website-settings/social/update','WebsiteSettingController@socialUpdate')->name('admin.website.setting.social.update');
     Route::match(['get', 'post'], 'website-settings/general','WebsiteSettingController@generalSettings')->name('admin.website.setting.general');
     Route::match(['get', 'post'], 'website-settings/general/update','WebsiteSettingController@updateGeneral')->name('admin.website.setting.general.update');
 

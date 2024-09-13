@@ -2,7 +2,7 @@
 @section("content")
 
 <!-- ========== HERO ========== -->
-<div class="bg-img-hero-bottom min-height-600 gradient-overlay-half-gray-gradient  space-top-lg-3 space-2" style="background-image: url(assets/frontend/img/1920x600/img1.jpg);">
+<div class="bg-img-hero-bottom min-height-600 gradient-overlay-half-gray-gradient  space-top-lg-3 space-2" style="background-image: url({{ uploaded_asset(get_setting('homepage_banner')) }});">
     <div class="container">
         <div class="d-md-flex align-items-lg-center text-center">
             <div class="row justify-content-md-center w-100 pt-4">
@@ -340,7 +340,7 @@
                                 <span class="fas fa-cloud-sun-rain"></span>&nbsp; {{ @$tour->season }}
                             </div>
                         </a>
-                        <a href="{{ route('tour.detail', @$tour->slug) }}" class="card-title font-size-17 font-weight-bold mb-0 text-dark">{{ @$tour->name }}</a>
+                        <a href="{{ route('tour.detail', @$tour->slug) }}" class="card-title font-size-17 font-weight-bold mb-0 text-dark" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;min-height: 3em;">{{ @$tour->name }}</a>
                         <div class="my-2">
                             <div class="d-inline-flex align-items-center font-size-13 text-lh-1 text-primary">
                                 <div class="green-lighter mr-2">

@@ -24,6 +24,10 @@ Route::namespace('App\Http\Controllers\Site')->middleware('auth')->group(functio
     Route::delete('/profile', 'ProfileController@destroy')->name('profile.destroy');
 });
 
+Route::namespace('App\Http\Controllers\Site')->group(function () {
+    Route::post('/submit-booking', 'BookingController@submitBooking')->name('tour.booking.submit');
+});
+
 // require __DIR__.'/auth.php';
 
 // require __DIR__.'/admin-auth.php';

@@ -16,6 +16,12 @@ class HomepageController extends Controller
     }
 
     public function tourDetail(Request $request){
-        return view('frontend.tours.detail');
+        $tour = Tour::where(['slug'=>$request->slug, 'status' => 1, 'admin_approval' => 1])->first();
+        if(!empty($tour)){
+            $related_tours = Tour::where(['status'=>1,'admin_approval'=>1])->latest()->limit(10)->get();
+            return view('frontend.tours.detail', compact('tour','related_tours'));
+        }else{
+            return redirect()->route('home');
+        }
     }
 }

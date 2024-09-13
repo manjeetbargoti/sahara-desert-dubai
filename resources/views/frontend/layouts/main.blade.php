@@ -2,14 +2,14 @@
 <html lang="en">
     <head>
         <!-- Title -->
-        <title>{{ env('APP_NAME') }}</title>
+        <title>{{ get_setting('website_title') ?? env('APP_NAME') }}</title>
 
         <!-- Required Meta Tags Always Come First -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Favicon -->
-        <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+        <link rel="shortcut icon" href="{{ uploaded_asset(get_setting('website_icon')) }}">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/bootstrap-select/dist/css/bootstrap-select.min.css?v='.env('APP_VERSION')) }}">
         <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/slick-carousel/slick/slick.css?v='.env('APP_VERSION')) }}">
         <link rel="stylesheet" href="{{ asset('assets/frontend/vendor/fancybox/jquery.fancybox.css?v='.env('APP_VERSION')) }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/css/intlTelInput.css">
 
         <!-- CSS MyTravel Template -->
         <link rel="stylesheet" href="{{ asset('assets/frontend/css/theme.css?v='.env('APP_VERSION')) }}">
@@ -40,13 +41,13 @@
         @include("frontend.layouts.footer")
 
         <!-- Page Preloader -->
-        <!-- <div id="jsPreloader" class="page-preloader">
+        {{-- <!-- <div id="jsPreloader" class="page-preloader">
             <div class="page-preloader__content-centered">
                 <div class="spinner-grow text-primary" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-        </div> -->
+        </div> --> --}}
         <!-- End Page Preloader -->
 
         <!-- Go to Top -->
@@ -83,6 +84,7 @@
         <script src="{{ asset('assets/frontend/js/components/hs.fancybox.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.svg-injector.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.quantity-counter.js?v='.env('APP_VERSION')) }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/intlTelInput.min.js"></script>
 
         <!-- JS Plugins Init. -->
         <script>
@@ -107,31 +109,25 @@
             $(document).on('ready', function () {
                 // initialization of header
                 $.HSCore.components.HSHeader.init($('#header'));
-
                 // initialization of unfold component
                 $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
-
                 // initialization of show animations
                 $.HSCore.components.HSShowAnimation.init('.js-animation-link');
-
                 // initialization of datepicker
                 $.HSCore.components.HSRangeDatepicker.init('.js-range-datepicker');
-
                 // initialization of select
                 $.HSCore.components.HSSelectPicker.init('.js-select');
-
                 // initialization of quantity counter
                 $.HSCore.components.HSQantityCounter.init('.js-quantity');
-
                 // initialization of slick carousel
                 $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-
                 // initialization of popups
                 $.HSCore.components.HSFancyBox.init('.js-fancybox');
-
                 // initialization of go to
                 $.HSCore.components.HSGoTo.init('.js-go-to');
             });
         </script>
+
+        @yield('custom-script')
     </body>
 </html>

@@ -33,6 +33,8 @@ class TourController extends Controller
                     'sale_price' => 'required',
                     'child_price' => 'required',
                     'infant_price' => 'required',
+                    'fixed_charges' => 'required',
+                    'fixed_charges_text' => 'string',
                     'short_description' => 'string',
                     'description' => 'string',
                     'what_this_tour' => 'string',
@@ -90,8 +92,10 @@ class TourController extends Controller
                 $tour->sell_price       = round($request->sale_price,2);
                 $tour->child_price      = round($request->child_price,2);
                 $tour->infant_price     = round($request->infant_price,2);
-                $tour->discount         = round($discount);
-                $tour->discount_type    = 'percent';
+                $tour->fixed_charges    = round($request->fixed_charges,2);
+                $tour->fixed_charges_text       = round($request->fixed_charges_text,2);
+                $tour->discount                 = round($discount);
+                $tour->discount_type            = 'percent';
                 $tour->short_description        = $request->short_description;
                 $tour->description              = $request->description;
                 $tour->tour_inclusion           = $request->tour_inclusion;
@@ -262,6 +266,8 @@ class TourController extends Controller
                     'sale_price' => 'required',
                     'child_price' => 'required',
                     'infant_price' => 'required',
+                    'fixed_charges' => 'required',
+                    'fixed_charges_text' => 'string',
                     'short_description' => 'string',
                     'description' => 'string',
                     'what_this_tour' => 'string',
@@ -322,8 +328,10 @@ class TourController extends Controller
                 $tour->sell_price       = round($request->sale_price,2);
                 $tour->child_price      = round($request->child_price,2);
                 $tour->infant_price     = round($request->infant_price,2);
-                $tour->discount         = round($discount);
-                $tour->discount_type    = 'percent';
+                $tour->fixed_charges    = round($request->fixed_charges,2);
+                $tour->fixed_charges_text       = round($request->fixed_charges_text,2);
+                $tour->discount                 = round($discount);
+                $tour->discount_type            = 'percent';
                 $tour->short_description        = $request->short_description;
                 $tour->description              = $request->description;
                 $tour->tour_inclusion           = $request->tour_inclusion;

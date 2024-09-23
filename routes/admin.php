@@ -54,6 +54,11 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['au
     Route::match(['get', 'post'], 'website-settings/general','WebsiteSettingController@generalSettings')->name('admin.website.setting.general');
     Route::match(['get', 'post'], 'website-settings/general/update','WebsiteSettingController@updateGeneral')->name('admin.website.setting.general.update');
 
+    // Booking Routes
+    Route::match(['get','post'], 'bookings/list', 'BookingController@index')->name('admin.bookings.list');
+    Route::match(['get','post'], 'bookings/{reference}/view', 'BookingController@view')->name('admin.bookings.view');
+    Route::match(['get','post'], 'bookings/{id}/update', 'BookingController@update')->name('admin.bookings.update');
+
     // Admin Logout
     Route::match(['get', 'post'],'logout', 'Auth\LoginController@destroy')->name('admin.logout');
 });

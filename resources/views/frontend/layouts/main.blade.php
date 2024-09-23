@@ -68,10 +68,12 @@
         <script src="{{ asset('assets/frontend/vendor/flatpickr/dist/flatpickr.min.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/vendor/bootstrap-select/dist/js/bootstrap-select.min.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/vendor/slick-carousel/slick/slick.js?v='.env('APP_VERSION')) }}"></script>
+        <script src="{{ asset('assets/frontend/vendor/gmaps/gmaps.min.js?v='.env('APP_VERSION')) }}"></script>
+        <script src="{{ asset('assets/frontend/vendor/player.js/dist/player.min.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/vendor/fancybox/jquery.fancybox.min.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/vendor/svg-injector/dist/svg-injector.min.js?v='.env('APP_VERSION')) }}"></script>
 
-        <!-- JS MyTravel -->
+        <!-- JS SDD -->
         <script src="{{ asset('assets/frontend/js/hs.core.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.header.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.unfold.js?v='.env('APP_VERSION')) }}"></script>
@@ -80,10 +82,12 @@
         <script src="{{ asset('assets/frontend/js/components/hs.range-datepicker.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.selectpicker.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.go-to.js?v='.env('APP_VERSION')) }}"></script>
-        <script src="{{ asset('assets/frontend/js/components/hs.slick-carousel.js?v='.env('APP_VERSION')) }}"></script>
+        <script src="{{ asset('assets/frontend/js/components/hs.slick-carousel.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.fancybox.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.svg-injector.js?v='.env('APP_VERSION')) }}"></script>
         <script src="{{ asset('assets/frontend/js/components/hs.quantity-counter.js?v='.env('APP_VERSION')) }}"></script>
+        <script src="{{ asset('assets/frontend/js/components/hs.g-map.js?v='.env('APP_VERSION')) }}"></script>
+        
         <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/intlTelInput.min.js"></script>
 
         <!-- JS Plugins Init. -->
@@ -114,7 +118,7 @@
                 // initialization of show animations
                 $.HSCore.components.HSShowAnimation.init('.js-animation-link');
                 // initialization of datepicker
-                $.HSCore.components.HSRangeDatepicker.init('.js-range-datepicker');
+                // $.HSCore.components.HSRangeDatepicker.init('.js-range-datepicker');
                 // initialization of select
                 $.HSCore.components.HSSelectPicker.init('.js-select');
                 // initialization of quantity counter

@@ -75,29 +75,29 @@
                 <!-- End Responsive Toggle Button -->
 
                 <!-- Navigation -->
-                <div id="navBar" class="navbar-collapse u-header__navbar-collapse u-header-left-aligned-nav collapse order-2 order-xl-0 pt-4 pt-xl-0 pl-xl-6">
+                <div id="navBar" class="navbar-collapse u-header__navbar-collapse u-header-right-aligned-nav collapse order-2 order-xl-0 pt-4 pt-xl-0 pl-xl-6">
                     <ul class="navbar-nav u-header__navbar-nav position-relative">
                         <!-- Home -->
-                        <li class="nav-item hs-has-sub-menu u-header__nav-item" data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut">
-                            <a id="homeMenu" class="nav-link u-header__nav-link u-header__nav-link-toggle u-header__nav-link-border" href="javascript:;" aria-haspopup="true" aria-expanded="false" aria-labelledby="homeSubMenu">Home</a>
+                        <li class="nav-item u-header__nav-item">
+                            <a class="nav-link u-header__nav-link" href="{{ route('home') }}" aria-expanded="false">{{ __('Home') }}</a>
                         </li>
                         <!-- End Home -->
 
                         <!-- Yacht -->
-                        <li class="nav-item hs-has-sub-menu u-header__nav-item" data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut">
-                            <a id="yachtMenu" class="nav-link u-header__nav-link u-header__nav-link-toggle u-header__nav-link-border" href="javascript:;" aria-haspopup="true" aria-expanded="false" aria-labelledby="yachtSubMenu">Yacht</a>
+                        <li class="nav-item u-header__nav-item">
+                            <a class="nav-link u-header__nav-link" href="#" aria-expanded="false" aria-labelledby="yachtSubMenu">{{ __('Tours') }}</a>
                         </li>
                         <!-- End Yacht -->
 
                         <!-- Flights -->
-                        <li class="nav-item hs-has-sub-menu u-header__nav-item" data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut">
-                            <a id="flightsMenu" class="nav-link u-header__nav-link u-header__nav-link-toggle u-header__nav-link-border" href="javascript:;" aria-haspopup="true" aria-expanded="false" aria-labelledby="flightsSubMenu">Flights</a>
+                        <li class="nav-item u-header__nav-item">
+                            <a class="nav-link u-header__nav-link" href="#" aria-expanded="false" aria-labelledby="flightsSubMenu">{{ __('Gallery') }}</a>
                         </li>
                         <!-- End Flights -->
 
                         <!-- Pages -->
-                        <li class="nav-item u-header__nav-item" data-event="hover" data-animation-in="slideInUp" data-animation-out="fadeOut" data-max-width="722px" data-position="right">
-                            <a class="nav-link u-header__nav-link u-header__nav-link-toggle" href="#" aria-haspopup="true" aria-expanded="false">Pages</a>
+                        <li class="nav-item u-header__nav-item">
+                            <a class="nav-link u-header__nav-link" href="#" aria-expanded="false">{{ __('Contact us') }}</a>
                         </li>
                         <!-- End Pages -->
 
@@ -125,7 +125,7 @@
                 <!-- Search Form -->
 
                 <!-- Shopping Cart -->
-                <div class="pl-2 pl-md-4 ml-auto shopping-cart">
+                {{-- <div class="pl-2 pl-md-4 ml-auto shopping-cart">
                     <a id="shoppingCartDropdownInvoker" class="btn-text-dark py-4 position-relative" href="javascript:;" role="button" aria-controls="shoppingCartDropdown" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#shoppingCartDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                         <span class="flaticon-shopping-basket font-size-25 text-primary-max-lg"></span>
                     </a>
@@ -192,7 +192,7 @@
                             <!-- End Footer -->
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- End Shopping Cart -->
 
                 <!-- Button -->

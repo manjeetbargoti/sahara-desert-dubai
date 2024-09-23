@@ -14,6 +14,25 @@ use Illuminate\Support\Facades\Auth;
 
 class TourController extends Controller
 {
+    // Generate Tour Reference
+    public function generateTourReference($length){
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        $tour_ref = 'ST'.$randomString;
+
+        $checkDb = Tour::where('tour_ref', $tour_ref)->exists();
+
+        if($checkDb){
+            $this->generateTourReference(10);
+        }else{
+            return $tour_ref;
+        }
+    }
+
     public function index(){
         $tours = Tour::latest()->paginate(30);
         // dd($tours);
@@ -81,10 +100,17 @@ class TourController extends Controller
                 }else{
                     $discount = 0;
                 }
+
+                if(!empty($request->slots)){
+                    $slots = implode(',', $request->slots);
+                }
+
+                $tour_ref = $this->generateTourReference(10);
     
                 $tour = new Tour();
                 $tour->name     = $request->name;
                 $tour->type     = $request->type;
+                $tour->tour_ref = $request->tour_ref;
                 $tour->category = $request->category;
                 $tour->subtitle = $request->subtitle;
                 $tour->slug     = Str::slug($request->name);
@@ -93,7 +119,7 @@ class TourController extends Controller
                 $tour->child_price      = round($request->child_price,2);
                 $tour->infant_price     = round($request->infant_price,2);
                 $tour->fixed_charges    = round($request->fixed_charges,2);
-                $tour->fixed_charges_text       = round($request->fixed_charges_text,2);
+                $tour->fixed_charges_text       = $request->fixed_charges_text;
                 $tour->discount                 = round($discount);
                 $tour->discount_type            = 'percent';
                 $tour->short_description        = $request->short_description;
@@ -118,6 +144,7 @@ class TourController extends Controller
                 $tour->infant_age       = $request->infant_age;
                 $tour->infant_count     = $request->infant_count;
                 $tour->is_slot          = $request->is_slot;
+                $tour->slots            = $slots ?? NULL;
                 $tour->cut_off_time     = $request->cut_off_time;
                 $tour->only_child       = $request->only_child;
                 $tour->latitude         = $request->latitude;
@@ -257,6 +284,8 @@ class TourController extends Controller
         try{
             $tour = Tour::where(['id' => $request->id])->first();
             if($request->isMethod('POST')){
+                // dd($request->all());
+
                 $request->validate([
                     'name' => 'required|string|max:255',
                     'type' => 'required',
@@ -315,6 +344,10 @@ class TourController extends Controller
                     $discount = 0;
                 }
 
+                if(!empty($request->slots)){
+                    $slots = implode(',', $request->slots);
+                }
+
                 $tour->name     = $request->name;
                 $tour->type     = $request->type;
                 $tour->category = $request->category;
@@ -329,7 +362,7 @@ class TourController extends Controller
                 $tour->child_price      = round($request->child_price,2);
                 $tour->infant_price     = round($request->infant_price,2);
                 $tour->fixed_charges    = round($request->fixed_charges,2);
-                $tour->fixed_charges_text       = round($request->fixed_charges_text,2);
+                $tour->fixed_charges_text       = $request->fixed_charges_text;
                 $tour->discount                 = round($discount);
                 $tour->discount_type            = 'percent';
                 $tour->short_description        = $request->short_description;
@@ -353,7 +386,9 @@ class TourController extends Controller
                 $tour->child_age        = $request->child_age;
                 $tour->infant_age       = $request->infant_age;
                 $tour->infant_count     = $request->infant_count;
+                $tour->min_age          = $request->min_age;
                 $tour->is_slot          = $request->is_slot;
+                $tour->slots            = $slots ?? NULL;
                 $tour->cut_off_time     = $request->cut_off_time;
                 $tour->only_child       = $request->only_child;
                 $tour->latitude         = $request->latitude;

@@ -319,42 +319,26 @@
                             </a>
                             @endif
                         </div>
-                        {{-- <div class="position-absolute top-0 right-0 pt-5 pr-3">
-                          <button type="button" class="btn btn-sm btn-icon text-white rounded-circle" data-toggle="tooltip" data-placement="top" title="" data-original-title="Save for later">
-                            <span class="flaticon-heart-1 font-size-20"></span>
-                          </button>
-                        </div> --}}
-                        <div class="position-absolute bottom-0 left-0 right-0">
-                            <div class="px-3 pb-2">
-                                @if(@$tour->child_price > 1)
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>{{ single_price(@$tour->child_price) }}</h2>
-                                @else
-                                <h2 class="h5 text-white mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>{{ single_price(@$tour->sell_price) }}</h2>
-                                @endif
-                            </div>
-                        </div>
                     </div>
                     <div class="card-body px-4 pt-2 pb-3">
                         <a href="{{ route('tour.detail', @$tour->slug) }}" class="d-block">
-                            <div class="mb-1 d-flex align-items-center font-size-14 text-gray-1">
+                            <div class="mb-1 d-flex align-items-center font-size-14 text-primary">
                                 <span class="fas fa-cloud-sun-rain"></span>&nbsp; {{ @$tour->season }}
                             </div>
                         </a>
                         <a href="{{ route('tour.detail', @$tour->slug) }}" class="card-title font-size-17 font-weight-bold mb-0 text-dark" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;min-height: 3em;">{{ @$tour->name }}</a>
-                        <div class="my-2">
-                            <div class="d-inline-flex align-items-center font-size-13 text-lh-1 text-primary">
-                                <div class="green-lighter mr-2">
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                    <small class="fas fa-star"></small>
-                                </div>
-                                <span class="text-secondary font-size-14 mt-1">48 Reviews</span>
-                            </div>
+                        <div class="font-size-14 text-muted pt-2">
+                            <i class="icon flaticon-clock-circular-outline mr-2 text-muted font-size-14"></i> {{ @$tour->duration }}
                         </div>
-                        <div class="font-size-14 text-gray-1">
-                            <i class="icon flaticon-clock-circular-outline mr-2 font-size-14"></i> {{ @$tour->duration }}
+                        
+                        <div class="bottom-0 left-0 right-0">
+                            <div class="pb-2">
+                                @if(@$tour->child_price > 1)
+                                <h2 class="h5 text-success mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>{{ single_price(@$tour->child_price) }}</h2>
+                                @else
+                                <h2 class="h5 text-success mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>{{ single_price(@$tour->sell_price) }}</h2>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -383,12 +367,154 @@
 </div>
 <!--End Banner v4-->
 
+@if(!empty($recentTours))
+<!-- Product Cards -->
+<div class="product-card-block product-card-v1 border-bottom border-color-8">
+    <div class="container space-1">
+        <div class="w-md-80 w-lg-50 text-center mx-md-auto mt-3">
+            <h2 class="section-title text-black font-size-30 font-weight-bold mb-0">Recent Tours</h2>
+        </div>
+        <div class="js-slick-carousel u-slick u-slick--equal-height u-slick--gutters-3 mb-4" data-slides-show="4" data-slides-scroll="1" data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic u-slick__arrow-classic--v2 u-slick__arrow-centered--y rounded-circle" data-arrow-left-classes="fas fa-chevron-left u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left ml-xl-n8" data-arrow-right-classes="fas fa-chevron-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right mr-xl-n8" data-pagi-classes="d-lg-none text-center u-slick__pagination mt-4" data-responsive='[ { "breakpoint": 1025, "settings": { "slidesToShow": 3 } }, { "breakpoint": 992, "settings": { "slidesToShow": 2 } }, { "breakpoint": 768, "settings": { "slidesToShow": 1 } }, { "breakpoint": 554, "settings": { "slidesToShow": 1 } } ]'>
+            @foreach($recentTours as $key => $rTour)
+            <div class="js-slide mt-5">
+                <div class="card mb-1 transition-3d-hover shadow-hover-2 w-100">
+                    <div class="position-relative mb-2">
+                        <a href="{{ route('tour.detail', @$rTour->slug) }}" class="d-block gradient-overlay-half-bg-gradient-v5">
+                            <img class="card-img-top" src="{{ uploaded_asset(@$rTour->thumbnail_img) }}" alt="{{ @$rTour->name }}">
+                        </a>
+                        <div class="position-absolute top-0 left-0 pt-5 pl-3">
+                            @if(@$rTour->featured == 1)
+                            <a href="{{ route('tour.detail', @$rTour->slug) }}">
+                                <span class="badge badge-pill bg-white text-primary px-4 py-2 font-size-14 font-weight-normal">Featured</span>
+                            </a>
+                            @endif
+                            @if(@$rTour->discount > 1)
+                            <a href="{{ route('tour.detail', @$rTour->slug) }}">
+                            <span class="badge badge-pill bg-white text-danger px-3 ml-3 py-2 font-size-14 font-weight-normal">{{ @$rTour->discount }}% OFF</span>
+                            </a>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="card-body px-4 pt-2 pb-3">
+                        <a href="{{ route('tour.detail', @$rTour->slug) }}" class="d-block">
+                            <div class="mb-1 d-flex align-items-center font-size-14 text-primary">
+                                <span class="fas fa-cloud-sun-rain"></span>&nbsp; {{ @$rTour->season }}
+                            </div>
+                        </a>
+                        <a href="{{ route('tour.detail', @$rTour->slug) }}" class="card-title font-size-17 font-weight-bold mb-0 text-dark" style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;min-height: 3em;">{{ @$rTour->name }}</a>
+                        <div class="font-size-14 text-muted pt-2">
+                            <i class="icon flaticon-clock-circular-outline mr-2 text-muted font-size-14"></i> {{ @$rTour->duration }}
+                        </div>
+                        
+                        <div class="bottom-0 left-0 right-0">
+                            <div class="pb-2">
+                                @if(@$rTour->child_price > 1)
+                                <h2 class="h5 text-success mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>{{ single_price(@$rTour->child_price) }}</h2>
+                                @else
+                                <h2 class="h5 text-success mb-0 font-weight-bold font-size-17"><small class="mr-2">From</small>{{ single_price(@$rTour->sell_price) }}</h2>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- End Product Cards -->
+@endif
+
+<div class="container">
+    <div class="w-100 bg-dark-gradient rounded-border py-5 px-xl-8 px-3">
+        <span class="text-muted">Why go with US?</span>
+        <h2 class="text-white font-size-30 font-weight-bold mb-0">For The Unforgettable Experiences!</h2>
+        <p class="text-white mb-4">If you’re looking for an unforgettable experience in Dubai, a desert safari is a must-do. And there’s no better company to do it with than Sahara Desert Dubai. We offer both private and group tours, so whether you’re traveling solo or with a group of friends or family, we can accommodate you. Our experienced guides will take you on an exciting journey through the desert, where you’ll see all the amazing sights and sounds that the Sahara has to offer.We also offer city tours, so if you want to explore all that Dubai has to offer, we can show you around. From the iconic Burj Khalifa to the beautiful beaches, we’ll make sure you see everything that this amazing city has to offer. So whether you’re looking for an adventure in the desert or a tour of the city, Sahara Desert Dubai is the perfect company for you. We guarantee that you’ll have an unforgettable experience with us.</p>
+        <div class="d-flex align-items-center gap-5 flex-wrap">
+            <div class="rounded-pill px-3 py-3 bg-custom d-flex align-items-center gap-3">
+                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1116_20)">
+                    <path d="M11.2069 22.43C9.53616 22.4298 7.88657 22.0563 6.37871 21.3367C4.87085 20.6172 3.54281 19.5699 2.49167 18.2712C1.44053 16.9726 0.692845 15.4555 0.303265 13.8308C-0.0863137 12.2061 -0.107942 10.5149 0.239962 8.88082C0.587866 7.24671 1.29651 5.71098 2.3141 4.38589C3.33169 3.06079 4.6325 1.97982 6.12147 1.22198C7.61044 0.46413 9.24993 0.0485644 10.9201 0.00565293C12.5903 -0.0372585 14.249 0.293568 15.7749 0.973953C15.8949 1.0274 16.0031 1.10395 16.0935 1.19924C16.1839 1.29453 16.2546 1.40668 16.3016 1.5293C16.3487 1.65192 16.3711 1.78261 16.3676 1.91389C16.3641 2.04518 16.3348 2.17449 16.2814 2.29445C16.2279 2.41442 16.1514 2.52268 16.0561 2.61305C15.9608 2.70343 15.8487 2.77416 15.726 2.82119C15.6034 2.86822 15.4727 2.89064 15.3415 2.88717C15.2102 2.8837 15.0809 2.8544 14.9609 2.80095C13.8333 2.30118 12.6168 2.03296 11.3836 2.01221C10.1503 1.99146 8.92552 2.21859 7.78173 2.68014C6.63795 3.14169 5.59851 3.82826 4.72508 4.69911C3.85165 5.56996 3.16201 6.60736 2.69707 7.74977C2.23213 8.89218 2.00137 10.1163 2.01847 11.3496C2.03557 12.5829 2.30019 13.8002 2.79662 14.9293C3.29305 16.0583 4.01119 17.0762 4.90843 17.9225C5.80568 18.7688 6.86375 19.4263 8.01989 19.856C9.41185 20.3696 10.9073 20.5395 12.379 20.351C13.8507 20.1625 15.2551 19.6213 16.4726 18.7734C17.6902 17.9255 18.6849 16.7961 19.3722 15.4811C20.0594 14.1662 20.4189 12.7047 20.4199 11.221V10.282C20.4199 10.0167 20.5252 9.76238 20.7128 9.57485C20.9003 9.38731 21.1547 9.28195 21.4199 9.28195C21.6851 9.28195 21.9395 9.38731 22.127 9.57485C22.3145 9.76238 22.4199 10.0167 22.4199 10.282V11.221C22.4151 14.1938 21.2316 17.0434 19.1288 19.1448C17.0261 21.2463 14.1757 22.428 11.2029 22.431L11.2069 22.43Z" fill="white"></path>
+                    <path d="M11.2128 14.273C10.9476 14.2729 10.6933 14.1675 10.5058 13.98L7.44282 10.917C7.26066 10.7284 7.15987 10.4758 7.16215 10.2136C7.16443 9.95136 7.26959 9.70055 7.455 9.51514C7.64041 9.32973 7.89122 9.22456 8.15342 9.22229C8.41562 9.22001 8.66822 9.3208 8.85682 9.50296L11.2128 11.859L20.7128 2.34496C20.8057 2.25205 20.9159 2.17834 21.0372 2.12803C21.1586 2.07772 21.2886 2.0518 21.42 2.05176C21.5513 2.05171 21.6814 2.07754 21.8028 2.12776C21.9241 2.17798 22.0344 2.25162 22.1273 2.34446C22.2202 2.43731 22.2939 2.54754 22.3443 2.66887C22.3946 2.79021 22.4205 2.92026 22.4205 3.05161C22.4206 3.18296 22.3947 3.31303 22.3445 3.43439C22.2943 3.55576 22.2207 3.66605 22.1278 3.75896L11.9198 13.979C11.8271 14.072 11.7169 14.1459 11.5956 14.1963C11.4743 14.2468 11.3442 14.2728 11.2128 14.273Z" fill="white"></path>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1116_20">
+                    <rect width="22.423" height="22.431" fill="white"></rect>
+                    </clipPath>
+                    </defs>
+                </svg>
+                <span class="text-white font-size-14">Group Tours</span>                                    
+            </div>
+            <div class="rounded-pill px-3 py-3 bg-custom d-flex align-items-center gap-3">
+                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1116_20)">
+                    <path d="M11.2069 22.43C9.53616 22.4298 7.88657 22.0563 6.37871 21.3367C4.87085 20.6172 3.54281 19.5699 2.49167 18.2712C1.44053 16.9726 0.692845 15.4555 0.303265 13.8308C-0.0863137 12.2061 -0.107942 10.5149 0.239962 8.88082C0.587866 7.24671 1.29651 5.71098 2.3141 4.38589C3.33169 3.06079 4.6325 1.97982 6.12147 1.22198C7.61044 0.46413 9.24993 0.0485644 10.9201 0.00565293C12.5903 -0.0372585 14.249 0.293568 15.7749 0.973953C15.8949 1.0274 16.0031 1.10395 16.0935 1.19924C16.1839 1.29453 16.2546 1.40668 16.3016 1.5293C16.3487 1.65192 16.3711 1.78261 16.3676 1.91389C16.3641 2.04518 16.3348 2.17449 16.2814 2.29445C16.2279 2.41442 16.1514 2.52268 16.0561 2.61305C15.9608 2.70343 15.8487 2.77416 15.726 2.82119C15.6034 2.86822 15.4727 2.89064 15.3415 2.88717C15.2102 2.8837 15.0809 2.8544 14.9609 2.80095C13.8333 2.30118 12.6168 2.03296 11.3836 2.01221C10.1503 1.99146 8.92552 2.21859 7.78173 2.68014C6.63795 3.14169 5.59851 3.82826 4.72508 4.69911C3.85165 5.56996 3.16201 6.60736 2.69707 7.74977C2.23213 8.89218 2.00137 10.1163 2.01847 11.3496C2.03557 12.5829 2.30019 13.8002 2.79662 14.9293C3.29305 16.0583 4.01119 17.0762 4.90843 17.9225C5.80568 18.7688 6.86375 19.4263 8.01989 19.856C9.41185 20.3696 10.9073 20.5395 12.379 20.351C13.8507 20.1625 15.2551 19.6213 16.4726 18.7734C17.6902 17.9255 18.6849 16.7961 19.3722 15.4811C20.0594 14.1662 20.4189 12.7047 20.4199 11.221V10.282C20.4199 10.0167 20.5252 9.76238 20.7128 9.57485C20.9003 9.38731 21.1547 9.28195 21.4199 9.28195C21.6851 9.28195 21.9395 9.38731 22.127 9.57485C22.3145 9.76238 22.4199 10.0167 22.4199 10.282V11.221C22.4151 14.1938 21.2316 17.0434 19.1288 19.1448C17.0261 21.2463 14.1757 22.428 11.2029 22.431L11.2069 22.43Z" fill="white"></path>
+                    <path d="M11.2128 14.273C10.9476 14.2729 10.6933 14.1675 10.5058 13.98L7.44282 10.917C7.26066 10.7284 7.15987 10.4758 7.16215 10.2136C7.16443 9.95136 7.26959 9.70055 7.455 9.51514C7.64041 9.32973 7.89122 9.22456 8.15342 9.22229C8.41562 9.22001 8.66822 9.3208 8.85682 9.50296L11.2128 11.859L20.7128 2.34496C20.8057 2.25205 20.9159 2.17834 21.0372 2.12803C21.1586 2.07772 21.2886 2.0518 21.42 2.05176C21.5513 2.05171 21.6814 2.07754 21.8028 2.12776C21.9241 2.17798 22.0344 2.25162 22.1273 2.34446C22.2202 2.43731 22.2939 2.54754 22.3443 2.66887C22.3946 2.79021 22.4205 2.92026 22.4205 3.05161C22.4206 3.18296 22.3947 3.31303 22.3445 3.43439C22.2943 3.55576 22.2207 3.66605 22.1278 3.75896L11.9198 13.979C11.8271 14.072 11.7169 14.1459 11.5956 14.1963C11.4743 14.2468 11.3442 14.2728 11.2128 14.273Z" fill="white"></path>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1116_20">
+                    <rect width="22.423" height="22.431" fill="white"></rect>
+                    </clipPath>
+                    </defs>
+                </svg>
+                <span class="text-white font-size-14">Private Tours</span>                                    
+            </div>
+            <div class="rounded-pill px-3 py-3 bg-custom d-flex align-items-center gap-3">
+                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1116_20)">
+                    <path d="M11.2069 22.43C9.53616 22.4298 7.88657 22.0563 6.37871 21.3367C4.87085 20.6172 3.54281 19.5699 2.49167 18.2712C1.44053 16.9726 0.692845 15.4555 0.303265 13.8308C-0.0863137 12.2061 -0.107942 10.5149 0.239962 8.88082C0.587866 7.24671 1.29651 5.71098 2.3141 4.38589C3.33169 3.06079 4.6325 1.97982 6.12147 1.22198C7.61044 0.46413 9.24993 0.0485644 10.9201 0.00565293C12.5903 -0.0372585 14.249 0.293568 15.7749 0.973953C15.8949 1.0274 16.0031 1.10395 16.0935 1.19924C16.1839 1.29453 16.2546 1.40668 16.3016 1.5293C16.3487 1.65192 16.3711 1.78261 16.3676 1.91389C16.3641 2.04518 16.3348 2.17449 16.2814 2.29445C16.2279 2.41442 16.1514 2.52268 16.0561 2.61305C15.9608 2.70343 15.8487 2.77416 15.726 2.82119C15.6034 2.86822 15.4727 2.89064 15.3415 2.88717C15.2102 2.8837 15.0809 2.8544 14.9609 2.80095C13.8333 2.30118 12.6168 2.03296 11.3836 2.01221C10.1503 1.99146 8.92552 2.21859 7.78173 2.68014C6.63795 3.14169 5.59851 3.82826 4.72508 4.69911C3.85165 5.56996 3.16201 6.60736 2.69707 7.74977C2.23213 8.89218 2.00137 10.1163 2.01847 11.3496C2.03557 12.5829 2.30019 13.8002 2.79662 14.9293C3.29305 16.0583 4.01119 17.0762 4.90843 17.9225C5.80568 18.7688 6.86375 19.4263 8.01989 19.856C9.41185 20.3696 10.9073 20.5395 12.379 20.351C13.8507 20.1625 15.2551 19.6213 16.4726 18.7734C17.6902 17.9255 18.6849 16.7961 19.3722 15.4811C20.0594 14.1662 20.4189 12.7047 20.4199 11.221V10.282C20.4199 10.0167 20.5252 9.76238 20.7128 9.57485C20.9003 9.38731 21.1547 9.28195 21.4199 9.28195C21.6851 9.28195 21.9395 9.38731 22.127 9.57485C22.3145 9.76238 22.4199 10.0167 22.4199 10.282V11.221C22.4151 14.1938 21.2316 17.0434 19.1288 19.1448C17.0261 21.2463 14.1757 22.428 11.2029 22.431L11.2069 22.43Z" fill="white"></path>
+                    <path d="M11.2128 14.273C10.9476 14.2729 10.6933 14.1675 10.5058 13.98L7.44282 10.917C7.26066 10.7284 7.15987 10.4758 7.16215 10.2136C7.16443 9.95136 7.26959 9.70055 7.455 9.51514C7.64041 9.32973 7.89122 9.22456 8.15342 9.22229C8.41562 9.22001 8.66822 9.3208 8.85682 9.50296L11.2128 11.859L20.7128 2.34496C20.8057 2.25205 20.9159 2.17834 21.0372 2.12803C21.1586 2.07772 21.2886 2.0518 21.42 2.05176C21.5513 2.05171 21.6814 2.07754 21.8028 2.12776C21.9241 2.17798 22.0344 2.25162 22.1273 2.34446C22.2202 2.43731 22.2939 2.54754 22.3443 2.66887C22.3946 2.79021 22.4205 2.92026 22.4205 3.05161C22.4206 3.18296 22.3947 3.31303 22.3445 3.43439C22.2943 3.55576 22.2207 3.66605 22.1278 3.75896L11.9198 13.979C11.8271 14.072 11.7169 14.1459 11.5956 14.1963C11.4743 14.2468 11.3442 14.2728 11.2128 14.273Z" fill="white"></path>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1116_20">
+                    <rect width="22.423" height="22.431" fill="white"></rect>
+                    </clipPath>
+                    </defs>
+                </svg>
+                <span class="text-white font-size-14">Experienced guides</span>                                    
+            </div>
+            <div class="rounded-pill px-3 py-3 bg-custom d-flex align-items-center gap-3">
+                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1116_20)">
+                    <path d="M11.2069 22.43C9.53616 22.4298 7.88657 22.0563 6.37871 21.3367C4.87085 20.6172 3.54281 19.5699 2.49167 18.2712C1.44053 16.9726 0.692845 15.4555 0.303265 13.8308C-0.0863137 12.2061 -0.107942 10.5149 0.239962 8.88082C0.587866 7.24671 1.29651 5.71098 2.3141 4.38589C3.33169 3.06079 4.6325 1.97982 6.12147 1.22198C7.61044 0.46413 9.24993 0.0485644 10.9201 0.00565293C12.5903 -0.0372585 14.249 0.293568 15.7749 0.973953C15.8949 1.0274 16.0031 1.10395 16.0935 1.19924C16.1839 1.29453 16.2546 1.40668 16.3016 1.5293C16.3487 1.65192 16.3711 1.78261 16.3676 1.91389C16.3641 2.04518 16.3348 2.17449 16.2814 2.29445C16.2279 2.41442 16.1514 2.52268 16.0561 2.61305C15.9608 2.70343 15.8487 2.77416 15.726 2.82119C15.6034 2.86822 15.4727 2.89064 15.3415 2.88717C15.2102 2.8837 15.0809 2.8544 14.9609 2.80095C13.8333 2.30118 12.6168 2.03296 11.3836 2.01221C10.1503 1.99146 8.92552 2.21859 7.78173 2.68014C6.63795 3.14169 5.59851 3.82826 4.72508 4.69911C3.85165 5.56996 3.16201 6.60736 2.69707 7.74977C2.23213 8.89218 2.00137 10.1163 2.01847 11.3496C2.03557 12.5829 2.30019 13.8002 2.79662 14.9293C3.29305 16.0583 4.01119 17.0762 4.90843 17.9225C5.80568 18.7688 6.86375 19.4263 8.01989 19.856C9.41185 20.3696 10.9073 20.5395 12.379 20.351C13.8507 20.1625 15.2551 19.6213 16.4726 18.7734C17.6902 17.9255 18.6849 16.7961 19.3722 15.4811C20.0594 14.1662 20.4189 12.7047 20.4199 11.221V10.282C20.4199 10.0167 20.5252 9.76238 20.7128 9.57485C20.9003 9.38731 21.1547 9.28195 21.4199 9.28195C21.6851 9.28195 21.9395 9.38731 22.127 9.57485C22.3145 9.76238 22.4199 10.0167 22.4199 10.282V11.221C22.4151 14.1938 21.2316 17.0434 19.1288 19.1448C17.0261 21.2463 14.1757 22.428 11.2029 22.431L11.2069 22.43Z" fill="white"></path>
+                    <path d="M11.2128 14.273C10.9476 14.2729 10.6933 14.1675 10.5058 13.98L7.44282 10.917C7.26066 10.7284 7.15987 10.4758 7.16215 10.2136C7.16443 9.95136 7.26959 9.70055 7.455 9.51514C7.64041 9.32973 7.89122 9.22456 8.15342 9.22229C8.41562 9.22001 8.66822 9.3208 8.85682 9.50296L11.2128 11.859L20.7128 2.34496C20.8057 2.25205 20.9159 2.17834 21.0372 2.12803C21.1586 2.07772 21.2886 2.0518 21.42 2.05176C21.5513 2.05171 21.6814 2.07754 21.8028 2.12776C21.9241 2.17798 22.0344 2.25162 22.1273 2.34446C22.2202 2.43731 22.2939 2.54754 22.3443 2.66887C22.3946 2.79021 22.4205 2.92026 22.4205 3.05161C22.4206 3.18296 22.3947 3.31303 22.3445 3.43439C22.2943 3.55576 22.2207 3.66605 22.1278 3.75896L11.9198 13.979C11.8271 14.072 11.7169 14.1459 11.5956 14.1963C11.4743 14.2468 11.3442 14.2728 11.2128 14.273Z" fill="white"></path>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1116_20">
+                    <rect width="22.423" height="22.431" fill="white"></rect>
+                    </clipPath>
+                    </defs>
+                </svg>
+                <span class="text-white font-size-14">Desert Tours</span>                                    
+            </div>
+            <div class="rounded-pill px-3 py-3 bg-custom d-flex align-items-center gap-3">
+                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1116_20)">
+                    <path d="M11.2069 22.43C9.53616 22.4298 7.88657 22.0563 6.37871 21.3367C4.87085 20.6172 3.54281 19.5699 2.49167 18.2712C1.44053 16.9726 0.692845 15.4555 0.303265 13.8308C-0.0863137 12.2061 -0.107942 10.5149 0.239962 8.88082C0.587866 7.24671 1.29651 5.71098 2.3141 4.38589C3.33169 3.06079 4.6325 1.97982 6.12147 1.22198C7.61044 0.46413 9.24993 0.0485644 10.9201 0.00565293C12.5903 -0.0372585 14.249 0.293568 15.7749 0.973953C15.8949 1.0274 16.0031 1.10395 16.0935 1.19924C16.1839 1.29453 16.2546 1.40668 16.3016 1.5293C16.3487 1.65192 16.3711 1.78261 16.3676 1.91389C16.3641 2.04518 16.3348 2.17449 16.2814 2.29445C16.2279 2.41442 16.1514 2.52268 16.0561 2.61305C15.9608 2.70343 15.8487 2.77416 15.726 2.82119C15.6034 2.86822 15.4727 2.89064 15.3415 2.88717C15.2102 2.8837 15.0809 2.8544 14.9609 2.80095C13.8333 2.30118 12.6168 2.03296 11.3836 2.01221C10.1503 1.99146 8.92552 2.21859 7.78173 2.68014C6.63795 3.14169 5.59851 3.82826 4.72508 4.69911C3.85165 5.56996 3.16201 6.60736 2.69707 7.74977C2.23213 8.89218 2.00137 10.1163 2.01847 11.3496C2.03557 12.5829 2.30019 13.8002 2.79662 14.9293C3.29305 16.0583 4.01119 17.0762 4.90843 17.9225C5.80568 18.7688 6.86375 19.4263 8.01989 19.856C9.41185 20.3696 10.9073 20.5395 12.379 20.351C13.8507 20.1625 15.2551 19.6213 16.4726 18.7734C17.6902 17.9255 18.6849 16.7961 19.3722 15.4811C20.0594 14.1662 20.4189 12.7047 20.4199 11.221V10.282C20.4199 10.0167 20.5252 9.76238 20.7128 9.57485C20.9003 9.38731 21.1547 9.28195 21.4199 9.28195C21.6851 9.28195 21.9395 9.38731 22.127 9.57485C22.3145 9.76238 22.4199 10.0167 22.4199 10.282V11.221C22.4151 14.1938 21.2316 17.0434 19.1288 19.1448C17.0261 21.2463 14.1757 22.428 11.2029 22.431L11.2069 22.43Z" fill="white"></path>
+                    <path d="M11.2128 14.273C10.9476 14.2729 10.6933 14.1675 10.5058 13.98L7.44282 10.917C7.26066 10.7284 7.15987 10.4758 7.16215 10.2136C7.16443 9.95136 7.26959 9.70055 7.455 9.51514C7.64041 9.32973 7.89122 9.22456 8.15342 9.22229C8.41562 9.22001 8.66822 9.3208 8.85682 9.50296L11.2128 11.859L20.7128 2.34496C20.8057 2.25205 20.9159 2.17834 21.0372 2.12803C21.1586 2.07772 21.2886 2.0518 21.42 2.05176C21.5513 2.05171 21.6814 2.07754 21.8028 2.12776C21.9241 2.17798 22.0344 2.25162 22.1273 2.34446C22.2202 2.43731 22.2939 2.54754 22.3443 2.66887C22.3946 2.79021 22.4205 2.92026 22.4205 3.05161C22.4206 3.18296 22.3947 3.31303 22.3445 3.43439C22.2943 3.55576 22.2207 3.66605 22.1278 3.75896L11.9198 13.979C11.8271 14.072 11.7169 14.1459 11.5956 14.1963C11.4743 14.2468 11.3442 14.2728 11.2128 14.273Z" fill="white"></path>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_1116_20">
+                    <rect width="22.423" height="22.431" fill="white"></rect>
+                    </clipPath>
+                    </defs>
+                </svg>
+                <span class="text-white font-size-14">City Tours</span>                                    
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Testimonials v2 -->
 <div class="testimonial-block testimonial-v2 border-bottom border-color-8">
     <div class="container">
         <div class="pt-7 pb-8">
             <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-5">
-                <h2 class="section-title text-black font-size-30 font-weight-bold mb-0">Customer Reviews</h2>
+                <h2 class="section-title text-black font-size-30 font-weight-bold mb-0">What our guests says on 
+                    <a href="https://www.tripadvisor.com/AttractionProductReview-g295424-d26683371-Full_Day_Desert_Safari_in_Dubai-Dubai_Emirate_of_Dubai.html" target="_blank">
+                        <img src="https://saharadesertdubai.com/site/img/tripadvisor_logo.svg" width="150">
+                    </a>
+                </h2>
             </div>
             <!-- Slick Carousel -->
             <div class="js-slick-carousel u-slick u-slick--gutters-3" data-infinite="true" data-autoplay="true" data-speed="3000" data-fade="true"
@@ -525,79 +651,5 @@
 </div>
 <!-- End Testimonials v2 -->
 
-<!-- Recent Article -->
-<div class="recent-article-block recent-article-v1">
-    <div class="container space-1 mt-3 mb-lg-4">
-        <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-5">
-            <h2 class="section-title text-black font-size-30 font-weight-bold mb-0">Recent Article</h2>
-        </div>
-        <div class="row">
-            <div class="col-md-6 col-lg-4">
-                <div class="mb-4 mb-lg-0 text-md-center text-lg-left">
-                    <a class="d-block mb-3" href="../blog/blog-single.html">
-                        <img class="img-fluid rounded-xs w-100" src="{{ asset('assets/frontend/img/410x300/img1.jpg') }}" alt="Image-Description">
-                    </a>
-                    <h6 class="font-size-17 pt-xl-1 font-weight-bold font-weight-bold mb-1">
-                        <a href="../blog/blog-single.html">How to travel with paper map</a>
-                    </h6>
-                    <a class="text-gray-1" href="../blog/blog-single.html">
-                        <span>June 6, 2019</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="mb-4 mb-lg-0 text-md-center text-lg-left">
-                    <a class="d-block mb-3" href="../blog/blog-single.html">
-                        <img class="img-fluid rounded-xs w-100" src="{{ asset('assets/frontend/img/410x300/img2.jpg') }}" alt="Image-Description">
-                    </a>
-                    <h6 class="font-size-17 pt-xl-1 font-weight-bold font-weight-bold mb-1">
-                        <a href="../blog/blog-single.html">Change your place and get fresh air</a>
-                    </h6>
-                    <a class="text-gray-1" href="../blog/blog-single.html">
-                        <span>June 6, 2019</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="mb-0 text-md-center text-lg-left">
-                    <a class="d-block mb-3" href="../blog/blog-single.html">
-                        <img class="img-fluid rounded-xs w-100" src="{{ asset('assets/frontend/img/410x300/img3.jpg') }}" alt="Image-Description">
-                    </a>
-                    <h6 class="font-size-17 pt-xl-1 font-weight-bold font-weight-bold mb-1">
-                        <a href="../blog/blog-single.html">Pityful a rethoric question ran</a>
-                    </h6>
-                    <a class="text-gray-1" href="../blog/blog-single.html">
-                        <span>June 6, 2019</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Recent Article -->
-
-<!-- Clients v1 -->
-<div class="clients-block clients-v1 border-bottom border-color-8">
-    <div class="container space-1">
-        <div class="row justify-content-between pb-lg-1 text-center text-md-left">
-            <div class="col-12 col-md mb-5">
-                <img class="img-fluid" src="{{ asset('assets/frontend/img/200x200/img11.pn') }}g" alt="Image Description">
-            </div>
-            <div class="col-12 col-md mb-5">
-                <img class="img-fluid" src="{{ asset('assets/frontend/img/200x200/img12.pn') }}g" alt="Image Description">
-            </div>
-            <div class="col-12 col-md mb-5">
-                <img class="img-fluid" src="{{ asset('assets/frontend/img/200x200/img13.pn') }}g" alt="Image Description">
-            </div>
-            <div class="col-12 col-md mb-5">
-                <img class="img-fluid" src="{{ asset('assets/frontend/img/200x200/img14.pn') }}g" alt="Image Description">
-            </div>
-            <div class="col-12 col-md mb-md-5">
-                <img class="img-fluid" src="{{ asset('assets/frontend/img/200x200/img15.pn') }}g" alt="Image Description">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Clients v1 -->
 
 @endsection

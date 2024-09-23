@@ -47,6 +47,16 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-xl-9">
+                @if(session('error'))
+                    <div class="alert alert-danger alert-icon">
+                        <em class="icon ni ni-check-circle"></em> {{ session('error') }}
+                    </div>
+                @endif
+                @if(session('success'))
+                    <div class="alert alert-success alert-icon">
+                        <em class="icon ni ni-check-circle"></em> {{ session('success') }}
+                    </div>
+                @endif
                 <div class="d-block d-md-flex flex-center-between align-items-start mb-3">
                     <div class="mb-1">
                         <div class="mb-2 mb-md-0">
@@ -58,7 +68,7 @@
                                 {{ @$tour->season }}
                                 {{-- <a href="{{ @$tour->google_map }}" target="_blank" class="ml-1 d-block d-md-inline"> - View on map</a> --}}
                             </div>
-                            <div class="mr-4 mb-2 mb-md-0 flex-horizontal-center">
+                            {{-- <div class="mr-4 mb-2 mb-md-0 flex-horizontal-center">
                                 <div class="ml-xl-3 font-size-10 letter-spacing-2">
                                     <span class="d-block green-lighter ml-1">
                                         <span class="fas fa-star"></span>
@@ -69,10 +79,10 @@
                                     </span>
                                 </div>
                                 <span class="font-size-14 text-gray-1 ml-2">(1,186 Reviews)</span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
-                    <ul class="list-group list-group-borderless list-group-horizontal custom-social-share">
+                    {{-- <ul class="list-group list-group-borderless list-group-horizontal custom-social-share">
                         <li class="list-group-item px-1">
                             <a href="#" class="height-45 width-45 border rounded border-width-2 flex-content-center">
                                 <i class="flaticon-like font-size-18 text-dark"></i>
@@ -83,33 +93,29 @@
                                 <i class="flaticon-share font-size-18 text-dark"></i>
                             </a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </div>
                 <div class="py-4 border-top border-bottom mb-4">
                     <ul class="list-group list-group-borderless list-group-horizontal row">
                         <li class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2">
                             <i class="flaticon-alarm text-primary font-size-22 mr-2 d-block"></i>
-                            <div class="ml-1 text-gray-1">5 Days</div>
+                            <div class="ml-1 text-gray-1">{{ @$tour->duration }}</div>
                         </li>
                         <li class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2">
                             <i class="flaticon-social text-primary font-size-22 mr-2 d-block"></i>
-                            <div class="ml-1 text-gray-1">Max People : 26</div>
+                            <div class="ml-1 text-gray-1">Max People : {{ @$tour->max_guest }}</div>
                         </li>
                         <li class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2">
-                            <i class="flaticon-wifi-signal text-primary font-size-22 mr-2 d-block"></i>
-                            <div class="ml-1 text-gray-1">Wifi Available</div>
-                        </li>
-                        <li class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2">
-                            <i class="flaticon-month text-primary font-size-22 mr-2 d-block"></i>
-                            <div class="ml-1 text-gray-1">Jan 18 - Dec 21</div>
+                            <i class="fas fa-cloud-sun text-primary font-size-22 mr-2 d-block"></i>
+                            <div class="ml-1 text-gray-1">{{ @$tour->season }}</div>
                         </li>
                         <li class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2">
                             <i class="flaticon-user-2 text-primary font-size-22 mr-2 d-block"></i>
-                            <div class="ml-1 text-gray-1">Min Age : 10+</div>
+                            <div class="ml-1 text-gray-1">Min Age : {{ @$tour->min_age }}</div>
                         </li>
                         <li class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2">
                             <i class="flaticon-pin text-primary font-size-22 mr-2 d-block"></i>
-                            <div class="ml-1 text-gray-1">Pickup: Airpot</div>
+                            <div class="ml-1 text-gray-1">Pickup: {{ @$tour->departure_point }}</div>
                         </li>
                     </ul>
                 </div>
@@ -228,7 +234,7 @@
                         <input type="hidden" name="adult_price" value="{{ @$tour->sell_price }}">
                         <input type="hidden" name="child_price" value="{{ @$tour->child_price }}">
                         <input type="hidden" name="infant_price" value="{{ @$tour->infant_price }}">
-                        <input type="hidden" name="fixed_charges" value="{{ @$tour->fixed_price }}">
+                        <input type="hidden" name="fixed_charges" value="{{ @$tour->fixed_charges }}">
                         <input type="hidden" name="fixed_charges_type" value="{{ @$tour->fixed_charges_text }}">
 
                         <div class="border border-color-7 rounded mb-5">
@@ -262,6 +268,25 @@
                                 </div>
                                 <!-- End Input -->
 
+                                @if(@$tour->is_slot == 1 && !empty(@$tour->slots))
+                                <!-- Input -->
+                                <span class="d-block text-gray-1 font-weight-normal mb-1 text-left">Time Slot</span>
+                                <div class="mb-4">
+                                    <div class="js-focus-state mb-2">
+                                        <select name="time_slot" class="form-control" id="timeSlot" aria-placeholder="Select time slot">
+                                            <option value="" selected>Select time slot</option>
+                                            @php
+                                                $slots = explode(',',@$tour->slots);
+                                            @endphp
+                                            @foreach (@$slots as $key => $slot)
+                                                <option value="{{ @$slot }}">{{ @$slot }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- End Input -->
+                                @endif
+
                                 <!-- Input -->
                                 <span class="d-block text-gray-1 font-weight-normal mb-1 text-left">Name</span>
                                 <div class="mb-4">
@@ -272,7 +297,7 @@
                                             </span>
                                         </div>
                                         <input class="form-control" placeholder="Name" name="name" id="customerName"
-                                            type="text">
+                                            type="text" value="{{ old('name') }}">
                                     </div>
                                 </div>
                                 <!-- End Input -->
@@ -286,8 +311,7 @@
                                                 <span class="fas fa-user"></span>
                                             </span>
                                         </div>
-                                        <input class="form-control" name="email" id="customerEmail" type="email"
-                                            placeholder="Email">
+                                        <input class="form-control" value="{{ old('email') }}" name="email" id="customerEmail" type="email" placeholder="Email">
                                     </div>
                                 </div>
                                 <!-- End Input -->
@@ -298,7 +322,7 @@
                                 <div class="mb-4">
                                     <div class="js-focus-state input-group mb-2">
                                         <input class="form-control" name="phone" id="customerPhone" type="text"
-                                            placeholder="Phone">
+                                            placeholder="Phone" value="{{ old('phone') }}">
                                     </div>
                                     <input type="hidden" name="country_code" value="">
                                     <input type="hidden" name="country_iso2" value="{{ old('country_iso2') }}">
@@ -315,14 +339,11 @@
                                             <span class="d-block">Age 18+</span>
                                             <div class="flex-horizontal-center">
                                                 <a class="js-minus font-size-10 text-dark" href="javascript:;">
-                                                    <i class="fas fa-chevron-up"></i>
-                                                </a>
-                                                <input
-                                                    class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
-                                                    name="adult_count" type="text" value="1" min="01"
-                                                    max="100">
-                                                <a class="js-plus font-size-10 text-dark" href="javascript:;">
                                                     <i class="fas fa-chevron-down"></i>
+                                                </a>
+                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="adult_count" type="text" value="1" min="01" max="1000">
+                                                <a class="js-plus font-size-10 text-dark" href="javascript:;">
+                                                    <i class="fas fa-chevron-up"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -340,14 +361,11 @@
                                             <span class="d-block">Age {{ @$tour->child_age }}</span>
                                             <div class="flex-horizontal-center">
                                                 <a class="js-minus font-size-10 text-dark" href="javascript:;">
-                                                    <i class="fas fa-chevron-up"></i>
-                                                </a>
-                                                <input
-                                                    class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
-                                                    readonly name="child_count" type="text" value="0"
-                                                    min="0" max="100">
-                                                <a class="js-plus font-size-10 text-dark" href="javascript:;">
                                                     <i class="fas fa-chevron-down"></i>
+                                                </a>
+                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="child_count" type="text" value="0" min="0" max="1000">
+                                                <a class="js-plus font-size-10 text-dark" href="javascript:;">
+                                                    <i class="fas fa-chevron-up"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -358,29 +376,28 @@
                                 <!-- Input -->
                                 <span class="d-block text-gray-1 font-weight-normal mb-2 text-left">Infant <small
                                         class="text-success font-weight-bold">({{ single_price(@$tour->infant_price) }}
-                                        /per person)</small></span>
+                                        /per person)</small><br><small class="text-warning">(Max Infant: {{ @$tour->infant_count }})</small></span>
                                 <div class="mb-4">
                                     <div class="border-bottom border-width-2 border-color-1 pb-1">
                                         <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
-                                            <span class="d-block">Age {{ @$tour->infant_age }} <br><small
-                                                    class="text-warning font-weight-bold">(Max {{ @$tour->infant_count }}
-                                                    infant)</small></span>
+                                            <span class="d-block">Age {{ @$tour->infant_age }}</span>
                                             <div class="flex-horizontal-center">
                                                 <a class="js-minus font-size-10 text-dark" href="javascript:;">
-                                                    <i class="fas fa-chevron-up"></i>
-                                                </a>
-                                                <input
-                                                    class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center"
-                                                    name="infant_count" type="text" value="0" min="0"
-                                                    max="100">
-                                                <a class="js-plus font-size-10 text-dark" href="javascript:;">
                                                     <i class="fas fa-chevron-down"></i>
+                                                </a>
+                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="infant_count" type="text" value="0" min="0" max="{{ @$tour->infant_count }}">
+                                                <a class="js-plus font-size-10 text-dark" href="javascript:;">
+                                                    <i class="fas fa-chevron-up"></i>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- End Input -->
+
+                                @if(@$tour->fixed_charges > 0)
+                                <span class="d-block text-info font-weight-bold mb-4 text-left">{{ @$tour->fixed_charges_text }}: <span>{{ single_price(@$tour->fixed_charges) }}</span></span>
+                                @endif
 
                                 <div class="text-center">
                                     <button type="submit"
@@ -434,26 +451,26 @@
                     data-arrow-right-classes="fas fa-chevron-right u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right shadow-5"
                     data-pagi-classes="text-center d-xl-none u-slick__pagination mt-4"
                     data-responsive='[{
-                "breakpoint": 1025,
-                "settings": {
-                "slidesToShow": 3
-                }
-                }, {
-                "breakpoint": 992,
-                "settings": {
-                "slidesToShow": 2
-                }
-                }, {
-                "breakpoint": 768,
-                "settings": {
-                "slidesToShow": 1
-                }
-                }, {
-                "breakpoint": 554,
-                "settings": {
-                "slidesToShow": 1
-                }
-                }]'>
+                                    "breakpoint": 1025,
+                                    "settings": {
+                                    "slidesToShow": 3
+                                    }
+                                    }, {
+                                    "breakpoint": 992,
+                                    "settings": {
+                                    "slidesToShow": 2
+                                    }
+                                    }, {
+                                    "breakpoint": 768,
+                                    "settings": {
+                                    "slidesToShow": 1
+                                    }
+                                    }, {
+                                    "breakpoint": 554,
+                                    "settings": {
+                                    "slidesToShow": 1
+                                    }
+                                    }]'>
                     @if (!empty($related_tours))
                         @foreach ($related_tours as $key => $reTour)
                             <div class="js-slide mt-5">
@@ -479,19 +496,19 @@
                                         <a href="{{ route('tour.detail', @$reTour->slug) }}"
                                             class="card-title font-size-17 font-weight-medium text-dark"
                                             style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;min-height: 3em;">{{ @$reTour->name }}</a>
-                                        <div class="mt-2 mb-3">
+                                        {{-- <div class="mt-2 mb-3">
                                             <span
                                                 class="badge badge-pill badge-warning text-white py-1 px-2 font-size-14 border-radius-3 font-weight-normal">4.6/5</span>
                                             <span class="font-size-14 text-gray-1 ml-2">(166 reviews)</span>
-                                        </div>
+                                        </div> --}}
                                         <div class="mb-0">
                                             <span class="mr-1 font-size-14 text-gray-1">From</span>
                                             @if (@$tour->child_price > 1)
                                                 <span
-                                                    class="font-weight-bold">{{ single_price(@$reTour->child_price) }}</span>
+                                                    class="font-weight-bold text-success">{{ single_price(@$reTour->child_price) }}</span>
                                             @else
                                                 <span
-                                                    class="font-weight-bold">{{ single_price(@$reTour->sell_price) }}</span>
+                                                    class="font-weight-bold text-success">{{ single_price(@$reTour->sell_price) }}</span>
                                             @endif
                                         </div>
                                     </div>

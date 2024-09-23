@@ -20,6 +20,17 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'referred_by',
+        'provider_id',
+        'role_id',
+        'user_type',
+        'phone_country_code',
+        'phone',
+        'ban',
+        'status',
+        'referrel_code',
+        'sdd_points',
+        'balance'
     ];
 
     /**

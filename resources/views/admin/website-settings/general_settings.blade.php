@@ -115,6 +115,26 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="websiteAddress">Website Address</label>
+                                            <span class="form-note">Please add  address.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="hidden" name="types[]" value="website_address">
+                                                <input type="text" name="website_address" value="{{ get_setting('website_address') ?? old('website_address') }}" class="form-control @error('website_address') is-invalid @enderror" id="websiteAddress">
+                                                @error('website_address')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 
 
                                 <div class="row g-3">

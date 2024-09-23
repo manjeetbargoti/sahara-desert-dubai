@@ -12,6 +12,10 @@ use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
+    public function dashboard(){
+        return view('frontend.seller.dashboard');
+    }
+
     /**
      * Display the user's profile form.
      */

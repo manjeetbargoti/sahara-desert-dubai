@@ -2,6 +2,7 @@
 
 use App\Models\Role;
 use App\Models\Upload;
+use App\Models\User;
 use App\Models\WebsiteSettings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -121,3 +122,41 @@ if (!function_exists('get_setting')) {
         return $setting == null ? $default : $setting->value;
     }
 }
+
+if(!function_exists('referrel_code')){
+    function referrel_code($length){
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        $refrl_code = 'SR'.$randomString;
+
+        $checkDb = User::where('referrel_code', $refrl_code)->exists();
+
+        if($checkDb){
+            referrel_code(8);
+        }else{
+            return $refrl_code;
+        }
+    }
+}
+
+if (!function_exists('roleIdByType')) {
+    function roleIdByType($type)
+    {
+        $role = Role::where('user_type', $type)->first(['id']);
+        // $roleId = $role->id;
+        return $role->id;
+    }
+}
+
+if (!function_exists('userById')) {
+    function userById($id)
+    {
+        $user = User::where('id', $id)->first();
+        return $user;
+    }
+}
+

@@ -10,7 +10,7 @@
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ uploaded_asset(get_setting('website_icon')) }}">
     <!-- Page Title  -->
-    <title>Admin Dashboard | {{ env('APP_NAME') }}</title>
+    <title>Vendor Dashboard | {{ env('APP_NAME') }}</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/dashlite.css?ver='.env('APP_VERSION')) }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/admin/assets/css/theme.css?ver='.env('APP_VERSION')) }}">
@@ -22,12 +22,12 @@
         <!-- main @s -->
         <div class="nk-main ">
             <!-- sidebar @s -->
-            @include("admin.layouts.sidebar")
+            @include("frontend.seller.layouts.sidebar")
             <!-- sidebar @e -->
             <!-- wrap @s -->
             <div class="nk-wrap ">
                 <!-- main header @s -->
-                @include("admin.layouts.header")
+                @include("frontend.seller.layouts.header")
                 <!-- main header @e -->
                 <!-- content @s -->
                 <div class="nk-content ">

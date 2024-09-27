@@ -83,6 +83,7 @@
                                     <ul class="link-list-plain">
                                         <li><a href="{{ route('admin.bookings.view', @$booking->booking_reference) }}" class="text-info">{{ __('View') }}</a></li>
                                         <li><a href="#" class="text-primary">{{ __('Edit') }}</a></li>
+                                        <li><a href="{{ route('admin.bookings.email_sent', @$booking->id) }}" class="text-primary">{{ __('Send Email') }}</a></li>
                                     </ul>
                                 </div>
                             </div>

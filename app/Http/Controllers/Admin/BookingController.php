@@ -3,30 +3,36 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendBookingEmail;
+use App\Mail\AdminBookingEmail;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
     // List all bookings
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $bookings = Booking::latest()->paginate(25);
         return view('admin.bookings.index', compact('bookings'));
     }
 
     // View booking detail
-    public function view(Request $request){
-        $vendors = User::where(['user_type' => 'vendor', 'status' => 1, 'ban' => 0])->get(['id','name']);
+    public function view(Request $request)
+    {
+        $vendors = User::where(['user_type' => 'vendor', 'status' => 1, 'ban' => 0])->get(['id', 'name']);
         $booking = Booking::where(['booking_reference' => $request->reference])->first();
-        return view('admin.bookings.view',compact('booking', 'vendors'));
+        return view('admin.bookings.view', compact('booking', 'vendors'));
     }
 
     // Update booking info
-    public function update(Request $request){
-        if($request->isMethod('POST')){
+    public function update(Request $request)
+    {
+        if ($request->isMethod('POST')) {
             $booking = Booking::where('id', $request->id)->first();
-            if(!empty($booking)){
+            if (!empty($booking)) {
                 $booking->name = $request->name;
                 $booking->email = $request->email;
                 // $booking->phone = $request->phone;
@@ -39,6 +45,30 @@ class BookingController extends Controller
 
                 return redirect()->route("admin.bookings.view", $booking->booking_reference)->with('success', 'Booking Updated Successfully!');
             }
+        }
+    }
+
+    public function sendBookingEmail(Request $request)
+    {
+        $booking = Booking::where(['id' => $request->id])->first();
+
+        if (!empty($booking)) {
+            // Send Confirmation Email to Customer
+            $mail_info = Mail::to($booking->email)->send(new SendBookingEmail($booking));
+
+            // Send Booking Email to Admin
+            $admin_mail_info = Mail::to(get_setting('admin_email'))->send(new AdminBookingEmail(@$booking));
+
+            if ($mail_info) {
+                flash()->success('Email sent successfully!');
+                return redirect()->back();
+            } else {
+                flash()->error('Something went wrong. Please try again later.');
+                return redirect()->back();
+            }
+        } else {
+            flash()->error('Something went wrong. Please try again later.');
+            return redirect()->back();
         }
     }
 }

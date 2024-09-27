@@ -26,22 +26,34 @@
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
+                            <span class="nk-menu-icon"><em class="icon ni ni-setting-fill"></em></span>
                             <span class="nk-menu-text">Settings</span>
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Profile Settings</span></a>
+                                <a href="{{ route('vendor.settings.profile.edit') }}" class="nk-menu-link"><span class="nk-menu-text">Profile Settings</span></a>
                             </li>
                             <li class="nk-menu-item">
-                                <a href="#" class="nk-menu-link"><span class="nk-menu-text">Shop Settings</span></a>
+                                <a href="{{ route('vendor.settings.shop.edit') }}" class="nk-menu-link"><span class="nk-menu-text">Shop Settings</span></a>
                             </li>
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
                         <a href="{{ route('vendor.bookings.list') }}" class="nk-menu-link">
-                            <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
+                            <span class="nk-menu-icon"><em class="icon ni ni-view-list-wd"></em></span>
                             <span class="nk-menu-text">Bookings</span>
+                        </a>
+                    </li><!-- .nk-menu-item -->
+                    <li class="nk-menu-item">
+                        <a href="#" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-sign-usdc"></em></span>
+                            <span class="nk-menu-text">Wallet</span>
+                        </a>
+                    </li><!-- .nk-menu-item -->
+                    <li class="nk-menu-item">
+                        <a href="#" class="nk-menu-link">
+                            <span class="nk-menu-icon"><em class="icon ni ni-amazon-pay-fill"></em></span>
+                            <span class="nk-menu-text">Payout History</span>
                         </a>
                     </li><!-- .nk-menu-item -->
                 </ul><!-- .nk-menu -->

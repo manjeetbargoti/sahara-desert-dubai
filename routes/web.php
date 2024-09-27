@@ -18,9 +18,17 @@ Route::prefix('vendor')->namespace('App\Http\Controllers\Site')->middleware('aut
     Route::match(['get', 'post'], 'booking/list', 'BookingController@vendorBookings')->name('vendor.bookings.list');
     Route::match(['get', 'post'], 'booking/{reference}/list', 'BookingController@viewVendorBookings')->name('vendor.bookings.view');
 
-    Route::get('/profile', 'ProfileController@edit')->name('vendor.profile.edit');
-    Route::patch('/profile', 'ProfileController@update')->name('vendor.profile.update');
-    Route::delete('/profile', 'ProfileController@destroy')->name('vendor.profile.destroy');
+
+    // Route::get('/profile', 'ProfileController@edit')->name('vendor.profile.edit');
+    // Route::patch('/profile', 'ProfileController@update')->name('vendor.profile.update');
+    // Route::delete('/profile', 'ProfileController@destroy')->name('vendor.profile.destroy');
+
+    // Profile Setting
+    Route::match(['get', 'post'], 'profile/edit', 'ProfileController@edit')->name('vendor.settings.profile.edit');
+
+    // Shop Setting
+    Route::match(['get', 'post'], 'shop/edit', 'ShopController@edit')->name('vendor.settings.shop.edit');
+
 });
 
 Route::namespace('App\Http\Controllers\Site')->group(function () {

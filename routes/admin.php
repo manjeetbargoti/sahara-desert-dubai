@@ -58,6 +58,7 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['au
     Route::match(['get','post'], 'bookings/list', 'BookingController@index')->name('admin.bookings.list');
     Route::match(['get','post'], 'bookings/{reference}/view', 'BookingController@view')->name('admin.bookings.view');
     Route::match(['get','post'], 'bookings/{id}/update', 'BookingController@update')->name('admin.bookings.update');
+    Route::match(['get','post'], 'bookings/{id}/send-booking-email', 'BookingController@sendBookingEmail')->name('admin.bookings.email_sent');
 
     // Admin Logout
     Route::match(['get', 'post'],'logout', 'Auth\LoginController@destroy')->name('admin.logout');

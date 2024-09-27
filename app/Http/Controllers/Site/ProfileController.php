@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -17,29 +18,33 @@ class ProfileController extends Controller
     }
 
     /**
-     * Display the user's profile form.
+     * Edit vendor profile information
      */
-    public function edit(Request $request): View
+    public function edit(Request $request)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+        $vendor = User::where(['user_type' => 'vendor', 'id' => Auth::user()->id])->first();
 
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+        if(!empty($vendor)){
+            if($request->isMethod('post')){
+                $vendor->name                   = $request->name;
+                $vendor->phone_country_code     = $request->country_code;
+                $vendor->phone                  = $request->phone;
+                $vendor->email                  = $request->email;
+                $vendor->address                = $request->address;
+                $vendor->country                = $request->country;
+                $vendor->state                  = $request->state;
+                $vendor->city                   = $request->city;
+                $vendor->postal_code            = $request->postal_code;
+    
+                $vendor->save();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+                flash()->success('Profile updated successfully!');
+    
+                return view('frontend.seller.settings.account', compact('vendor'));
+            }
+
+            return view('frontend.seller.settings.account', compact('vendor'));
         }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**

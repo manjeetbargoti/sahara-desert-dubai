@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
+
+use App\Mail\SendBookingEmail;
+use App\Mail\AdminBookingEmail;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -91,6 +95,12 @@ class BookingController extends Controller
                 $booking->payment_date          = NULL;
 
                 $booking->save();
+
+                // Send Confirmation Email to Customer
+                $mail_info = Mail::to($booking->email)->send(new SendBookingEmail($booking));
+
+                // Send Booking Email to Admin
+                $admin_mail_info = Mail::to(get_setting('admin_email'))->send(new AdminBookingEmail(@$booking));
 
                 return redirect()->back()->with(['success'=>'Booking is Successful. Your booking reference is '.$booking_reference.'.', 'data' => $booking]);
             }catch(\Exception $e){

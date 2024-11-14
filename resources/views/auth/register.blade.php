@@ -79,6 +79,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="form-label" for="email">Business Name</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" name="shop_name" class="form-control form-control-lg" id="shop_name" placeholder="Enter your business name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="form-label" for="password">Password</label>
                                         <div class="form-control-wrap">
                                             <a href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">

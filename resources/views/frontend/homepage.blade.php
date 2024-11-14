@@ -2,7 +2,7 @@
 @section("content")
 
 <!-- ========== HERO ========== -->
-<div class="bg-img-hero-bottom min-height-600 gradient-overlay-half-gray-gradient  space-top-lg-3 space-2" style="background-image: url({{ uploaded_asset(get_setting('homepage_banner')) }});">
+<div class="bg-img-hero-bottom min-height-600 space-top-lg-3 space-2" style="background-image: url({{ uploaded_asset(get_setting('homepage_banner')) }});">
     <div class="container">
         <div class="d-md-flex align-items-lg-center text-center">
             <div class="row justify-content-md-center w-100 pt-4">
@@ -111,6 +111,18 @@
             </div>
         </div> --}}
     </div>
+    <!-- ========== Start TripAdvisor ========== -->
+    <div id="TA_cdsratingsonlywide505" class="TA_cdsratingsonlywide" style="position: relative; top: 25em;">
+        <ul id="q7wq7QwB" class="TA_links BOaGe6">
+            <li id="BmZFaPz" class="KEJsAPi">
+                <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g295424-d26678366-Reviews-Sahara_Desert_Dubai-Dubai_Emirate_of_Dubai">
+                    <img src="https://www.tripadvisor.com/img/cdsi/img2/branding/v2/Tripadvisor_lockup_horizontal_secondary_registered-18034-2.svg" width="100" alt="TripAdvisor" />
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script async src="https://www.jscache.com/wejs?wtype=cdsratingsonlywide&amp;uniq=505&amp;locationId=26678366&amp;lang=en_US&amp;border=true&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+    <!-- ========== End TripAdvisor ========== -->
 </div>
 <!-- ========== END HERO ========== -->
 
@@ -123,7 +135,7 @@
                 <div class="media pr-xl-14">
                     <i class="flaticon-placeholder-2 text-primary font-size-50 text-lh-1 mb-3 mr-3"></i>
                     <div class="media-body">
-                        <h5 class="font-size-19 text-dark font-weight-bold mb-1"><a href="#">2.000 +Destinations</a></h5>
+                        <h5 class="font-size-19 text-dark font-weight-bold mb-1"><a href="#">2000+ Destinations</a></h5>
                         <p class="text-gray-1 text-lh-inherit">Our expert team handpicked all destinations in this site</p>
                     </div>
                 </div>
@@ -147,7 +159,7 @@
                 <div class="media pr-xl-14">
                     <i class="flaticon-customer-service text-primary font-size-50 text-lh-1 mb-3 mr-3"></i>
                     <div class="media-body">
-                        <h5 class="font-size-19 text-dark font-weight-bold mb-1"><a href="#">Top Notch Support</a></h5>
+                        <h5 class="font-size-19 text-dark font-weight-bold mb-1"><a href="#">Top Notch 24x7 Support</a></h5>
                         <p class="text-gray-1 text-lh-inherit">We are here to help, before, during, and even after your trip.</p>
                     </div>
                 </div>
@@ -351,7 +363,7 @@
 @endif
 
 <!--Banner v4-->
-<div class="banner-block banner-v4 gradient-overlay-half-bg-blue-light bg-img-hero space-3 space-top-lg-4 space-bottom-lg-3" style="background-image: url({{ asset('assets/frontend/img/1920x500/img5.jp') }}g);">
+<div class="banner-block banner-v4 gradient-overlay-half-bg-blue-light bg-img-hero space-3 space-top-lg-4 space-bottom-lg-3" style="background-image: url({{ uploaded_asset(get_setting('homepage_video_banner')) }});background-attachment:fixed;">
     <div class="text-center mt-xl-2">
         <h5 class="text-white font-size-41 font-weight-bold mb-2">Travelling Highlights</h5>
         <h6 class="text-white font-size-21 font-weight-bold mb-3 mb-lg-5 opacity-7">Your New Travelling Idea</h6>
@@ -529,18 +541,13 @@
                     <!-- Testimonials -->
                     <div class="d-flex justify-content-center mb-6">
                         <div class="position-relative">
-                            <img class="img-fluid mx-auto" src="{{ asset('assets/frontend/img/137x137/img1.jpg') }}" alt="Image-Descrition">
-                            <div class="btn-position btn btn-icon btn-dark rounded-circle d-flex align-items-center justify-content-center height-60 width-60">
-                                <figure id="quote7" class="svg-preloader">
-                                    <img class="js-svg-injector" src="{{ asset('assets/frontend/svg/illustrations/qu') }}ote2.svg" alt="SVG" data-parent="#quote7">
-                                </figure>
-                            </div>
+                            <img class="img-thumbnail rounded-circle mx-auto" width="120" src="{{ asset('assets/frontend/img/default-avatar.jpg') }}" alt="Image-Descrition">
                         </div>
                     </div>
                     <div class="text-center">
-                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">This is the 3rd time I’ve used Travelo website and telling you the truth their services are always realiable and it only takes few minutes to plan and finalize</p>
-                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">Jessica Brown</h6>
-                        <span class="text-blue-lighter-1 font-size-normal">client</span>
+                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">Today was an absolutely amazing day's with many fun activities. We did many things such as dune bashing, camel riding and a wonderful sunset photoshoot. We also had an amazing driver and tour guide called Waseem and overall a 10/10 trip.</p>
+                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">faňhmRadek R</h6>
+                        <span class="text-blue-lighter-1 font-size-normal">Desert Safari</span>
                     </div>
                     <!-- End Testimonials -->
                 </div>
@@ -549,18 +556,18 @@
                     <!-- Testimonials -->
                     <div class="d-flex justify-content-center mb-6">
                         <div class="position-relative">
-                            <img class="img-fluid mx-auto" src="{{ asset('assets/frontend/img/137x137/img2.jpg') }}" alt="Image-Descrition">
-                            <div class="btn-position btn btn-icon btn-dark rounded-circle d-flex align-items-center justify-content-center height-60 width-60">
-                                <figure id="quote8" class="svg-preloader">
-                                    <img class="js-svg-injector" src="{{ asset('assets/frontend/svg/illustrations/qu') }}ote2.svg" alt="SVG" data-parent="#quote8">
-                                </figure>
-                            </div>
+                            <img class="img-thumbnail rounded-circle mx-auto" width="120" src="{{ asset('assets/frontend/img/default-avatar.jpg') }}" alt="Image-Descrition">
                         </div>
                     </div>
                     <div class="text-center">
-                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">This is the 3rd time I’ve used Travelo website and telling you the truth their services are always realiable and it only takes few minutes to plan and finalize</p>
-                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">Augusta Silva</h6>
-                        <span class="text-blue-lighter-1 font-size-normal">client</span>
+                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">We had a great time!
+                            Thank you Sahara Desert Dubai.
+                            We went there first time and our experience was beyond our expectations. Every single moment was enjoyable and memorable. We went there as Family group and they were able to assist us and give us what we need. Very accommodating and this tour is High recommended! 
+                            The Land Cruiser experience - it was enjoyable and not that extreme. They drive safely where you can seat and enjoy the dessert ride going to camp!
+                            The camping experience - We eat great buffet foods! Including many options, grilled chicken, salad, rice, desserts, bread and etc.
+                            A must have experience and bucket list tour in Dubai, High reccomended! </p>
+                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">Rona Mae F</h6>
+                        <span class="text-blue-lighter-1 font-size-normal">Best Tour in Dubai - Bucket List</span>
                     </div>
                     <!-- End Testimonials -->
                 </div>
@@ -569,78 +576,13 @@
                     <!-- Testimonials -->
                     <div class="d-flex justify-content-center mb-6">
                         <div class="position-relative">
-                            <img class="img-fluid mx-auto" src="{{ asset('assets/frontend/img/137x137/img3.jpg') }}" alt="Image-Descrition">
-                            <div class="btn-position btn btn-icon btn-dark rounded-circle d-flex align-items-center justify-content-center height-60 width-60">
-                                <figure id="quote9" class="svg-preloader">
-                                    <img class="js-svg-injector" src="{{ asset('assets/frontend/svg/illustrations/qu') }}ote2.svg" alt="SVG" data-parent="#quote9">
-                                </figure>
-                            </div>
+                            <img class="img-thumbnail rounded-circle mx-auto" width="120" src="{{ asset('assets/frontend/img/default-avatar.jpg') }}" alt="Image-Descrition">
                         </div>
                     </div>
                     <div class="text-center">
-                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">This is the 3rd time I’ve used Travelo website and telling you the truth their services are always realiable and it only takes few minutes to plan and finalize</p>
-                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">Ali Tufan</h6>
-                        <span class="text-blue-lighter-1 font-size-normal">client</span>
-                    </div>
-                    <!-- End Testimonials -->
-                </div>
-
-                <div class="js-slide">
-                    <!-- Testimonials -->
-                    <div class="d-flex justify-content-center mb-6">
-                        <div class="position-relative">
-                            <img class="img-fluid mx-auto" src="{{ asset('assets/frontend/img/137x137/img1.jpg') }}" alt="Image-Descrition">
-                            <div class="btn-position btn btn-icon btn-dark rounded-circle d-flex align-items-center justify-content-center height-60 width-60">
-                                <figure id="quote10" class="svg-preloader">
-                                    <img class="js-svg-injector" src="{{ asset('assets/frontend/svg/illustrations/qu') }}ote2.svg" alt="SVG" data-parent="#quote10">
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">This is the 3rd time I’ve used Travelo website and telling you the truth their services are always realiable and it only takes few minutes to plan and finalize</p>
-                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">Jessica Brown</h6>
-                        <span class="text-blue-lighter-1 font-size-normal">client</span>
-                    </div>
-                    <!-- End Testimonials -->
-                </div>
-
-                <div class="js-slide">
-                    <!-- Testimonials -->
-                    <div class="d-flex justify-content-center mb-6">
-                        <div class="position-relative">
-                            <img class="img-fluid mx-auto" src="{{ asset('assets/frontend/img/137x137/img3.jpg') }}" alt="Image-Descrition">
-                            <div class="btn-position btn btn-icon btn-dark rounded-circle d-flex align-items-center justify-content-center height-60 width-60">
-                                <figure id="quote11" class="svg-preloader">
-                                    <img class="js-svg-injector" src="{{ asset('assets/frontend/svg/illustrations/qu') }}ote2.svg" alt="SVG" data-parent="#quote11">
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">This is the 3rd time I’ve used Travelo website and telling you the truth their services are always realiable and it only takes few minutes to plan and finalize</p>
-                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">Ali Tufan</h6>
-                        <span class="text-blue-lighter-1 font-size-normal">client</span>
-                    </div>
-                    <!-- End Testimonials -->
-                </div>
-
-                <div class="js-slide">
-                    <!-- Testimonials -->
-                    <div class="d-flex justify-content-center mb-6">
-                        <div class="position-relative">
-                            <img class="img-fluid mx-auto" src="{{ asset('assets/frontend/img/137x137/img2.jpg') }}" alt="Image-Descrition">
-                            <div class="btn-position btn btn-icon btn-dark rounded-circle d-flex align-items-center justify-content-center height-60 width-60">
-                                <figure id="quote12" class="svg-preloader">
-                                    <img class="js-svg-injector" src="{{ asset('assets/frontend/svg/illustrations/qu') }}ote2.svg" alt="SVG" data-parent="#quote12">
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">This is the 3rd time I’ve used Travelo website and telling you the truth their services are always realiable and it only takes few minutes to plan and finalize</p>
-                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">Augusta Silva</h6>
-                        <span class="text-blue-lighter-1 font-size-normal">client</span>
+                        <p class="text-gray-1 font-italic text-lh-inherit px-xl-20 mx-xl-15 px-xl-20 mx-xl-18">I had an incredible time on the desert safari with Sahara Desert Dubai! My friends and I had an absolute blast with thrilling activities like dune bashing and ATV bike rides. Our driver was not only an expert but also a true professional, ensuring our safety throughout. The whole experience was smooth and enjoyable. I wholeheartedly recommend Sahara Desert Dubai for an unforgettable adventure! </p>
+                        <h6 class="font-size-17 font-weight-bold text-gray-6 mb-0">Danial i</h6>
+                        <span class="text-blue-lighter-1 font-size-normal">VIP Group</span>
                     </div>
                     <!-- End Testimonials -->
                 </div>

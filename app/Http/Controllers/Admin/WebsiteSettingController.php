@@ -40,7 +40,8 @@ class WebsiteSettingController extends Controller
             }
         }
         
-        return redirect()->back()->with('success', 'Settings Updated Successfully!');
+        flash()->success('Settings Updated Successfully!');
+        return redirect()->back();
     }
 
     public function imagesUpdate(Request $request){
@@ -124,7 +125,7 @@ class WebsiteSettingController extends Controller
     
                     $extension = $homepage_banner->getClientOriginalExtension();
                     $image_size = $homepage_banner->getSize();
-                    $file_name = "sdd-icon-" . Str::random(36).'.'.$extension;
+                    $file_name = "sdd-banner-" . Str::random(36).'.'.$extension;
                     $path = public_path("/uploads/website/settings/general");
                     
                     // Create directory if not exist
@@ -153,17 +154,87 @@ class WebsiteSettingController extends Controller
                     }
                 }
 
-                WebsiteSettings::where(['type' => 'website_logo'])->update(['value' => $uploadedWebLogo ?? $request->website_logo_old]);
-                WebsiteSettings::where(['type' => 'website_icon'])->update(['value' => $uploadedWebIcon ?? $request->website_icon_old]);
-                WebsiteSettings::where(['type' => 'homepage_banner'])->update(['value' => $uploadedHomepageBanner ?? $request->homepage_banner_old]);
+                // Upload Homepage Banner
+                if($request->hasFile('homepage_video_banner')){
+                    $homepage_video_banner = $request->file('homepage_video_banner');
+    
+                    $extension = $homepage_video_banner->getClientOriginalExtension();
+                    $image_size = $homepage_video_banner->getSize();
+                    $file_name = "sdd-vbanner-" . Str::random(36).'.'.$extension;
+                    $path = public_path("/uploads/website/settings/general");
+                    
+                    // Create directory if not exist
+                    if(!File::isDirectory($path)){
+                        File::makeDirectory($path, 0777, true, true);
+                    }
+    
+                    try{
+                        if(!empty(basename($homepage_video_banner))){
+                            copy($homepage_video_banner, $path . "/" . $file_name);
+                            // dd($homepage_video_banner->getClientOriginalName());
+    
+                            $upload = new Upload();
+                            $upload->file_original_name = @$homepage_video_banner->getClientOriginalName();
+                            $upload->file_name = '/uploads/website/settings/general/'. $file_name;
+                            $upload->user_id = Auth::user()->id;
+                            $upload->file_size = $image_size ?? null;
+                            $upload->extension = $extension ?? null;
+                            $upload->type = 'image';
+    
+                            $upload->save();
+                            $uploadedHomepageVideoBanner = $upload->id;
+                        }
+                    }catch(\Exception $eh){
+                        dd($eh);
+                    }
+                }
 
+                if(WebsiteSettings::where(['type' => 'website_logo'])->exists()){
+                    WebsiteSettings::where(['type' => 'website_logo'])->update(['value' => $uploadedWebLogo ?? $request->website_logo_old]);
+                }else{
+                    $websiteSetting = new WebsiteSettings();
+                    $websiteSetting->type = 'website_logo';
+                    $websiteSetting->value = @$uploadedWebLogo ?? $request->website_logo_old;
+                    $websiteSetting->save();
+                }
+
+                if(WebsiteSettings::where(['type' => 'website_icon'])->exists()){
+                    WebsiteSettings::where(['type' => 'website_icon'])->update(['value' => $uploadedWebIcon ?? $request->website_icon_old]);
+                }else{
+                    $websiteSetting = new WebsiteSettings();
+                    $websiteSetting->type = 'website_icon';
+                    $websiteSetting->value = @$uploadedWebIcon ?? $request->website_icon_old;
+                    $websiteSetting->save();
+                }
+
+                if(WebsiteSettings::where(['type' => 'homepage_banner'])->exists()){
+                    WebsiteSettings::where(['type' => 'homepage_banner'])->update(['value' => $uploadedHomepageBanner ?? $request->homepage_banner_old]);
+                }else{
+                    $websiteSetting = new WebsiteSettings();
+                    $websiteSetting->type = 'homepage_banner';
+                    $websiteSetting->value = @$uploadedHomepageBanner ?? $request->homepage_banner_old;
+                    $websiteSetting->save();
+                }
+                
+                if(WebsiteSettings::where(['type' => 'homepage_video_banner'])->exists()){
+                    WebsiteSettings::where(['type' => 'homepage_video_banner'])->update(['value' => $uploadedHomepageVideoBanner ?? $request->homepage_video_banner_old]);
+                }else{
+                    $websiteSetting = new WebsiteSettings();
+                    $websiteSetting->type = 'homepage_video_banner';
+                    $websiteSetting->value = @$uploadedHomepageVideoBanner ?? $request->homepage_video_banner_old;
+                    $websiteSetting->save();
+                }
+                
                 DB::commit();
-                return redirect()->back()->with('success', 'Settings updated successfully!');
+
+                flash()->success('Settings updated successfully!');
+                return redirect()->back();
             }
 
         }catch(\Exception $el){
             DB::rollBack();
-            return redirect()->back()->with('error', $el->getMessage().', '.$el->getLine());
+            flash()->error($el->getMessage().', '.$el->getLine());
+            return redirect()->back();
         }
     }
 
@@ -191,6 +262,7 @@ class WebsiteSettingController extends Controller
             }
         }
         
-        return redirect()->back()->with('success', 'Settings Updated Successfully!');
+        flash()->success('Settings Updated Successfully!');
+        return redirect()->back();
     }
 }

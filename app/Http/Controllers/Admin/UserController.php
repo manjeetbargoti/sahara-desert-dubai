@@ -36,7 +36,8 @@ class UserController extends Controller
 
         // $user->syncRoles($request->roles);
 
-        return redirect()->route('users.index')->with('status', 'User Created Successfully!');
+        flash()->success('User Created Successfully!');
+        return redirect()->route('users.index');
     }
 
     public function edit(User $user){

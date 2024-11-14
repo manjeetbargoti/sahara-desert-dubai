@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="./images/favicon.png">
+    <link rel="shortcut icon" href="{{ uploaded_asset(get_setting('website_icon')) }}">
     <!-- Page Title  -->
-    <title>{{ __('Send Booking Confirmation Email') }}</title>
+    <title>{{ __('Admin Booking Confirmation Email') }}</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/dashlite.css') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/admin/assets/css/theme.css') }}">

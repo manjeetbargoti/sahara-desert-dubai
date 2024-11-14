@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use App\Models\Seller;
+use App\Models\Shop;
 use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +15,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class RegisteredUserController extends Controller
 {
@@ -63,8 +67,17 @@ class RegisteredUserController extends Controller
             $seller->balance = 0;
             $seller->save();
 
+            $shop = new Shop();
+            $shop->name = $request->shop_name;
+            $shop->slug = Str::slug($request->shop_name);
+            $shop->user_id = $user->id;
+            $shop->save();
+
             DB::commit();
-    
+
+            // Send Confirmation Email to Customer
+            $mail_info = Mail::to($request->email)->send(new WelcomeEmail($user));
+            
             event(new Registered($user));
     
             Auth::login($user);

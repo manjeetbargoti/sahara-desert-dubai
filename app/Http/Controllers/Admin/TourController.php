@@ -268,11 +268,14 @@ class TourController extends Controller
                 $tour->save();
 
                 DB::commit();
-                return redirect()->route('admin.tours.index')->with('success', 'Tour Created Successfully!');
+
+                flash()->success('Tour Created Successfully!');
+                return redirect()->route('admin.tours.index');
             }
         }catch(\Exception $ex){
             DB::rollBack();
-            return redirect()->back()->with('error', $ex->getMessage().', '.$ex->getLine());
+
+            flash()->error($ex->getMessage().', '.$ex->getLine());
         }
         
         $tourCategories = TourCategory::where('status', 1)->get();
@@ -525,12 +528,15 @@ class TourController extends Controller
 
                 DB::commit();
 
-                return redirect()->route('admin.tours.index')->with('success', 'Tour Updated Successfully!');
+                flash()->success('Tour Updated Successfully!');
+                return redirect()->route('admin.tours.index');
             }
 
         }catch(\Exception $ex){
             DB::rollBack();
-            return redirect()->back()->with('error', $ex->getMessage().', '.$ex->getLine());
+
+            flash()->error($ex->getMessage().', '.$ex->getLine());
+            return redirect()->back();
         }
 
         $tourCategories = TourCategory::where('status', 1)->get();

@@ -135,6 +135,46 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="supportEmail">VIP Safari & Tours</label>
+                                            <span class="form-note">Please enter VIP Tour Link.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="hidden" name="types[]" value="vip_tour">
+                                                <input type="text" name="vip_tour" value="{{ get_setting('vip_tour') ?? old('vip_tour') }}" class="form-control @error('vip_tour') is-invalid @enderror" id="supportEmail">
+                                                @error('vip_tour')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="supportEmail">City Tour</label>
+                                            <span class="form-note">Please enter City Tour Link.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="hidden" name="types[]" value="city_tour">
+                                                <input type="text" name="city_tour" value="{{ get_setting('city_tour') ?? old('city_tour') }}" class="form-control @error('city_tour') is-invalid @enderror" id="supportEmail">
+                                                @error('city_tour')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 
 
                                 <div class="row g-3">
@@ -227,6 +267,32 @@
                                                 @enderror
                                                 <div class="image-preview mt-1">
                                                     <img id="homeBannerPreview" class="img-thumbnail" src="{{ uploaded_asset(get_setting('homepage_banner')) ?? 'https://placehold.co/1920x600/EEE/31343C' }}" alt="preview image" width="150">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="homeVideoBanner">Homepage Video Banner</label>
+                                            <span class="form-note">Please upload homepage video banner (1920x500 px).</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <div class="custom-file">
+                                                    <input type="hidden" name="homepage_video_banner_old" value="{{ get_setting('homepage_video_banner') }}">
+                                                    <input type="file" name="homepage_video_banner" value="{{ old('homepage_video_banner') }}" class="custom-file-input @error('homepage_video_banner') is-invalid @enderror" id="homeVideoBanner">
+                                                    <label class="custom-file-label" for="homeVideoBanner">Choose file</label>
+                                                </div>
+                                                @error('homepage_video_banner')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                                <div class="image-preview mt-1">
+                                                    <img id="homeVideoBannerPreview" class="img-thumbnail" src="{{ uploaded_asset(get_setting('homepage_video_banner')) ?? 'https://placehold.co/1920x600/EEE/31343C' }}" alt="preview image" width="150">
                                                 </div>
                                             </div>
                                         </div>
@@ -390,6 +456,13 @@
                 let reader = new FileReader();
                 reader.onload = (e) => {
                 $('#homeBannerPreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+            $('#homeVideoBanner').change(function(){
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                $('#homeVideoBannerPreview').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(this.files[0]);
             });

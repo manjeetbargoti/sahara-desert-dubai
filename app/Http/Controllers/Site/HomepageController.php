@@ -16,6 +16,13 @@ class HomepageController extends Controller
         return view('frontend.homepage', compact('popularTours', 'recentTours'));
     }
 
+    public function tourList(){
+        $tour_count = Tour::where(['status'=>1,'admin_approval'=>1])->count();
+        $tours = Tour::where(['status'=>1,'admin_approval'=>1])->latest()->cursorPaginate(20);
+
+        return view('frontend.tours.tour_list', compact('tours', 'tour_count'));
+    }
+
     public function tourDetail(Request $request){
         $tour = Tour::where(['slug'=>$request->slug, 'status' => 1, 'admin_approval' => 1])->first();
         if(!empty($tour)){
@@ -24,5 +31,9 @@ class HomepageController extends Controller
         }else{
             return redirect()->route('home');
         }
+    }
+
+    public function contactUs(){
+        return view('frontend.contact_us');
     }
 }

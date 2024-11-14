@@ -82,7 +82,11 @@ if (! function_exists('format_price')) {
         //     return currency_symbol().' '.number_format($price, 2);
         // }
         // return number_format($price, 2).currency_symbol();
-        return currency_symbol().' '.number_format($price, 2);
+        if($price < 0){
+            return '- '.currency_symbol().' '.str_replace('-', '', number_format($price, 2));
+        }else{
+            return currency_symbol().' '.number_format($price, 2);
+        }
     }
 }
 

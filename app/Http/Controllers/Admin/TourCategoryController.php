@@ -105,7 +105,9 @@ class TourCategoryController extends Controller
             $tourCategory->banner = $uploadedBannerImg ?? null;
 
             $tourCategory->save();
-            return redirect()->route('admin.tours.category.index')->with('success', 'Tour Category Created Successfully!');
+
+            flash()->success('Tour Category Created Successfully!');
+            return redirect()->route('admin.tours.category.index');
         }
 
         return view('admin.tours.category.create');
@@ -215,7 +217,9 @@ class TourCategoryController extends Controller
                 $category->save();
 
                 DB::commit();
-                return redirect()->route('admin.tours.category.index')->with('success', 'Tour Category Created Successfully!');
+
+                flash()->success('Tour Category Created Successfully!');
+                return redirect()->route('admin.tours.category.index');
             }
         }catch(\Exception $ex){
             DB::rollBack();

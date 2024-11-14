@@ -9,7 +9,8 @@
                     <h4 class="nk-block-title">Booking List</h4>
                 </div>
                 <div class="nk-block-head-content">
-                    {{-- <a href="{{ route('admin.tours.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Tour</span></a> --}}
+                    <a href="{{ route('admin.bookings.export') }}" class="btn btn-dim btn-outline-info"><em class="icon ni ni-plus"></em><span>Export Bookings</span></a>
+                    <a href="{{ route('admin.bookings.create') }}" class="btn btn-dim btn-outline-primary"><em class="icon ni ni-plus"></em><span>Create New Booking</span></a>
                 </div>
             </div>
         </div>
@@ -44,7 +45,7 @@
                         <td>
                             <div class="row">
                                 <div class="col-sm-10">
-                                    <span class="title text-primary fw-bold">{{ @$booking->booking_reference }}</span><br>
+                                    <span class="title text-primary fw-bold">{{ @$booking->booking_reference }}</span>
                                 </div>
                             </div>
                         </td>
@@ -60,16 +61,16 @@
                         </td>
                         <td>
                             @if(@$booking->payment_status == 'paid')
-                            <span class="badge badge-success">{{ __('Paid') }}</span>
+                            <span class="badge badge-dim badge-outline-success">{{ __('Paid') }}</span>
                             @else
-                            <span class="badge badge-danger">{{ __('Unpaid') }}</span>
+                            <span class="badge badge-dim badge-outline-danger">{{ __('Unpaid') }}</span>
                             @endif
                         </td>
                         <td>
                             @if(@$booking->status == 1)
-                            <span class="badge badge-success">{{ __('Fulfilled') }}</span>
+                            <span class="badge badge-dim badge-outline-success">{{ __('Completed') }}</span>
                             @else
-                            <span class="badge badge-warning">{{ __('Unfulfilled') }}</span>
+                            <span class="badge badge-dim badge-outline-warning">{{ __('Pending') }}</span>
                             @endif
                         </td>
                         <td>
@@ -82,7 +83,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                     <ul class="link-list-plain">
                                         <li><a href="{{ route('admin.bookings.view', @$booking->booking_reference) }}" class="text-info">{{ __('View') }}</a></li>
-                                        <li><a href="#" class="text-primary">{{ __('Edit') }}</a></li>
+                                        <li><a href="{{ route('admin.bookings.edit', @$booking->booking_reference) }}" class="text-primary">{{ __('Edit') }}</a></li>
                                         <li><a href="{{ route('admin.bookings.email_sent', @$booking->id) }}" class="text-primary">{{ __('Send Email') }}</a></li>
                                     </ul>
                                 </div>

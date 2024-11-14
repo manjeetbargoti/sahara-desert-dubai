@@ -90,6 +90,7 @@ class BookingController extends Controller
                 $booking->email                 = $request->email;
                 $booking->phone                 = @$request->country_code.' '.$request->phone;
                 $booking->location              = $request->location;
+                $booking->address               = $request->address;
                 $booking->payment_status        = 'unpaid';
                 $booking->payment_method        = 'cash';
                 $booking->payment_date          = NULL;
@@ -102,11 +103,19 @@ class BookingController extends Controller
                 // Send Booking Email to Admin
                 $admin_mail_info = Mail::to(get_setting('admin_email'))->send(new AdminBookingEmail(@$booking));
 
-                return redirect()->back()->with(['success'=>'Booking is Successful. Your booking reference is '.$booking_reference.'.', 'data' => $booking]);
+                return $this->bookingThankyou(@$booking_reference);
+
+                // return redirect()->back()->with(['success'=>'Booking is Successful. Your booking reference is '.$booking_reference.'.', 'data' => $booking]);
             }catch(\Exception $e){
                 return redirect()->back()->with('error', $e->getMessage());
             }
         }
+    }
+
+    // Booking Thank you
+    public function bookingThankyou($booking_reference){
+        $booking = Booking::where('booking_reference', $booking_reference)->first();
+        return view('frontend.booking_thank_you', compact('booking'));
     }
 
     // List all vendor bookings

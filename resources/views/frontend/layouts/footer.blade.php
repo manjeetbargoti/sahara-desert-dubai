@@ -62,10 +62,10 @@
                     <h4 class="h6 font-weight-bold mb-2 mb-xl-4">Company</h4>
                     <!-- List Group -->
                     <ul class="list-group list-group-flush list-group-borderless mb-0">
-                        <li><a class="text-decoration-on-hover list-group-item list-group-item-action" href="#">About us</a></li>
-                        <li><a class="text-decoration-on-hover list-group-item list-group-item-action" href="#">All Tours</a></li>
-                        <li><a class="text-decoration-on-hover list-group-item list-group-item-action" href="#">VIP Safari & Tours</a></li>
-                        <li><a class="text-decoration-on-hover list-group-item list-group-item-action" href="#">City Tours</a></li>
+                        <li><a class="text-decoration-on-hover list-group-item list-group-item-action" href="{{ route('home') }}">Home</a></li>
+                        <li><a class="text-decoration-on-hover list-group-item list-group-item-action" href="{{ route('tour.list') }}">All Tours</a></li>
+                        <li><a class="text-decoration-on-hover list-group-item list-group-item-action" href="{{ get_setting('vip_tour') }}">VIP Safari & Tours</a></li>
+                        <li><a class="text-decoration-on-hover list-group-item list-group-item-action" href="{{ get_setting('city_tour') }}">City Tours</a></li>
                         <li><a class="list-group-item list-group-item-action text-decoration-on-hover" href="#">Gallery</a></li>
                     </ul>
                     <!-- End List Group -->
@@ -81,7 +81,7 @@
                             <a class="list-group-item list-group-item-action text-decoration-on-hover" href="#">Privacy Policy</a>
                         </li>
                         <li>
-                            <a class="list-group-item list-group-item-action text-decoration-on-hover" href="#">Contact</a>
+                            <a class="list-group-item list-group-item-action text-decoration-on-hover" href="{{ route('contactus') }}">Contact</a>
                         </li>
                     </ul>
                     <!-- End List Group -->

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/dashlite.css?ver='.env('APP_VERSION')) }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/admin/assets/css/theme.css?ver='.env('APP_VERSION')) }}">
     <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/editors/summernote.css?ver='.env('APP_VERSION')) }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/css/intlTelInput.css">
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -65,6 +66,8 @@
     <script src="{{ asset('assets/admin/assets/js/charts/gd-default.js?ver='.env('APP_VERSION')) }}"></script>
     <script src="{{ asset('assets/admin/assets/js/libs/editors/summernote.js?ver='.env('APP_VERSION')) }}"></script>
     <script src="{{ asset('assets/admin/assets/js/editors.js?ver='.env('APP_VERSION')) }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/intlTelInput.min.js"></script>
 
     @yield('custom-script')
 </body>

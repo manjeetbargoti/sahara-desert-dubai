@@ -56,9 +56,28 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['au
 
     // Booking Routes
     Route::match(['get','post'], 'bookings/list', 'BookingController@index')->name('admin.bookings.list');
+    Route::match(['get', 'post'], 'bookings/create', 'BookingController@createBooking')->name('admin.bookings.create');
+    Route::match(['get', 'post'], 'bookings/{reference}/edit', 'BookingController@editBooking')->name('admin.bookings.edit');
+    Route::match(['get','post'], 'bookings/tour-by-id', 'BookingController@tourById')->name('admin.bookings.tourbyid');
     Route::match(['get','post'], 'bookings/{reference}/view', 'BookingController@view')->name('admin.bookings.view');
     Route::match(['get','post'], 'bookings/{id}/update', 'BookingController@update')->name('admin.bookings.update');
     Route::match(['get','post'], 'bookings/{id}/send-booking-email', 'BookingController@sendBookingEmail')->name('admin.bookings.email_sent');
+    Route::match(['get','post'], 'bookings/{id}/export', 'BookingController@exportVendorBooking')->name('admin.vendor.bookings.export');
+    Route::match(['get','post'], 'bookings/export', 'BookingController@exportBooking')->name('admin.bookings.export');
+
+    // Vendor Routes
+    Route::match(['get','post'], 'vendor/list', 'VendorController@vendorList')->name('admin.vendor.list');
+    Route::match(['get','post'], 'vendor/{id}/bookings', 'VendorController@vendorBookings')->name('admin.vendor.bookings');
+    Route::match(['get','post'], 'vendor/{id}/profile', 'VendorController@vendorProfile')->name('admin.vendor.profile');
+    Route::match(['get','post'], 'vendor/{id}/edit', 'VendorController@vendorEdit')->name('admin.vendor.edit');
+    Route::match(['get','post'], 'vendor/{id}/basic-update', 'VendorController@updateBasicInfo')->name('admin.vendor.basic.update');
+    Route::match(['get','post'], 'vendor/{id}/business-update', 'VendorController@updateBusinessInfo')->name('admin.vendor.business.update');
+    Route::match(['get','post'], 'vendor/{id}/bank-update', 'VendorController@updateBankInfo')->name('admin.vendor.bank.update');
+    Route::match(['get','post'], 'vendor/{id}/wallet-update', 'VendorController@updateWalletBalances')->name('admin.vendor.wallet.update');
+    // Route::match(['get','post'], 'vendor/{id}/export-bookings', 'VendorController@updateWalletBalances')->name('admin.vendor.wallet.update');
+
+    // Reports
+    Route::match(['get','post'], 'reports/booking', 'BookingController@reports')->name('admin.reports.booking');
 
     // Admin Logout
     Route::match(['get', 'post'],'logout', 'Auth\LoginController@destroy')->name('admin.logout');

@@ -7,7 +7,15 @@ Route::namespace('App\Http\Controllers\Site')->group(function() {
     Route::get('/', 'HomepageController@index')->name('home');
 
     // Tour Detail Route
+    Route::match(['get','post'], 'tours','HomepageController@tourList')->name('tour.list');
     Route::match(['get','post'], 'tours/{slug}','HomepageController@tourDetail')->name('tour.detail');
+
+    // Contact-us page
+    Route::get('contact-us', 'HomepageController@contactUs')->name('contactus');
+
+    // Create booking
+    Route::post('/submit-booking', 'BookingController@submitBooking')->name('tour.booking.submit');
+    Route::match(['get', 'post'],'/booking/thank-you', 'BookingController@bookingThankyou')->name('tour.booking.thankyou');
 });
 
 Route::prefix('vendor')->namespace('App\Http\Controllers\Site')->middleware('auth')->group(function () {
@@ -17,6 +25,10 @@ Route::prefix('vendor')->namespace('App\Http\Controllers\Site')->middleware('aut
     // Vendor Booking List
     Route::match(['get', 'post'], 'booking/list', 'BookingController@vendorBookings')->name('vendor.bookings.list');
     Route::match(['get', 'post'], 'booking/{reference}/list', 'BookingController@viewVendorBookings')->name('vendor.bookings.view');
+
+    // Wallet Routes
+    Route::match(['get','post'], 'wallet','WalletController@index')->name('vendor.wallet.index');
+    Route::match(['get','post'], 'wallet/{id}/tranx/view','WalletController@detail')->name('vendor.wallet.tranx.view');
 
 
     // Route::get('/profile', 'ProfileController@edit')->name('vendor.profile.edit');
@@ -32,7 +44,7 @@ Route::prefix('vendor')->namespace('App\Http\Controllers\Site')->middleware('aut
 });
 
 Route::namespace('App\Http\Controllers\Site')->group(function () {
-    Route::post('/submit-booking', 'BookingController@submitBooking')->name('tour.booking.submit');
+    
 });
 
 // require __DIR__.'/auth.php';

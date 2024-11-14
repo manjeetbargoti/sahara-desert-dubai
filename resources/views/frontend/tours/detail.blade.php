@@ -194,7 +194,7 @@
                 @if (!empty(strip_tags($tour->cancellation_policy_description)))
                     <div class="border-bottom py-4 text-justify">
                         <h5 class="font-size-21 font-weight-bold text-dark mb-4">
-                            {{ $tour->cancellation_policy_name }}
+                            {!! $tour->cancellation_policy_name !!}
                         </h5>
                         {!! @$tour->cancellation_policy_description !!}
                     </div>
@@ -203,7 +203,7 @@
                 @if (!empty(strip_tags($tour->child_cacellation_policy_description)))
                     <div class="border-bottom py-4 text-justify">
                         <h5 class="font-size-21 font-weight-bold text-dark mb-4">
-                            {{ $tour->child_cacellation_policy_name }}
+                            {!! $tour->child_cacellation_policy_name !!}
                         </h5>
                         {!! @$tour->child_cacellation_policy_description !!}
                     </div>
@@ -231,10 +231,10 @@
                         <input type="hidden" name="tour_id" value="{{ @$tour->id }}">
                         <input type="hidden" name="ip_address" value="{{ @$_SERVER['REMOTE_ADDR'] }}">
                         <input type="hidden" name="request_page" value="{{ @url()->current() }}">
-                        <input type="hidden" name="adult_price" value="{{ @$tour->sell_price }}">
-                        <input type="hidden" name="child_price" value="{{ @$tour->child_price }}">
-                        <input type="hidden" name="infant_price" value="{{ @$tour->infant_price }}">
-                        <input type="hidden" name="fixed_charges" value="{{ @$tour->fixed_charges }}">
+                        <input type="hidden" id="adultPrice" name="adult_price" value="{{ @$tour->sell_price }}">
+                        <input type="hidden" id="childPrice" name="child_price" value="{{ @$tour->child_price }}">
+                        <input type="hidden" id="infantPrice" name="infant_price" value="{{ @$tour->infant_price }}">
+                        <input type="hidden" id="fixedCharges" name="fixed_charges" value="{{ @$tour->fixed_charges }}">
                         <input type="hidden" name="fixed_charges_type" value="{{ @$tour->fixed_charges_text }}">
 
                         <div class="border border-color-7 rounded mb-5">
@@ -317,6 +317,20 @@
                                 <!-- End Input -->
 
                                 <!-- Input -->
+                                <span class="d-block text-gray-1 font-weight-normal mb-1 text-left">Pickup Location</span>
+                                <div class="mb-4">
+                                    <div class="js-focus-state input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fas fa-map-pin"></span>
+                                            </span>
+                                        </div>
+                                        <input class="form-control" value="{{ old('address') }}" name="address" id="customerAddress" type="address" placeholder="Address">
+                                    </div>
+                                </div>
+                                <!-- End Input -->
+
+                                <!-- Input -->
                                 <span class="d-block text-gray-1 font-weight-normal mb-1 text-left">Phone <small
                                         class="text-info"><i>(with country code)</i></small></span>
                                 <div class="mb-4">
@@ -338,11 +352,11 @@
                                         <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
                                             <span class="d-block">Age 18+</span>
                                             <div class="flex-horizontal-center">
-                                                <a class="js-minus font-size-10 text-dark" href="javascript:;">
+                                                <a class="js-minus font-size-10 text-dark" href="javascript:;" onclick="decbtnadult();">
                                                     <i class="fas fa-chevron-down"></i>
                                                 </a>
-                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="adult_count" type="text" value="1" min="01" max="1000">
-                                                <a class="js-plus font-size-10 text-dark" href="javascript:;">
+                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="adult_count" id="adultCount" type="text" value="0" min="01" max="1000">
+                                                <a class="js-plus font-size-10 text-dark" href="javascript:;" onclick="incbtnadult();">
                                                     <i class="fas fa-chevron-up"></i>
                                                 </a>
                                             </div>
@@ -360,11 +374,11 @@
                                         <div class="js-quantity flex-center-between mb-1 text-dark font-weight-bold">
                                             <span class="d-block">Age {{ @$tour->child_age }}</span>
                                             <div class="flex-horizontal-center">
-                                                <a class="js-minus font-size-10 text-dark" href="javascript:;">
+                                                <a class="js-minus font-size-10 text-dark" href="javascript:;" onclick="decbtnchild();">
                                                     <i class="fas fa-chevron-down"></i>
                                                 </a>
-                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="child_count" type="text" value="0" min="0" max="1000">
-                                                <a class="js-plus font-size-10 text-dark" href="javascript:;">
+                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="child_count" id="childCount" type="text" value="0" min="0" max="1000">
+                                                <a class="js-plus font-size-10 text-dark" href="javascript:;" onclick="incbtnchild();">
                                                     <i class="fas fa-chevron-up"></i>
                                                 </a>
                                             </div>
@@ -385,7 +399,7 @@
                                                 <a class="js-minus font-size-10 text-dark" href="javascript:;">
                                                     <i class="fas fa-chevron-down"></i>
                                                 </a>
-                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="infant_count" type="text" value="0" min="0" max="{{ @$tour->infant_count }}">
+                                                <input class="js-result form-control h-auto width-30 font-weight-bold font-size-16 shadow-none bg-tranparent border-0 rounded p-0 mx-1 text-center" name="infant_count" id="infantCount" type="text" value="0" min="0" max="{{ @$tour->infant_count }}">
                                                 <a class="js-plus font-size-10 text-dark" href="javascript:;">
                                                     <i class="fas fa-chevron-up"></i>
                                                 </a>
@@ -400,9 +414,8 @@
                                 @endif
 
                                 <div class="text-center">
-                                    <button type="submit"
-                                        class="btn btn-primary d-flex align-items-center justify-content-center  height-60 w-100 mb-xl-0 mb-lg-1 transition-3d-hover font-weight-bold">Book
-                                        Now</button>
+                                    <button type="submit" class="btn btn-primary d-flex align-items-center justify-content-center height-60 w-100 mb-xl-0 mb-lg-1 transition-3d-hover font-weight-bold">Book
+                                        Now <span id="bookingBtn"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -551,5 +564,97 @@
         var country = phoneInput.getSelectedCountryData();
         $('input[name=country_code]').val(country.dialCode);
         $('input[name=country_iso2]').val(country.iso2);
+    </script>
+
+    <script>
+        let bookingBtn = document.getElementById("bookingBtn");
+        function incbtnadult(){
+            var adultCount = Number($("#adultCount").val()) + 1;
+            var childCount = Number($("#childCount").val());
+            var infantCount = Number($("#infantCount").val());
+            var adultPrice = Number($("#adultPrice").val());
+            var childPrice = Number($("#childPrice").val());
+            var infantPrice = Number($("#infantPrice").val());
+            var fixedCharges = Number($("#fixedCharges").val());
+
+            var grandTotal = adultCount*adultPrice + childCount*childPrice + infantCount*infantPrice + fixedCharges;
+            bookingBtn.innerHTML = "&nbsp; (AED "+grandTotal+")";
+        }
+
+        function incbtnchild(){
+            var adultCount = Number($("#adultCount").val());
+            var childCount = Number($("#childCount").val()) + 1;
+            var infantCount = Number($("#infantCount").val());
+            var adultPrice = Number($("#adultPrice").val());
+            var childPrice = Number($("#childPrice").val());
+            var infantPrice = Number($("#infantPrice").val());
+            var fixedCharges = Number($("#fixedCharges").val());
+
+            var grandTotal = adultCount*adultPrice + childCount*childPrice + infantCount*infantPrice + fixedCharges;
+            bookingBtn.innerHTML = "&nbsp; (AED "+grandTotal+")";
+        }
+
+        function incbtninfant(){
+            var adultCount = Number($("#adultCount").val());
+            var childCount = Number($("#childCount").val());
+            var infantCount = Number($("#infantCount").val()) + 1;
+            var adultPrice = Number($("#adultPrice").val());
+            var childPrice = Number($("#childPrice").val());
+            var infantPrice = Number($("#infantPrice").val());
+            var fixedCharges = Number($("#fixedCharges").val());
+
+            var grandTotal = adultCount*adultPrice + childCount*childPrice + infantCount*infantPrice + fixedCharges;
+            bookingBtn.innerHTML = "&nbsp; (AED "+grandTotal+")";
+        }
+
+        function decbtnadult(){
+            var adultCount = Number($("#adultCount").val());
+            if(adultCount > 0){
+                var adultCount = adultCount - 1;
+                var childCount = Number($("#childCount").val());
+                var infantCount = Number($("#infantCount").val());
+                var adultPrice = Number($("#adultPrice").val());
+                var childPrice = Number($("#childPrice").val());
+                var infantPrice = Number($("#infantPrice").val());
+                var fixedCharges = Number($("#fixedCharges").val());
+
+                var grandTotal = adultCount*adultPrice + childCount*childPrice + infantCount*infantPrice + fixedCharges;
+                bookingBtn.innerHTML = "&nbsp; (AED "+grandTotal+")";
+            }else{
+                alert("Select atleast 1 quantity for Adult.");
+            }
+        }
+
+        function decbtnchild(){
+            var childCount = Number($("#childCount").val());
+            if(childCount > 0){
+                var adultCount = Number($("#adultCount").val());
+                var childCount = childCount - 1;
+                var infantCount = Number($("#infantCount").val());
+                var adultPrice = Number($("#adultPrice").val());
+                var childPrice = Number($("#childPrice").val());
+                var infantPrice = Number($("#infantPrice").val());
+                var fixedCharges = Number($("#fixedCharges").val());
+
+                var grandTotal = adultCount*adultPrice + childCount*childPrice + infantCount*infantPrice + fixedCharges;
+                bookingBtn.innerHTML = "&nbsp; (AED "+grandTotal+")";
+            }
+        }
+
+        function decbtninfant(){
+            var infantCount = Number($("#infantCount").val());
+            if(infantCount > 0){
+                var adultCount = Number($("#adultCount").val());
+                var childCount = Number($("#childCount").val());
+                var infantCount = infantCount - 1;
+                var adultPrice = Number($("#adultPrice").val());
+                var childPrice = Number($("#childPrice").val());
+                var infantPrice = Number($("#infantPrice").val());
+                var fixedCharges = Number($("#fixedCharges").val());
+
+                var grandTotal = adultCount*adultPrice + childCount*childPrice + infantCount*infantPrice + fixedCharges;
+                bookingBtn.innerHTML = "&nbsp; (AED "+grandTotal+")";
+            }
+        }
     </script>
 @endsection

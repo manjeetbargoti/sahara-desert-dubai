@@ -32,12 +32,12 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="position-relative px-3 u-header__topbar-divider">
+                        {{-- <div class="position-relative px-3 u-header__topbar-divider">
                             <a href="{{ route('login') }}" class="d-flex align-items-center text-dark">
                                 <i class="flaticon-user mr-2 ml-1"></i>
-                                <span class="d-inline-block font-size-14 mr-1">Sign in or Register</span>
+                                <span class="d-inline-block font-size-14 mr-1">Vendor Registration</span>
                             </a>
-                        </div>
+                        </div> --}}
                         {{-- <div class="position-relative pl-3 language-switcher u-header__topbar-divider">
                             <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-nav-link-dark dropdown-toggle d-flex align-items-center ml-1 py-2" href="javascript:;" role="button" aria-controls="languageDropdown" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#languageDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
                                 <span class="d-inline-block">EUR</span>
@@ -85,7 +85,7 @@
 
                         <!-- Yacht -->
                         <li class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="#" aria-expanded="false" aria-labelledby="yachtSubMenu">{{ __('Tours') }}</a>
+                            <a class="nav-link u-header__nav-link" href="{{ route('tour.list') }}" aria-expanded="false" aria-labelledby="yachtSubMenu">{{ __('Tours') }}</a>
                         </li>
                         <!-- End Yacht -->
 
@@ -97,7 +97,7 @@
 
                         <!-- Pages -->
                         <li class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="#" aria-expanded="false">{{ __('Contact us') }}</a>
+                            <a class="nav-link u-header__nav-link" href="{{ route('contactus') }}" aria-expanded="false">{{ __('Contact us') }}</a>
                         </li>
                         <!-- End Pages -->
 

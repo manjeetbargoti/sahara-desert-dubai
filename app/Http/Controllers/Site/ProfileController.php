@@ -9,12 +9,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
 use App\Models\User;
+use App\Models\Wallet;
 
 class ProfileController extends Controller
 {
     public function dashboard(){
-        return view('frontend.seller.dashboard');
+        $vendorBookings = Booking::where(['vendor_id'=>Auth::user()->id])->latest()->limit(10)->get();
+        $vendorBookingsCount = Booking::where(['vendor_id' => Auth::user()->id])->count();
+        $vendorBookingsCompleted = Booking::where(['vendor_id' => Auth::user()->id, 'status' => 1])->count();
+        $vendorBookingsPending = Booking::where(['vendor_id' => Auth::user()->id, 'status' => 2, 'payment_status' => 'unpaid'])->count();
+
+        $vendorWalletBalance = Auth::user()->balance;
+        $vendorTotalCredit = Wallet::where(['user_id' => Auth::user()->id, 'tranx_type' => 'credit'])->sum('tranx_amount');
+        $vendorTotalDebit = Wallet::where(['user_id' => Auth::user()->id, 'tranx_type' => 'debit'])->sum('tranx_amount');
+
+        return view('frontend.seller.dashboard', compact('vendorBookings', 'vendorBookingsCount', 'vendorBookingsCompleted', 'vendorBookingsPending', 'vendorWalletBalance', 'vendorTotalCredit', 'vendorTotalDebit'));
     }
 
     /**

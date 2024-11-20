@@ -30,6 +30,9 @@ Route::prefix('vendor')->namespace('App\Http\Controllers\Site')->middleware('aut
     Route::match(['get','post'], 'wallet','WalletController@index')->name('vendor.wallet.index');
     Route::match(['get','post'], 'wallet/{id}/tranx/view','WalletController@detail')->name('vendor.wallet.tranx.view');
 
+    // Payout to admin
+    Route::match(['get','post'], 'payout','PayoutController@index')->name('vendor.payout.index');
+
 
     // Route::get('/profile', 'ProfileController@edit')->name('vendor.profile.edit');
     // Route::patch('/profile', 'ProfileController@update')->name('vendor.profile.update');

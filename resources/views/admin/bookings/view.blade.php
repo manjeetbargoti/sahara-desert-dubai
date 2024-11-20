@@ -30,142 +30,164 @@
                         data-target="#updateBookingForm">Update Booking</button>
                 </div>
             </div>
-
-            <div class="row mt-2">
-                <div class="col-sm-5">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td class="font-weight-bold text-muted">Vendor Name</td>
-                            <td class="text-info">{{ @$booking->vendor->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-muted">Business Name</td>
-                            <td class="text-info">{{ @$booking->vendor->shop->name }}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bold text-muted">Business Address</td>
-                            <td class="text-info">{{ @$booking->vendor->shop->city . ', ' . @$booking->vendor->shop->country }}
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
         @endif
     </div><!-- .nk-block-head -->
-    <div class="nk-block">
-        <div class="invoice">
-            <div class="invoice-action">
-            </div><!-- .invoice-actions -->
-            <div class="invoice-wrap">
-                <div class="invoice-head">
-                    <div class="invoice-contact">
-                        <div class="invoice-contact-info">
-                            <h4 class="title">{{ @$booking->name }}</h4>
-                            <ul class="list-plain">
-                                <li><em class="icon ni ni-map-pin-fill"></em><span>{{ @$booking->address }}</span></li>
-                                <li><em
-                                        class="icon ni ni-call-fill"></em><span>{{ @$booking->country_code . ' ' . @$booking->phone }}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="">
-                        <ul class="list-plain">
-                            <li class="">
-                                <span>Booking Status: </span>
-                                @if (@$booking->status == 1)
-                                    <span class="text-success fw-bold">Fulfilled</span>
-                                @else
-                                    <span class="text-warning fw-bold">Unfulfilled</span>
-                                @endif
-                            </li>
-                            <li class="">
-                                <span>Payment Status: </span>
-                                @if (@$booking->payment_status == 'paid')
-                                    <span class="text-success fw-bold">Paid</span>
-                                @else
-                                    <span class="text-danger fw-bold">Unpaid</span>
-                                @endif
-                            </li>
-                        </ul>
-                    </div>
-                </div><!-- .invoice-head -->
-                <div class="invoice-bills">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th width="15%">Item ID</th>
-                                    <th width="40%">Description</th>
-                                    <th width="15%">Price (excl. VAT)</th>
-                                    <th width="15%">VAT (5%)</th>
-                                    <th width="15%">Amount (incl. VAT)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ @$booking->tour->tour_ref }}</td>
-                                    <td>
-                                        {{ @$booking->tour->name }}<br>
-                                        @if (@$booking->adult_count > 0)
-                                            <span class="text-info fw-bold"><strong>Adult:</strong>
-                                                {{ single_price(@$booking->adult_price) }}
-                                                x{{ @$booking->adult_count }}</span><br>
-                                        @endif
-                                        @if (@$booking->child_count > 0)
-                                            <span class="text-success fw-bold">Child:
-                                                {{ single_price(@$booking->child_price) }}
-                                                x{{ @$booking->child_count }}</span><br>
-                                        @endif
-                                        @if (@$booking->infant_count > 0)
-                                            <span class="text-primary fw-bold">Infant:
-                                                {{ single_price(@$booking->infant_price) }}
-                                                x{{ @$booking->infant_count }}</span><br>
-                                        @endif
-                                        @if (@$booking->fixed_charges > 0)
-                                            <span class="text-warning fw-bold">{{ @$booking->fixed_charges_type }}:
-                                                {{ single_price(@$booking->fixed_charges) }}</span><br>
-                                        @endif
-                                        <span class="fw-bold">Activity Date:
-                                            {{ date('d M, Y', strtotime(@$booking->booking_date)) }}</span><br>
-                                        <span class="fw-bold">Time Slot:
-                                            {{ date('h:i A', strtotime(@$booking->time_slot)) }}</span>
-                                    </td>
-                                    <td class="text-info fw-bold">{{ single_price(@$booking->subtotal) }}</td>
-                                    <td>{{ single_price(@$booking->total_vat) }}</td>
-                                    <td>{{ single_price(@$booking->grand_total) }}</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td colspan="2"></td>
-                                    <td colspan="2" class="text-right fw-normal">Subtotal <small>(excl. VAT)</small></td>
-                                    <td class="fw-normal">{{ single_price(@$booking->subtotal) }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"></td>
-                                    <td colspan="2" class="text-right">VAT (5%)</td>
-                                    <td>{{ single_price(@$booking->total_vat) }}</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"></td>
-                                    <td colspan="2" class="text-right fw-bold">Grand Total <small>(incl. VAT)</small>
-                                    </td>
-                                    <td class="fw-bold">{{ single_price(@$booking->grand_total) }}</td>
-                                </tr>
-                                {{-- <tr>
-                                <a class="btn btn-icon btn-lg btn-white btn-dim btn-outline-primary" href="#" target="_blank"><em class="icon ni ni-printer-fill"></em></a>
-                            </tr> --}}
-                            </tfoot>
 
-                        </table>
-                        <div class="nk-notes ff-italic fs-12px text-soft"> Invoice was created on a computer and is valid
-                            without the signature and seal. </div>
-                    </div>
-                </div><!-- .invoice-bills -->
-            </div><!-- .invoice-wrap -->
-        </div><!-- .invoice -->
-    </div><!-- .nk-block -->
+    <div class="nk-block-head">
+        <div class="row">
+            <div class="col-sm-7">
+                <table class="table table-bordered table-hover bg-white">
+                    <tr>
+                        <td><span class="text-muted font-weight-bold">Booking Details:</span></td>
+                        <td class="text-right">
+                            @if(@$booking->status == 1)
+                            <span class="badge badge-dim badge-outline-success font-weight-bold">Completed</span>
+                            @elseif(@$booking->status == 0)
+                            <span class="badge badge-dim badge-warning font-weight-bold">Pending</span>
+                            @elseif(@$booking->status == 2)
+                            <span class="badge badge-dim badge-danger font-weight-bold">Canceled</span>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Booking Reference</td>
+                        <td class="font-weight-bold">{{ @$booking->booking_reference }}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Activity Name</td>
+                        <td>{{ @$booking->tour->name }}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Activity Date</td>
+                        <td>{{ date('d M, Y', strtotime(@$booking->booking_date)) }}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Activity Time Slot</td>
+                        <td>{{ !empty(@$booking->time_slot) ? date('h:i A', strtotime(@$booking->time_slot)) : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Adults</td>
+                        @if(@$booking->adult_price > 0)
+                        <td>{{ @$booking->adult_count.' x '.single_price(@$booking->adult_price).' = '.single_price(@$booking->adult_price*@$booking->adult_count) }}</td>
+                        @else
+                        <td>{{ @$booking->adult_count }}</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        <td width="30%">Child</td>
+                        @if(@$booking->child_price > 0)
+                        <td>{{ @$booking->child_count.' x '.single_price(@$booking->child_price).' = '.single_price(@$booking->child_price*@$booking->child_count) }}</td>
+                        @else
+                        <td>{{ @$booking->child_count }}</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        <td width="30%">Infant <small class="text-danger"><i>(max. {{ @$booking->tour->infant_count }})</i></small></td>
+                        @if(@$booking->infant_price > 0)
+                        <td>{{ @$booking->infant_count.' x '.single_price(@$booking->infant_price).' = '.single_price(@$booking->infant_price*@$booking->infant_count) }}</td>
+                        @else
+                        <td>{{ @$booking->infant_count }}</td>
+                        @endif
+                    </tr>
+                    <tr>
+                        <td width="30%">{{ @$booking->fixed_charges_type }}</td>
+                        <td>{{ single_price(@$booking->fixed_charges) }}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Subtotal <small><i>(excl. VAT)</i></small></td>
+                        <td>{{ single_price(@$booking->subtotal) }}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">VAT (5%)</td>
+                        <td>{{ single_price(@$booking->total_vat) }}</td>
+                    </tr>
+                    <tr class="font-weight-bold">
+                        <td width="30%">Grand Total</td>
+                        <td>{{ single_price(@$booking->grand_total) }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-5">
+                <table class="table table-bordered bg-white">
+                    <tr>
+                        <td class="font-weight-bold text-muted">Vendor Name</td>
+                        <td class="text-info">{{ @$booking->vendor->name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold text-muted">Vendor Phone</td>
+                        <td class="text-info">{{ '+'.@$booking->vendor->phone_country_code.' '.@$booking->vendor->phone }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold text-muted">Vendor Email</td>
+                        <td class="text-info">{{ @$booking->vendor->email }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold text-muted">Business Name</td>
+                        <td class="text-info">{{ @$booking->vendor->shop->name }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold text-muted">Business Address</td>
+                        <td class="text-info">{{ @$booking->vendor->shop->city . ', ' . @$booking->vendor->shop->country }}
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered bg-white">
+                    <tbody>
+                        <tr>
+                            <td colspan="2"><span class="text-muted font-weight-bold font-size-20">Customer Details:</span></td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Name</td>
+                            <td>{{ @$booking->name }}</td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Phone</td>
+                            <td>{{ '+'.@$booking->phone }}</td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Email</td>
+                            <td>{{ @$booking->email }}</td>
+                        </tr>
+                        @if(!empty(@$booking->address))
+                        <tr>
+                            <td width="30%">Address</td>
+                            <td>{{ @$booking->address }}</td>
+                        </tr>
+                        @endif
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered bg-white">
+                    <tbody>
+                        <tr>
+                            <td colspan="2"><span class="text-muted font-weight-bold font-size-20">Payment Details:</span></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Payment Status</td>
+                            <td>
+                                @if(@$booking->payment_status == 'paid')
+                                <span class="text-success">Paid</span>
+                                @else
+                                <span class="text-danger">Unpaid</span>
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Payment Method</td>
+                            <td>
+                                @if(@$booking->payment_method == 'cash')
+                                <span class="text-primary">Cash</span>
+                                @else
+                                <span class="text-success">Credit/Debit Card</span>
+                                @endif
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     {{-- Assign Vendor Modal --}}
     <div class="modal fade" id="updateBookingForm">
@@ -234,12 +256,11 @@
                                 <select name="status"
                                     class="form-select form-control @error('status') is-invalid @enderror"
                                     data-search="off" id="bookingStatus" data-placeholder="Please select booking status">
-                                    <option value=""></option>
-                                    <option value="1" {{ $booking->status == 1 ? 'selected' : '' }}>Fullfilled
+                                    <option value="1" {{ $booking->status == 1 ? 'selected' : '' }}>Completed
                                     </option>
-                                    <option value="2" {{ $booking->status == 2 ? 'selected' : '' }}>UnFullfilled
+                                    <option value="0" {{ $booking->status == 0 ? 'selected' : '' }}>Pending
                                     </option>
-                                    <option value="3" {{ $booking->status == 3 ? 'selected' : '' }}>Canceled</option>
+                                    <option value="2" {{ $booking->status == 2 ? 'selected' : '' }}>Canceled</option>
                                 </select>
                             </div>
                         </div>

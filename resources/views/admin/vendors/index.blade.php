@@ -59,6 +59,7 @@
                                         <li><a href="{{ route('admin.vendor.edit', $vendor->id) }}" class="text-primary">{{ __('Edit') }}</a></li>
                                         <li><a href="#" class="text-danger">{{ __('Ban Vendor') }}</a></li>
                                         <li><a href="{{ route('admin.vendor.bookings', $vendor->id) }}" class="text-success">{{ __('Booking List') }}</a></li>
+                                        <li><a href="{{ route('admin.vendor.payout.list', $vendor->id) }}" class="text-success">{{ __('Payout History') }}</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -7,6 +7,7 @@ use App\Mail\SendBookingEmail;
 use App\Mail\AdminBookingEmail;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\AdminPayout;
 use App\Models\User;
 use App\Models\Tour;
 use App\Exports\BookingExport;
@@ -143,6 +144,7 @@ class BookingController extends Controller
     {
         if ($request->isMethod('POST')) {
             $booking = Booking::where('id', $request->id)->first();
+            // dd($booking, $request->all());
             if (!empty($booking)) {
                 $booking->name = $request->name;
                 $booking->email = $request->email;
@@ -153,6 +155,24 @@ class BookingController extends Controller
                 $booking->vendor_id = $request->vendor;
 
                 $booking->save();
+
+                if(@$request->status == 1){
+                    $adminPayout = new AdminPayout();
+                    $adminPayout->user_id = @$booking->vendor_id;
+                    $adminPayout->booking_id = $booking->id;
+                    $adminPayout->booking_reference = $booking->booking_reference;
+                    $adminPayout->payment_type = 'credit';
+                    $adminPayout->amount = $booking->grand_total;
+                    $adminPayout->transfer_to_admin = 0;
+                    $adminPayout->tranx_remark = "Amount to be paid for Booking Reference: ".$booking->booking_reference;
+                    $adminPayout->save();
+
+                    if(!empty($booking->vendor_id)){
+                        $vendorUser = User::where(['id' => @$booking->vendor_id])->first();
+                        $vendorUser->dues_to_admin += $booking->grand_total;
+                        $vendorUser->save();
+                    }
+                }
 
                 flash()->success('Booking Updated Successfully!');
                 return redirect()->route("admin.bookings.view", $booking->booking_reference);

@@ -51,7 +51,7 @@
                         </a>
                     </li><!-- .nk-menu-item -->
                     <li class="nk-menu-item">
-                        <a href="#" class="nk-menu-link">
+                        <a href="{{ route('vendor.payout.index') }}" class="nk-menu-link">
                             <span class="nk-menu-icon"><em class="icon ni ni-amazon-pay-fill"></em></span>
                             <span class="nk-menu-text">Payout History</span>
                         </a>

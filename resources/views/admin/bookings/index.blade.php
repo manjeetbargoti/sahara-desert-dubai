@@ -69,7 +69,9 @@
                         <td>
                             @if(@$booking->status == 1)
                             <span class="badge badge-dim badge-outline-success">{{ __('Completed') }}</span>
-                            @else
+                            @elseif(@$booking->status == 2)
+                            <span class="badge badge-dim badge-outline-danger">{{ __('Canceled') }}</span>
+                            @elseif(@$booking->status == 0)
                             <span class="badge badge-dim badge-outline-warning">{{ __('Pending') }}</span>
                             @endif
                         </td>

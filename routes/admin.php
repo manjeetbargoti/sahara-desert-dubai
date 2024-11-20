@@ -76,6 +76,12 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['au
     Route::match(['get','post'], 'vendor/{id}/wallet-update', 'VendorController@updateWalletBalances')->name('admin.vendor.wallet.update');
     // Route::match(['get','post'], 'vendor/{id}/export-bookings', 'VendorController@updateWalletBalances')->name('admin.vendor.wallet.update');
 
+    // Vendor Payout History
+    Route::match(['get','post'], 'vendor/{id}/payout/list', 'PayoutController@index')->name('admin.vendor.payout.list');
+    Route::match(['get','post'], 'vendor/{id}/payout/update_status', 'PayoutController@payoutStatus')->name('admin.vendor.payout.update_status');
+    Route::match(['get','post'], 'vendor/{vendor_id}/payout/add-new-transaction', 'PayoutController@addNewTranx')->name('admin.vendor.payout.add_tranx');
+    Route::match(['get','post'], 'vendor/{id}/payout/view', 'PayoutController@payoutView')->name('admin.vendor.payout.view');
+
     // Reports
     Route::match(['get','post'], 'reports/booking', 'BookingController@reports')->name('admin.reports.booking');
 

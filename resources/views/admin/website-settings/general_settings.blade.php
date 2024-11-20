@@ -96,6 +96,26 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label" for="adminVendorEmail">Admin Vendor Email</label>
+                                            <span class="form-note">Please enter admin login email address.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="hidden" name="types[]" value="admin_vendor_email">
+                                                <input type="email" name="admin_vendor_email" value="{{ get_setting('admin_vendor_email') ?? old('admin_vendor_email') }}" class="form-control @error('admin_vendor_email') is-invalid @enderror" id="adminEmail">
+                                                @error('admin_vendor_email')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">

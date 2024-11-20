@@ -55,6 +55,9 @@ class BookingController extends Controller
                 // Get Booking Reference
                 $booking_reference = $this->generateBookingReference(10);
 
+                // Admin Vendor
+                $adminVendor = User::where(['email' => get_setting('admin_vendor_email')])->first();
+
                 // CONSTANTS
                 $adultAmt = $request->adult_price * $request->adult_count;
                 $childAmt = $request->child_price * $request->child_count;
@@ -84,7 +87,7 @@ class BookingController extends Controller
                 $booking->subtotal              = round($subtotal, 2);
                 $booking->total_vat             = round($vatOnSubtotal, 2);
                 $booking->grand_total           = round($grandTotal, 2);
-                $booking->vendor_id             = $request->vendor_id;
+                $booking->vendor_id             = $adminVendor->id;
                 $booking->status                = 2;
                 $booking->name                  = $request->name;
                 $booking->email                 = $request->email;

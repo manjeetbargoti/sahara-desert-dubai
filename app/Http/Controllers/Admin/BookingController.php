@@ -14,6 +14,7 @@ use App\Exports\BookingExport;
 use App\Exports\VendorBookingExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BookingController extends Controller
 {
@@ -222,9 +223,31 @@ class BookingController extends Controller
         return Excel::download(new VendorBookingExport($request->all(), $request->id), 'vendor_bookings_'.$request->id.'.xlsx');
     }
 
+    // Download vendor bookings
+    public function exportCommVendorBooking(Request $request){
+        return Excel::download(new VendorBookingExport($request->all(), $request->id), 'vendor_bookings_'.$request->id.'.xlsx');
+    }
+
     // Download reports
     public function reports(){
         $bookingReport = Booking::latest()->paginate(25);
         return view('admin.reports.main_reports', compact('bookingReport'));
+    }
+
+    // Download Commission Reports
+    public function commissionReports(){
+        $bookingReport = Booking::latest()->paginate(25);
+        return view('admin.reports.main_reports', compact('bookingReport'));
+    }
+
+    // Invoice Download
+    public function bookingInvoiceDownload(Request $request){
+        $bookingInfo = Booking::where(['id' => $request->booking_id])->first();
+
+        if(!empty($bookingInfo)){
+            $pdf = Pdf::loadView('invoices.booking', ['data' => $bookingInfo]);
+
+            return $pdf->download('Booking-'.@$bookingInfo->booking_reference.'.pdf');
+        }
     }
 }

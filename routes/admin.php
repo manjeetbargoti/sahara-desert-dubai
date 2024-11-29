@@ -63,7 +63,9 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['au
     Route::match(['get','post'], 'bookings/{id}/update', 'BookingController@update')->name('admin.bookings.update');
     Route::match(['get','post'], 'bookings/{id}/send-booking-email', 'BookingController@sendBookingEmail')->name('admin.bookings.email_sent');
     Route::match(['get','post'], 'bookings/{id}/export', 'BookingController@exportVendorBooking')->name('admin.vendor.bookings.export');
+    Route::match(['get','post'], 'bookings/{id}/commission-export', 'BookingController@exportCommVendorBooking')->name('admin.vendor.bookings.comm_export');
     Route::match(['get','post'], 'bookings/export', 'BookingController@exportBooking')->name('admin.bookings.export');
+    Route::match(['get','post'], 'bookings/{booking_id}/invoice/download', 'BookingController@bookingInvoiceDownload')->name('admin.bookings.invoice.download');
 
     // Vendor Routes
     Route::match(['get','post'], 'vendor/list', 'VendorController@vendorList')->name('admin.vendor.list');

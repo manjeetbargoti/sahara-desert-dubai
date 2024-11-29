@@ -35,8 +35,8 @@
                     </table>
                 </div>
                 <div class="col-sm-7 text-right">
-                    <a href="#" class="btn btn-dim btn-outline-info"><em
-                        class="icon ni ni-download"></em><span>Download Report</span></a>
+                    <a href="{{ route('admin.vendor.bookings.comm_export', @$vendor->id) }}" class="btn btn-dim btn-outline-info"><em
+                        class="icon ni ni-download"></em><span>Commission Report</span></a>
                     <a href="{{ route('admin.vendor.bookings.export', @$vendor->id) }}" class="btn btn-dim btn-outline-info"><em
                             class="icon ni ni-download"></em><span>Export Bookings</span></a>
                 </div>

@@ -106,6 +106,14 @@
                         <td>{{ single_price(@$booking->grand_total) }}</td>
                     </tr>
                 </table>
+
+                <div class="invoice-download-btn">
+                    <a href="{{ route('admin.bookings.invoice.download', @$booking->id) }}" class="btn btn-outline-info btn-dim"><em
+                        class="icon ni ni-arrow-to-down"></em><span>Customer Invoice</span></a>
+
+                    {{-- <a href="#" class="btn btn-outline-info btn-dim"><em
+                            class="icon ni ni-arrow-to-down"></em><span>Tax Invoice</span></a> --}}
+                </div>
             </div>
             <div class="col-sm-5">
                 <table class="table table-bordered bg-white">

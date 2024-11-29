@@ -139,6 +139,26 @@
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
+                                            <label class="form-label" for="sddTrn">TRN Number</label>
+                                            <span class="form-note">Please enter SDD TRN Number.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="hidden" name="types[]" value="sdd_trn">
+                                                <input type="text" name="sdd_trn" value="{{ get_setting('sdd_trn') ?? old('sdd_trn') }}" class="form-control @error('sdd_trn') is-invalid @enderror" id="sddTrn">
+                                                @error('sdd_trn')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
                                             <label class="form-label" for="websiteAddress">Website Address</label>
                                             <span class="form-note">Please add  address.</span>
                                         </div>

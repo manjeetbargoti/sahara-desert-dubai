@@ -15,9 +15,9 @@
             <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Activity Date</th>
             <th width="10" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Time Slot</th>
 
-            <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Subtotal</th>
-            <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">VAT (5%)</th>
-            <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Grand Total</th>
+            {{-- <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Subtotal</th>
+            <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">VAT (5%)</th> --}}
+            <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Total</th>
             <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Status</th>
 
             <th width="20" style="font-weight: bold; background: yellow;vertical-align: middle">Customer Name</th>
@@ -28,6 +28,7 @@
             <th width="20" style="font-weight: bold; background: #1ee0ac;vertical-align: middle; text-align:center;">Payment Method</th>
 
             <th width="25" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Booking Date</th>
+            <th width="25" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Remarks</th>
         </tr>
     </thead>
     <tbody>
@@ -47,8 +48,8 @@
                 <td style="vertical-align: middle; text-align:center;">{{ single_price(@$booking->fixed_charges) }}</td>
                 <td style="vertical-align: middle; text-align:center;">{{ date('d M, Y', strtotime(@$booking->booking_date)) }}</td>
                 <td style="vertical-align: middle; text-align:center;">{{ date('h:i A', strtotime(@$booking->time_slot)) }}</td>
-                <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->subtotal) }}</td>
-                <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->total_vat) }}</td>
+                {{-- <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->subtotal) }}</td>
+                <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->total_vat) }}</td> --}}
                 <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->grand_total) }}</td>
 
                 @if (@$booking->status == 1)
@@ -65,6 +66,7 @@
                 <td style="vertical-align: middle; text-align:center;">{{ @$booking->payment_method }}</td>
 
                 <td style="vertical-align: middle; text-align:center;">{{ date('d M, Y h:i A', strtotime(@$booking->created_at)) }}</td>
+                <td style="vertical-align: middle; text-align:center;">{{ @$booking->custom_remarks }}</td>
             </tr>
             @endforeach
         @endif

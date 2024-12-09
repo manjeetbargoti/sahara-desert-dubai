@@ -16,7 +16,8 @@
             <th width="10" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Time Slot</th>
 
             <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Subtotal</th>
-            <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">VAT (5%)</th>
+            {{-- <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">VAT (5%) (inclusive)</th> --}}
+            <th width="15" style="font-weight: bold; background: #FF0000;vertical-align: middle; text-align:center;">Commission</th>
             <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Grand Total</th>
             <th width="15" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Status</th>
 
@@ -28,6 +29,7 @@
             <th width="20" style="font-weight: bold; background: #1ee0ac;vertical-align: middle; text-align:center;">Payment Method</th>
 
             <th width="25" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Booking Date</th>
+            <th width="25" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Remarks</th>
         </tr>
     </thead>
     <tbody>
@@ -47,12 +49,24 @@
                 <td style="vertical-align: middle; text-align:center;">{{ single_price(@$booking->fixed_charges) }}</td>
                 <td style="vertical-align: middle; text-align:center;">{{ date('d M, Y', strtotime(@$booking->booking_date)) }}</td>
                 <td style="vertical-align: middle; text-align:center;">{{ date('h:i A', strtotime(@$booking->time_slot)) }}</td>
-                <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->subtotal) }}</td>
-                <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->total_vat) }}</td>
-                <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->grand_total) }}</td>
+                <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->subtotal + @$booking->total_vat) }}</td>
+                {{-- <td style="font-weight: bold; vertical-align: middle; text-align:center;">{{ single_price(@$booking->total_vat) }}</td> --}}
+                <td style="font-weight: bold; vertical-align: middle; text-align:center;color: #FF0000;">
+                    @if(!empty(@$booking->custom_commission))
+                        -{{ single_price(@$booking->custom_commission) }}
+                    @endif
+                </td>
+                @php
+                    if(!empty(@$booking->custom_commission)){
+                        $grand_total = @$booking->grand_total - @$booking->custom_commission;
+                    }else{
+                        $grand_total = @$booking->grand_total;
+                    }
+                @endphp
+                <td style="font-weight: bold; vertical-align: middle; text-align:center;color: #92d050;">{{ single_price(@$grand_total) }}</td>
 
                 @if (@$booking->status == 1)
-                    <td style="font-weight: bold; color: green;vertical-align: middle; text-align:center;">Completed</td>
+                    <td style="font-weight: bold; color: rgb(0, 149, 255);vertical-align: middle; text-align:center;">Completed</td>
                 @else
                     <td style="font-weight: bold; color: red;vertical-align: middle; text-align:center;">Pending</td>
                 @endif
@@ -65,6 +79,7 @@
                 <td style="vertical-align: middle; text-align:center;">{{ @$booking->payment_method }}</td>
 
                 <td style="vertical-align: middle; text-align:center;">{{ date('d M, Y h:i A', strtotime(@$booking->created_at)) }}</td>
+                <td style="vertical-align: middle; text-align:center;">{{ @$booking->custom_remarks }}</td>
             </tr>
             @endforeach
         @endif

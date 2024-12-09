@@ -41,7 +41,7 @@
                             <small class="text-primary font-italic">{{ @$vendor->shop->city.', '.@$vendor->shop->country }}</small>
                             @endif
                         </td>
-                        <td>{{ @$vendor->phone_country_code.' '.@$vendor->phone }}</td>
+                        <td>{{ '+'.@$vendor->phone_country_code.' '.@$vendor->phone }}</td>
                         <td>{{ @$vendor->email }}</td>
                         <td>
                             @if(@$vendor->status == 1)

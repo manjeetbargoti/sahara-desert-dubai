@@ -4,8 +4,6 @@
     <title>Customer Invoice</title>
     <meta http-equiv="Content-Type" content="text/html;"/>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ asset('assets/admin/assets/css/dashlite.css?ver='.env('APP_VERSION')) }}">
-    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/admin/assets/css/theme.css?ver='.env('APP_VERSION')) }}">
 	<style media="all">
 		@font-face {
             font-family: "Roboto", sans-serif;
@@ -70,6 +68,9 @@
 		.currency{
 
 		}
+		.page-break {
+			page-break-after: always;
+		}
 	</style>
 </head>
 <body>
@@ -78,7 +79,8 @@
 			<table>
 				<tr>
 					<td>
-						<img src="https://sdd.fluidgeek.com/uploads/website/settings/general/sdd-logo-FwPG3IALqMQehsX5pE8RL66AucEF4W5kCIlR.png" height="40" style="display:inline-block;">
+						{{-- <img src="{{'data:image/png;base64,'.base64_encode(file_get_contents(public_path('assets/sdd_logo.png')))}}" height="40" style="display:inline-block;"> --}}
+						<img src="{{ asset('assets/sdd_logo.png') }}" height="40" style="display:inline-block;">
 					</td>
 					<td style="font-size: 1.6rem;" class="text-right strong">{{  __('CUSTOMER INVOICE') }}</td>
 				</tr>
@@ -95,7 +97,11 @@
 				</tr>
 				<tr>
 					<td class="gry-color small"></td>
-					<td class="text-right small"><span class="gry-color small">{{  __('VAT # ') }}</span> <span class="strong">{{ get_setting('sdd_trn') }}</span></td>
+					<td class="text-right small">
+						@if(!empty(get_setting('sdd_trn')))
+						<span class="gry-color small">{{  __('VAT # ') }}</span> <span class="strong">{{ get_setting('sdd_trn') }}</span>
+						@endif
+					</td>
 				</tr>
 				<tr>
 					<td class="gry-color small">{{  __('Email') }}: {{ get_setting('support_email') }}</td>
@@ -111,9 +117,19 @@
 
 		<div style="padding: 0.5rem;padding-bottom: 0">
             <table>
-				<tr><td class="small" style="margin-bottom: 0.5rem;"><b class="text-info">{{ __('Guest Details') }}:</b></td></tr>
-				<tr><td class="strong">{{ ucfirst($data->name) }}</td></tr>
-				<tr><td class="gry-color small">{{ $data->address }}</td></tr>
+				<tr>
+					<td class="small" style="margin-bottom: 0.5rem;"><b class="text-info">{{ __('Guest Details') }}:</b></td>
+					<td class="small" style="margin-bottom: 0.5rem;"><b class="text-info">{{ __('Booking Details') }}:</b></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="strong">{{ ucfirst($data->name) }}</td>
+					<td class="strong"><span class="gry-color">Activity Date: </span>{{ date('d M, Y', strtotime(@$data->booking_date)) }}</td>
+				</tr>
+				<tr>
+					<td class="gry-color small">{{ $data->address }}</td>
+					<td class="strong"><span class="gry-color">Time Slot: </span>{{ date('h:i A', strtotime(@$data->time_slot)) }}</td>
+				</tr>
 				<tr><td class="gry-color small">{{ __('Email') }}: {{ $data->email }}</td></tr>
 				<tr><td class="gry-color small">{{ __('Phone') }}: {{ $data->phone }}</td></tr>
 			</table>
@@ -146,8 +162,6 @@
                     <tr>
                         <td style="font-size: 12px;">
                             <p class="text-primary" style="font-weight: bold;">{{ @$data->tour->name }}</p>
-                            <p style="font-style: italic;"><span class="gry-color">Activity Date: </span>{{ date('d M, Y', strtotime(@$data->booking_date)) }}</p>
-                            <p style="font-style: italic;"><span class="gry-color">Time Slot: </span>{{ date('h:i A', strtotime(@$data->time_slot)) }}</p>
                             <p style="font-style: italic;"><span class="gry-color">Adult: </span>{{ @$data->adult_count }}</p>
                             <p style="font-style: italic;"><span class="gry-color">Child: </span>{{ @$data->child_count }}</p>
                             <p style="font-style: italic;"><span class="gry-color">Infant: </span>{{ @$data->infant_count }}</p>
@@ -220,6 +234,29 @@
 		    </table>
 	    </div>
 
+	</div>
+
+	<div class="page-break"></div>
+
+	<div class="">
+		<div style="padding: 1rem;" class="custom-activity">
+			@if(!empty(@$data->custom_activity))
+			<div style="background-color: #eceff4;padding:0.5rem;border-radius: 5px;">
+				<h3>Activities:</h3>
+				<div style="padding: 0.5rem 0 0 1.5rem;">
+					{!! @$data->custom_activity !!}
+				</div>
+			</div>
+			@endif
+		</div>
+		<div style="padding: 1rem;text-align:justify;">
+			<div style="background-color: rgba(255, 0, 0, 0.1);padding:0.5rem;border: 1px solid rgba(255, 0, 0, 0.5);border-radius: 5px;">
+				<h3>Cancelation Policies:</h3>
+				<div style="padding: 0.5rem 0;font-size: 12px;">
+					{!! @$data->tour->cancellation_policy_description !!}
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

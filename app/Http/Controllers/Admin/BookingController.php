@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Tour;
 use App\Exports\BookingExport;
 use App\Exports\VendorBookingExport;
+use App\Exports\VendorBookingCommExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -186,6 +187,72 @@ class BookingController extends Controller
         $vendors = User::where(['user_type' => 'vendor', 'status' => 1, 'ban' => 0])->get(['id', 'name']);
         $tours = Tour::latest()->get();
         $booking = Booking::where(['booking_reference' => $request->reference])->first();
+
+        if($request->isMethod('POST')){
+            try{
+                $request->validate([
+                    'tour_id' => 'required',
+                    'adult_price' => 'required',
+                    'child_price' => 'required',
+                    'infant_price' => 'required',
+                    'booking_date' => 'required',
+                    'name' => 'required|string',
+                    'email' => 'required|email',
+                    'phone' => 'required',
+                    'adult_count' => 'required',
+                    'child_count' => 'required',
+                    'infant_count' => 'required'
+                ]);
+
+                // CONSTANTS
+                $adultAmt = $request->adult_price * $request->adult_count;
+                $childAmt = $request->child_price * $request->child_count;
+                $infantAmt = $request->infant_price * $request->infant_count;
+                $fixedCharges = $request->fixed_charges;
+
+                $grandTotal = $adultAmt + $childAmt + $infantAmt + $fixedCharges;
+                $subtotal = ($grandTotal / 105) * 100;          // Without VAT
+                $vatOnSubtotal = $subtotal * 0.05;              // Vat rate 5%
+
+                // dd($request->all());
+                $booking->tour_id               = $request->tour_id;          
+                $booking->adult_price           = round($request->adult_price, 2);
+                $booking->child_price           = round($request->child_price, 2);
+                $booking->infant_price          = round($request->infant_price, 2);
+                $booking->fixed_charges         = round($request->fixed_charges, 2);
+                $booking->fixed_charges_type    = $request->fixed_charges_type;
+                $booking->booking_date          = date('Y-m-d', strtotime($request->booking_date));
+                $booking->time_slot             = date('H:i', strtotime($request->time_slot));
+                $booking->adult_count           = $request->adult_count;
+                $booking->child_count           = $request->child_count;
+                $booking->infant_count          = $request->infant_count;
+                $booking->subtotal              = round($subtotal, 2);
+                $booking->total_vat             = round($vatOnSubtotal, 2);
+                $booking->grand_total           = round($grandTotal, 2);
+                $booking->custom_commission     = round($request->custom_commission, 2);
+                $booking->vendor_id             = $request->vendor;
+                $booking->status                = $request->status;
+                $booking->name                  = $request->name;
+                $booking->email                 = $request->email;
+                $booking->phone                 = @$request->country_code.' '.$request->phone;
+                $booking->location              = $request->location;
+                $booking->payment_status        = $request->payment_status;
+                $booking->payment_method        = $request->payment_method;
+                $booking->payment_date          = NULL;
+                $booking->address               = $request->address;
+                $booking->custom_remarks        = $request->custom_remarks;
+                $booking->custom_activity       = $request->custom_activity;
+
+                $booking->save();
+
+                flash()->success('Booking updated successfully!');
+                return redirect()->route('admin.bookings.list');
+
+            }catch(\Exception $e){
+                return redirect()->back()->with('error', $e->getMessage());
+            }
+        }
+
         return view('admin.bookings.edit', compact('booking','vendors','tours'));
     }
 
@@ -225,7 +292,7 @@ class BookingController extends Controller
 
     // Download vendor bookings
     public function exportCommVendorBooking(Request $request){
-        return Excel::download(new VendorBookingExport($request->all(), $request->id), 'vendor_bookings_'.$request->id.'.xlsx');
+        return Excel::download(new VendorBookingCommExport($request->all(), $request->id), 'vendor_bookings_comm_'.$request->id.'.xlsx');
     }
 
     // Download reports

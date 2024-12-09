@@ -8,8 +8,7 @@
                         class="text-primary small">#{{ @$booking->booking_reference }}</strong></h3>
                 <div class="nk-block-des text-soft">
                     <ul class="list-inline">
-                        <li>Booking Date: <span
-                                class="text-base">{{ date('d M, Y h:i A', strtotime($booking->created_at)) }}</span></li>
+                        <li>Booking Date: <span class="text-base">{{ date('d M, Y h:i A', strtotime($booking->created_at)) }}</span></li>
                     </ul>
                 </div>
             </div>
@@ -104,6 +103,17 @@
                     <tr class="font-weight-bold">
                         <td width="30%">Grand Total</td>
                         <td>{{ single_price(@$booking->grand_total) }}</td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered table-hover bg-white">
+                    <tr>
+                        <td><span class="text-muted font-weight-bold">Activities Inclueded:</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {!! @$booking->custom_activity !!}
+                        </td>
                     </tr>
                 </table>
 

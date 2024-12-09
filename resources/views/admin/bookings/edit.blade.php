@@ -6,7 +6,13 @@
     }
 </style>
 
-<div class="card card-bordered">
+<div class="col-sm-8 m-auto">
+    <div class="mb-4">
+        <h4><span class="text-info">[#{{ @$booking->booking_reference }}]</span> {{ @$booking->tour->name }}</h4>
+    </div>
+</div>
+
+<div class="card card-bordered col-sm-8 m-auto">
     <div class="card-inner">
         <div class="card-head">
             <h5 class="card-title">Edit Booking</h5>
@@ -16,7 +22,7 @@
             {{-- <input type="hidden" name="ip_address" value="{{ @$_SERVER['REMOTE_ADDR'] }}">
             <input type="hidden" name="request_page" value="{{ @url()->current() }}"> --}}
             <div class="row g-4">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label class="form-label">Tours or Activity</label>
                         <div class="form-control-wrap">
@@ -31,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Activity Date</label>
                         <div class="form-control-wrap">
@@ -43,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-6">
                     <div class="form-group">
                         <label class="form-label">Time Slot</label>
                         <div class="form-control-wrap">
@@ -81,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="adultCount">Adults</label>
                         <div class="form-control-wrap">
@@ -89,7 +95,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="childCount">Child</label>
                         <div class="form-control-wrap">
@@ -97,7 +103,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="infantCount">Infants</label>
                         <div class="form-control-wrap">
@@ -105,7 +111,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="adultPrice">Adult Price</label>
                         <div class="form-control-wrap">
@@ -113,7 +119,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="childPrice">Child Price</label>
                         <div class="form-control-wrap">
@@ -121,7 +127,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="infantPrice">Infant Price</label>
                         <div class="form-control-wrap">
@@ -129,7 +135,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="fixedChargesType">Fixed Charges Type</label>
                         <div class="form-control-wrap">
@@ -137,7 +143,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-4">
                     <div class="form-group">
                         <label class="form-label" for="fixedCharges">Fixed Charges</label>
                         <div class="form-control-wrap">
@@ -145,7 +151,15 @@
                         </div>
                     </div> 
                 </div>
-                <div class="col-sm-3">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-label" for="customCommission">Custom Commission</label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="custom_commission" class="form-control" value="{{ @$booking->custom_commission }}" id="customCommission" placeholder="0.00">
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Vendor</label>
                         <div class="form-control-wrap">
@@ -160,11 +174,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Payment Status</label>
                         <div class="form-control-wrap">
-                            <select class="form-select" id="paymentStatus" name="payment_status" data-search="on" data-placeholder="Payment Status">
+                            <select class="form-select" id="paymentStatus" name="payment_status" data-placeholder="Payment Status">
                                 <option></option>
                                 <option value="paid" {{ @$booking->payment_status == 'paid' ? 'selected' : '' }}>Paid</option>
                                 <option value="unpaid" {{ @$booking->payment_status == 'unpaid' ? 'selected' : '' }}>Unpaid</option>
@@ -172,11 +186,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-4">
                     <div class="form-group">
                         <label class="form-label">Payment Method</label>
                         <div class="form-control-wrap">
-                            <select class="form-select" id="paymentMethod" name="payment_method" data-search="on" data-placeholder="Payment Method">
+                            <select class="form-select" id="paymentMethod" name="payment_method" data-placeholder="Payment Method">
                                 <option></option>
                                 <option value="cash" {{ @$booking->payment_method == 'cash' ? 'selected' : '' }}>Cash</option>
                                 <option value="credit_debit" {{ @$booking->payment_method == 'credit_debit' ? 'selected' : '' }}>Credit/Debit</option>
@@ -186,15 +200,44 @@
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
+                        <label class="form-label" for="bookingStatus">Booking Status</label>
+                        <div class="form-control-wrap">
+                            <select class="form-select" id="bookingStatus" name="status" data-placeholder="Booking Status">
+                                <option></option>
+                                <option value="1" {{ @$booking->status == '1' ? 'selected' : '' }}>Completed</option>
+                                <option value="0" {{ @$booking->status == '0' ? 'selected' : '' }}>Pending</option>
+                                <option value="2" {{ @$booking->status == '2' ? 'selected' : '' }}>Canceled</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
                         <label class="form-label" for="customerAddress">Customer Address</label>
                         <div class="form-control-wrap">
                             <textarea name="address" id="customerAddress" cols="30" rows="2" class="form-control">{{ @$booking->address }}</textarea>
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="form-label" for="customRemarks">Custom Remarks</label>
+                        <div class="form-control-wrap">
+                            <textarea name="custom_remarks" id="customRemarks" cols="30" rows="2" class="form-control">{{ @$booking->custom_remarks }}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="form-label" for="customActivity">Custom Activity</label>
+                        <div class="form-control-wrap">
+                            <textarea name="custom_activity" id="customActivity" cols="30" rows="4" class="form-control summernote-basic">{{ @$booking->custom_activity }}</textarea>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-lg btn-primary">Save Booking</button>
+                        <button type="submit" class="btn btn-lg btn-primary">Update Booking</button>
                     </div>
                 </div>
             </div>

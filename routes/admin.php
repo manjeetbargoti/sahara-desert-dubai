@@ -15,9 +15,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' =>'admin', '
 
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->middleware(['auth:admin',])->group(function () {
     // Dashboard
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->middleware(['auth', 'verified'])->name('admin.dashboard');
+    Route::get('/dashboard', 'HomeController@dashboard')->middleware(['auth', 'verified'])->name('admin.dashboard');
 
     // Permission Routes
     Route::any('permissions/{id}/update', 'PermissionController@update')->name('admin.permissions.update');

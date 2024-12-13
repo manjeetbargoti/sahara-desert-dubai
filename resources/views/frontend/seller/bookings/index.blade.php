@@ -60,16 +60,18 @@
                         </td>
                         <td>
                             @if(@$booking->payment_status == 'paid')
-                            <span class="badge badge-success">{{ __('Paid') }}</span>
+                            <span class="badge badge-dim badge-outline-success">{{ __('Paid') }}</span>
                             @else
-                            <span class="badge badge-danger">{{ __('Unpaid') }}</span>
+                            <span class="badge badge-dim badge-outline-danger">{{ __('Unpaid') }}</span>
                             @endif
                         </td>
                         <td>
                             @if(@$booking->status == 1)
-                            <span class="badge badge-success">{{ __('Fulfilled') }}</span>
-                            @else
-                            <span class="badge badge-warning">{{ __('Unfulfilled') }}</span>
+                            <span class="badge badge-dim badge-outline-success">{{ __('Completed') }}</span>
+                            @elseif(@$booking->status == 2)
+                            <span class="badge badge-dim badge-outline-warning">{{ __('Pending') }}</span>
+                            @elseif(@$booking->status == 0)
+                            <span class="badge badge-dim badge-outline-danger">{{ __('Canceled') }}</span>
                             @endif
                         </td>
                         <td>
@@ -82,7 +84,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                     <ul class="link-list-plain">
                                         <li><a href="{{ route('vendor.bookings.view', @$booking->booking_reference) }}" class="text-info">{{ __('View') }}</a></li>
-                                        <li><a href="#" class="text-primary">{{ __('Edit') }}</a></li>
+                                        {{-- <li><a href="#" class="text-primary">{{ __('Edit') }}</a></li> --}}
                                     </ul>
                                 </div>
                             </div>

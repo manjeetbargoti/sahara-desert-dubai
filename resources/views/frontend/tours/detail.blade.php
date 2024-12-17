@@ -19,13 +19,6 @@
             <div class="position-relative">
                 <div class="position-absolute right-0 mt-md-n11 mt-n9">
                     <div class="flex-horizontal-center">
-                        <!-- Video -->
-                        {{-- <a class="js-fancybox btn btn-white transition-3d-hover py-2 px-md-5 px-3 shadow-6 mr-1" href="javascript:;"
-                        data-src="//www.youtube.com/watch?v=Vfk5VuUpJ-o"
-                        data-speed="700">
-                        <i class="flaticon-movie mr-md-2 font-size-18 text-primary"></i><span class="d-none d-md-inline">Video</span>
-                    </a> --}}
-                        <!-- End Video -->
 
                         <a class="js-fancybox btn btn-white transition-3d-hover ml-2 py-2 px-md-5 px-3 shadow-6"
                             href="javascript:;" data-src="{{ uploaded_asset(@$tour->photos) }}"
@@ -64,36 +57,24 @@
                         </div>
                         <div class="d-block d-xl-flex flex-horizontal-center">
                             <div class="d-block d-md-flex flex-horizontal-center font-size-14 text-gray-1 mb-2 mb-xl-0">
-                                <span class="fas fa-cloud-sun"> </span> &nbsp;
-                                {{ @$tour->season }}
-                                {{-- <a href="{{ @$tour->google_map }}" target="_blank" class="ml-1 d-block d-md-inline"> - View on map</a> --}}
+                                <span class="fas fa-car text-success"> </span> &nbsp;
+                                @if (@$tour->type == 1)
+                                {{ __('Shared Transfer') }}
+                                @elseif(@$tour->type == 2)
+                                <span class="text-success">{{ __('Private Transfer') }}</span>
+                                @elseif(@$tour->type == 3)
+                                {{ __('Without Transfer') }}
+                                @endif
+                            </div> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                            @if(!empty(@$tour->season))
+                            <div class="d-block d-md-flex flex-horizontal-center font-size-14 text-gray-1 mb-2 mb-xl-0">
+                                <span class="fas fa-cloud-sun text-primary"> </span> &nbsp;
+                                <span class="text-primary">{{ @$tour->season }}</span>
                             </div>
-                            {{-- <div class="mr-4 mb-2 mb-md-0 flex-horizontal-center">
-                                <div class="ml-xl-3 font-size-10 letter-spacing-2">
-                                    <span class="d-block green-lighter ml-1">
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>
-                                        <span class="fas fa-star"></span>
-                                    </span>
-                                </div>
-                                <span class="font-size-14 text-gray-1 ml-2">(1,186 Reviews)</span>
-                            </div> --}}
+                            @endif
                         </div>
                     </div>
-                    {{-- <ul class="list-group list-group-borderless list-group-horizontal custom-social-share">
-                        <li class="list-group-item px-1">
-                            <a href="#" class="height-45 width-45 border rounded border-width-2 flex-content-center">
-                                <i class="flaticon-like font-size-18 text-dark"></i>
-                            </a>
-                        </li>
-                        <li class="list-group-item px-1">
-                            <a href="#" class="height-45 width-45 border rounded border-width-2 flex-content-center">
-                                <i class="flaticon-share font-size-18 text-dark"></i>
-                            </a>
-                        </li>
-                    </ul> --}}
                 </div>
                 <div class="py-4 border-top border-bottom mb-4">
                     <ul class="list-group list-group-borderless list-group-horizontal row">
@@ -114,8 +95,16 @@
                             <div class="ml-1 text-gray-1">Min Age : {{ @$tour->min_age }}</div>
                         </li>
                         <li class="col-md-4 flex-horizontal-center list-group-item text-lh-sm mb-2">
-                            <i class="flaticon-pin text-primary font-size-22 mr-2 d-block"></i>
-                            <div class="ml-1 text-gray-1">Pickup: {{ @$tour->departure_point }}</div>
+                            <i class="flaticon-car text-primary font-size-22 mr-2 d-block"></i>
+                            <div class="ml-1 text-gray-1">Transfer Type: 
+                                @if (@$tour->type == 1)
+                                {{ __('Shared Transfer') }}
+                                @elseif(@$tour->type == 2)
+                                {{ __('Private Transfer') }}
+                                @elseif(@$tour->type == 3)
+                                {{ __('Without Transfer') }}
+                                @endif
+                            </div>
                         </li>
                     </ul>
                 </div>

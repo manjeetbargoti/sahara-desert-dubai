@@ -123,8 +123,25 @@ class BookingController extends Controller
 
     // List all vendor bookings
     public function vendorBookings(Request $request){
-        $bookings = Booking::where('vendor_id', Auth::user()->id)->latest()->paginate(25);
-        return view('frontend.seller.bookings.index', compact('bookings'));
+
+        $payment_status = @$request->payment_status != null ? @$request->payment_status : null;
+        $status = @$request->status != null ? @$request->status : null;
+        $sort_search = @$request->search != null ? @$request->search : null;
+
+        // dd($request->all());
+
+        $bookings = Booking::where('vendor_id', Auth::user()->id)->when($request->payment_status != null, function($ps) use($request){
+            $ps->where('payment_status', $request->payment_status);
+        })->when($request->status != null, function($s) use($request){
+            $s->where('status', $request->status);
+        })->when($request->search != null, function($se) use($request){
+            $se->where('booking_reference',$request->search)->orWhere('name', 'LIKE','%'.$request->search.'%');
+        });
+
+        $bookings = $bookings->latest()->paginate(25);
+
+        // $bookings = Booking::where('vendor_id', Auth::user()->id)->latest()->paginate(25);
+        return view('frontend.seller.bookings.index', compact('bookings','sort_search','payment_status','status'));
     }
 
     // View booking detail

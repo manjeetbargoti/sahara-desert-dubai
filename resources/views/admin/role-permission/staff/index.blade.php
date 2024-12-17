@@ -80,7 +80,7 @@
                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-xs">
                                     <ul class="link-list-plain">
-                                        <li><a href="#" class="text-info">{{ __('View') }}</a></li>
+                                        {{-- <li><a href="#" class="text-info">{{ __('View') }}</a></li> --}}
                                         <li><a href="{{ route('admin.staff.edit', @$staff->id) }}" class="text-primary">{{ __('Edit') }}</a></li>
                                         <li><a href="{{ route('admin.staff.delete', @$staff->id) }}" class="text-danger">{{ __('Delete') }}</a></li>
                                     </ul>

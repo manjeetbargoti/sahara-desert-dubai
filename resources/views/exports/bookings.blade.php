@@ -29,6 +29,7 @@
             <th width="20" style="font-weight: bold; background: #1ee0ac;vertical-align: middle; text-align:center;">Payment Method</th>
 
             <th width="25" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Booking Date</th>
+            <th width="25" style="font-weight: bold; background: #92d050;vertical-align: middle; text-align:center;">Remarks</th>
         </tr>
     </thead>
     <tbody>
@@ -55,8 +56,10 @@
 
                 @if (@$booking->status == 1)
                     <td style="font-weight: bold; color: green;vertical-align: middle; text-align:center;">Completed</td>
-                @else
-                    <td style="font-weight: bold; color: red;vertical-align: middle; text-align:center;">Pending</td>
+                @elseif (@$booking->status == 2)
+                    <td style="font-weight: bold; color: orange;vertical-align: middle; text-align:center;">Pending</td>
+                @elseif (@$booking->status == 0)
+                    <td style="font-weight: bold; color: red;vertical-align: middle; text-align:center;">Canceled</td>
                 @endif
 
                 <td style="vertical-align: middle;">{{ @$booking->name }}</td>
@@ -67,6 +70,7 @@
                 <td style="vertical-align: middle; text-align:center;">{{ @$booking->payment_method }}</td>
 
                 <td style="vertical-align: middle; text-align:center;">{{ date('d M, Y h:i A', strtotime(@$booking->created_at)) }}</td>
+                <td style="vertical-align: middle; text-align:center;">{{ @$booking->custom_remarks }}</td>
             </tr>
             @endforeach
         @endif

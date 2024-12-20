@@ -41,8 +41,20 @@ class BookingController extends Controller
     // List all bookings
     public function index(Request $request)
     {
-        $bookings = Booking::latest()->paginate(25);
-        return view('admin.bookings.index', compact('bookings'));
+        $payment_status = @$request->payment_status != null ? @$request->payment_status : null;
+        $status = @$request->status != null ? @$request->status : null;
+        $sort_search = @$request->search != null ? @$request->search : null;
+
+        $bookings = Booking::when($request->payment_status != null, function($ps) use($request){
+            $ps->where('payment_status', $request->payment_status);
+        })->when($request->status != null, function($s) use($request){
+            $s->where('status', $request->status);
+        })->when($request->search != null, function($se) use($request){
+            $se->where('booking_reference',$request->search)->orWhere('name', 'LIKE','%'.$request->search.'%');
+        });
+
+        $bookings = $bookings->latest()->paginate(25);
+        return view('admin.bookings.index', compact('bookings','payment_status','status','sort_search'));
     }
 
     // View booking detail
@@ -287,12 +299,12 @@ class BookingController extends Controller
 
     // Download vendor bookings
     public function exportVendorBooking(Request $request){
-        return Excel::download(new VendorBookingExport($request->all(), $request->id), 'vendor_bookings_'.$request->id.'.xlsx');
+        return Excel::download(new VendorBookingExport($request->inputs, $request->id), 'vendor_bookings_'.$request->id.'.xlsx');
     }
 
     // Download vendor bookings
     public function exportCommVendorBooking(Request $request){
-        return Excel::download(new VendorBookingCommExport($request->all(), $request->id), 'vendor_bookings_comm_'.$request->id.'.xlsx');
+        return Excel::download(new VendorBookingCommExport($request->inputs, $request->id), 'vendor_bookings_comm_'.$request->id.'.xlsx');
     }
 
     // Download reports

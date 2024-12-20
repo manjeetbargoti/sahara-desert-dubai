@@ -23,9 +23,23 @@ class VendorController extends Controller
 
     // Get Vendor Bookings
     public function vendorBookings(Request $request){
+        $payment_status = @$request->payment_status != null ? @$request->payment_status : null;
+        $status = @$request->status != null ? @$request->status : null;
+        $sort_search = @$request->search != null ? @$request->search : null;
+
+        $bookings = Booking::where(['vendor_id' => $request->id])->when(@$request->payment_status != null, function($ps) use($request){
+            $ps->where('payment_status', @$request->payment_status);
+        })->when(@$request->status != null, function($s) use ($request){
+            $s->where('status', @$request->status);
+        })->when(@$request->search != null, function($ser) use ($request){
+            $ser->where('booking_reference', @$request->search)->orWhere('name','LIKE','%'.@$request->search.'%');
+        });
+
         $vendor = User::where(['user_type' => 'vendor'])->first();
-        $bookings = Booking::where(['vendor_id' => $request->id])->paginate(25);
-        return view('admin.vendors.vendor_bookings', compact('bookings','vendor'));
+        // $bookings = Booking::where(['vendor_id' => $request->id])->paginate(25);
+        $bookings = $bookings->latest()->paginate(25);
+
+        return view('admin.vendors.vendor_bookings', compact('bookings','vendor','payment_status','status','sort_search'));
     }
 
     // Vendor Profile or Information

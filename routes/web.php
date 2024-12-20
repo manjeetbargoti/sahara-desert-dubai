@@ -25,6 +25,7 @@ Route::prefix('vendor')->namespace('App\Http\Controllers\Site')->middleware('aut
     // Vendor Booking List
     Route::match(['get', 'post'], 'booking/list', 'BookingController@vendorBookings')->name('vendor.bookings.list');
     Route::match(['get', 'post'], 'booking/{reference}/list', 'BookingController@viewVendorBookings')->name('vendor.bookings.view');
+    Route::match(['get', 'post'], 'booking/{id}/export', 'BookingController@vendorBookingsExport')->name('vendor.bookings.export');
 
     // Wallet Routes
     Route::match(['get','post'], 'wallet','WalletController@index')->name('vendor.wallet.index');

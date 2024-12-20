@@ -66,9 +66,11 @@
                 <td style="font-weight: bold; vertical-align: middle; text-align:center;color: #92d050;">{{ single_price(@$grand_total) }}</td>
 
                 @if (@$booking->status == 1)
-                    <td style="font-weight: bold; color: rgb(0, 149, 255);vertical-align: middle; text-align:center;">Completed</td>
-                @else
-                    <td style="font-weight: bold; color: red;vertical-align: middle; text-align:center;">Pending</td>
+                    <td style="font-weight: bold; color: green;vertical-align: middle; text-align:center;">Completed</td>
+                @elseif (@$booking->status == 2)
+                    <td style="font-weight: bold; color: orange;vertical-align: middle; text-align:center;">Pending</td>
+                @elseif (@$booking->status == 0)
+                    <td style="font-weight: bold; color: red;vertical-align: middle; text-align:center;">Canceled</td>
                 @endif
 
                 <td style="vertical-align: middle;">{{ @$booking->name }}</td>

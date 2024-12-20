@@ -15,7 +15,8 @@
                     <h4 class="nk-block-title">Booking List</h4>
                 </div>
                 <div class="nk-block-head-content">
-                    {{-- <a href="{{ route('admin.tours.create') }}" class="btn btn-primary"><em class="icon ni ni-plus"></em><span>Add Tour</span></a> --}}
+                    <a href="{{ route('vendor.bookings.export',['id'=>Auth::user()->id,'inputs'=>request()->input()]) }}" class="btn btn-dim btn-outline-primary"><em
+                            class="icon ni ni-download"></em><span>Export Bookings</span></a>
                 </div>
             </div>
         </div>

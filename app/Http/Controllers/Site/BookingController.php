@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 
+use App\Exports\VendorBookingExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\SendBookingEmail;
 use App\Mail\AdminBookingEmail;
 use Illuminate\Http\Request;
@@ -149,5 +151,10 @@ class BookingController extends Controller
         $vendors = User::where(['user_type' => 'vendor', 'status' => 1, 'ban' => 0])->get(['id','name']);
         $booking = Booking::where(['booking_reference' => $request->reference])->first();
         return view('frontend.seller.bookings.view',compact('booking', 'vendors'));
+    }
+
+    // Export Vendor Booking
+    public function vendorBookingsExport(Request $request){
+        return Excel::download(new VendorBookingExport($request->inputs, $request->id), 'vendor_bookings_'.$request->id.'.xlsx');
     }
 }

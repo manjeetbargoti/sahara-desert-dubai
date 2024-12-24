@@ -240,14 +240,12 @@
 
 	<div class="">
 		<div style="padding: 1rem;" class="custom-activity">
-			@if(!empty(@$data->custom_activity))
 			<div style="background-color: #eceff4;padding:0.5rem;border-radius: 5px;">
 				<h3>Activities:</h3>
 				<div style="padding: 0.5rem 0 0 1.5rem;">
-					{!! @$data->custom_activity !!}
+					{!! @$data->custom_activity ?? @$data->tour->itenarary_description !!}
 				</div>
 			</div>
-			@endif
 		</div>
 		<div style="padding: 1rem;text-align:justify;">
 			<div style="background-color: rgba(255, 0, 0, 0.1);padding:0.5rem;border: 1px solid rgba(255, 0, 0, 0.5);border-radius: 5px;">

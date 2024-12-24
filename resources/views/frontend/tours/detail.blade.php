@@ -126,23 +126,23 @@
                     </div>
                 @endif
 
-                @if (!empty(strip_tags($tour->tour_inclusion)))
+                {{-- @if (!empty(strip_tags($tour->tour_inclusion)))
                     <div class="border-bottom py-4 text-justify">
                         <h5 class="font-size-21 font-weight-bold text-dark mb-4">
                             Included in this tour
                         </h5>
                         {!! @$tour->tour_inclusion !!}
                     </div>
-                @endif
+                @endif --}}
 
-                @if (!empty(strip_tags($tour->itenarary_description)))
+                {{-- @if (!empty(strip_tags($tour->itenarary_description)))
                     <div class="border-bottom py-4 text-justify">
                         <h5 class="font-size-21 font-weight-bold text-dark mb-4">
                             Itinerary
                         </h5>
                         {!! @$tour->itenarary_description !!}
                     </div>
-                @endif
+                @endif --}}
 
                 @if (!empty(strip_tags($tour->what_this_tour)))
                     <div class="border-bottom py-4 text-justify">
@@ -198,6 +198,7 @@
                     </div>
                 @endif
 
+                @if(!empty(@$tour->google_map))
                 <div class="border-bottom py-4 text-justify">
                     <h5 class="font-size-21 font-weight-bold text-dark mb-4">
                         Location
@@ -205,12 +206,15 @@
                     <iframe src="{{ @$tour->google_map }}" width="100%" height="480" frameborder="0"
                         style="border:0;" allowfullscreen=""></iframe>
                 </div>
+                @endif
+                @if(!empty(@$tour->faq_details))
                 <div class="border-bottom py-4 text-justify">
                     <h5 class="font-size-21 font-weight-bold text-dark mb-4">
                         Faq
                     </h5>
                     {!! @$tour->faq_details !!}
                 </div>
+                @endif
             </div>
             <div class="col-lg-4 col-xl-3">
                 <div class="mb-4">

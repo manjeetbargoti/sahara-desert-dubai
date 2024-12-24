@@ -242,7 +242,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row g-3 align-center">
+                                {{-- <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="tourInclusion">Tour Inclusion</label>
@@ -259,7 +259,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 {{-- <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -299,8 +299,8 @@
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="form-label" for="itenararyDescription">Itenarary Description</label>
-                                            <span class="form-note">Write itenarary description.</span>
+                                            <label class="form-label" for="itenararyDescription">Activity to Print on PDF</label>
+                                            <span class="form-note">Write Activity here.</span>
                                         </div>
                                     </div>
                                     <div class="col-lg-8">

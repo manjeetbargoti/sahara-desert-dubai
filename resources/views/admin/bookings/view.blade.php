@@ -41,9 +41,9 @@
                         <td class="text-right">
                             @if(@$booking->status == 1)
                             <span class="badge badge-dim badge-outline-success font-weight-bold">Completed</span>
-                            @elseif(@$booking->status == 0)
-                            <span class="badge badge-dim badge-warning font-weight-bold">Pending</span>
                             @elseif(@$booking->status == 2)
+                            <span class="badge badge-dim badge-warning font-weight-bold">Pending</span>
+                            @elseif(@$booking->status == 0)
                             <span class="badge badge-dim badge-danger font-weight-bold">Canceled</span>
                             @endif
                         </td>
@@ -276,9 +276,9 @@
                                     data-search="off" id="bookingStatus" data-placeholder="Please select booking status">
                                     <option value="1" {{ $booking->status == 1 ? 'selected' : '' }}>Completed
                                     </option>
-                                    <option value="0" {{ $booking->status == 0 ? 'selected' : '' }}>Pending
+                                    <option value="0" {{ $booking->status == 2 ? 'selected' : '' }}>Pending
                                     </option>
-                                    <option value="2" {{ $booking->status == 2 ? 'selected' : '' }}>Canceled</option>
+                                    <option value="2" {{ $booking->status == 0 ? 'selected' : '' }}>Canceled</option>
                                 </select>
                             </div>
                         </div>

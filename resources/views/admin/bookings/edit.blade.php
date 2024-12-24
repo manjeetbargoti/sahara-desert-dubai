@@ -205,8 +205,8 @@
                             <select class="form-select" id="bookingStatus" name="status" data-placeholder="Booking Status">
                                 <option></option>
                                 <option value="1" {{ @$booking->status == '1' ? 'selected' : '' }}>Completed</option>
-                                <option value="0" {{ @$booking->status == '0' ? 'selected' : '' }}>Pending</option>
-                                <option value="2" {{ @$booking->status == '2' ? 'selected' : '' }}>Canceled</option>
+                                <option value="0" {{ @$booking->status == '2' ? 'selected' : '' }}>Pending</option>
+                                <option value="2" {{ @$booking->status == '0' ? 'selected' : '' }}>Canceled</option>
                             </select>
                         </div>
                     </div>

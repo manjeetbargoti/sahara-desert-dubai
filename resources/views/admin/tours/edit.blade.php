@@ -199,7 +199,7 @@
                                     <div class="col-lg-8">
                                         <div class="form-group">
                                             <div class="form-control-wrap">
-                                                <input type="text" name="fixed_charges_text" value="{{ @$tour->fixed_charges_text ?? old('fixed_charges_text') }}" class="form-control @error('fixed_charges_text') is-invalid @enderror" min="0.00" step="0.10" id="fixedChargesText">
+                                                <input type="text" name="fixed_charges_text" value="{{ @$tour->fixed_charges_text ?? old('fixed_charges_text') }}" class="form-control @error('fixed_charges_text') is-invalid @enderror" id="fixedChargesText">
                                                 @error('fixed_charges_text')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
@@ -261,7 +261,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row g-3 align-center">
+                                {{-- <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="whatThisTour">What This Tour</label>
@@ -278,8 +278,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row g-3 align-center">
+                                </div> --}}
+                                {{-- <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="importantInformation">Important Information</label>
@@ -296,7 +296,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -315,7 +315,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row g-3 align-center">
+                                {{-- <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="usefulInformation">Useful Information</label>
@@ -332,7 +332,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -351,7 +351,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row g-3 align-center">
+                                {{-- <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="termsCondition">Terms & Condition</label>
@@ -368,7 +368,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
@@ -379,7 +379,7 @@
                                     <div class="col-lg-8">
                                         <div class="form-group">
                                             <div class="form-control-wrap">
-                                                <textarea name="cancellation_policy_name" class="form-control @error('cancellation_policy_name') is-invalid @enderror summernote-basic" id="cancellationPolicyName" rows="10">{{ $tour->cancellation_policy_name ?? old('cancellation_policy_name') }}</textarea>
+                                                <input type="text" name="cancellation_policy_name" class="form-control @error('cancellation_policy_name') is-invalid @enderror" id="cancellationPolicyName" value="{{ $tour->cancellation_policy_name ?? old('cancellation_policy_name') }}">
                                                 @error('cancellation_policy_name')
                                                     <label class="text-danger">{{ $message }}</label>
                                                 @enderror
@@ -405,7 +405,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row g-3 align-center">
+                                {{-- <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label" for="childCacellationPolicyName">Child Cacellation Policy Name</label>
@@ -440,7 +440,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 {{-- Upload Images --}}
                                 <div class="row g-3 align-center">

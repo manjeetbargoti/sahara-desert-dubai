@@ -40,6 +40,7 @@ class TourController extends Controller
     }
 
     public function create(Request $request){
+        // dd($request->all());
         DB::beginTransaction();
         try{
             if($request->isMethod('POST')){
@@ -52,42 +53,25 @@ class TourController extends Controller
                     'sale_price' => 'required',
                     'child_price' => 'required',
                     'infant_price' => 'required',
-                    'fixed_charges' => 'required',
-                    'fixed_charges_text' => 'string',
-                    'short_description' => 'string',
-                    'description' => 'string',
-                    'what_this_tour' => 'string',
-                    'important_information' => 'string',
-                    'itenarary_description' => 'string',
-                    'useful_information' => 'string',
-                    'faq_details' => 'string',
-                    'terms_condition' => 'string',
-                    'cancellation_policy_name' => 'string',
-                    'cancellation_policy_description' => 'string',
-                    'child_cacellation_policy_name' => 'string',
-                    'child_cacellation_policy_description' => 'string',
+                    'short_description' => 'string|nullable',
+                    'description' => 'string|nullable',
+                    'itenarary_description' => 'string|nullable',
+                    'faq_details' => 'string|nullable',
+                    'cancellation_policy_name' => 'string|nullable',
+                    'cancellation_policy_description' => 'string|nullable',
                     'thumbnail_img' => 'image|mimes:jpeg,png,jpg|max:1024',
                     'banner' => 'image|mimes:jpeg,png,jpg|max:1024',
                     'photo' => 'image|mimes:jpeg,png,jpg|max:1024',
-                    // 'reporting_time' => '',
-                    // 'start_time' => '',
-                    'duration' => 'string',
-                    'season' => 'string',
-                    'max_guest' => 'string',
-                    'departure_point' => 'string',
-                    'child_age' => 'string',
-                    'infant_age' => 'string',
-                    'infant_count' => 'string',
-                    'is_slot' => 'required',
-                    'cut_off_time' => 'required|string',
-                    'only_child' => 'required',
-                    'latitude' => 'string',
-                    'longitude' => 'string',
-                    'google_map' => 'string',
-                    'meal' => 'required',
-                    'status' => 'required',
-                    'featured' => 'required',
-                    'admin_approval' => 'required'
+                    'duration' => 'string|nullable',
+                    'season' => 'string|nullable',
+                    'max_guest' => 'string|nullable',
+                    'departure_point' => 'string|nullable',
+                    'child_age' => 'string|nullable',
+                    'infant_age' => 'string|nullable',
+                    'infant_count' => 'string|nullable',
+                    'latitude' => 'string|nullable',
+                    'longitude' => 'string|nullable',
+                    'google_map' => 'string|nullable'
                 ]);
     
                 if($request->org_price > $request->sale_price){
@@ -118,7 +102,7 @@ class TourController extends Controller
                 $tour->sell_price       = round($request->sale_price,2);
                 $tour->child_price      = round($request->child_price,2);
                 $tour->infant_price     = round($request->infant_price,2);
-                $tour->fixed_charges    = round($request->fixed_charges,2);
+                $tour->fixed_charges    = $request->fixed_charges ? round($request->fixed_charges,2): '0.00';
                 $tour->fixed_charges_text       = $request->fixed_charges_text;
                 $tour->discount                 = round($discount);
                 $tour->discount_type            = 'percent';
@@ -261,9 +245,9 @@ class TourController extends Controller
                     }
                 }
     
-                $tour->thumbnail_img = $uploadedThumbImg;
-                $tour->photos = $uploadedGalImg;
-                $tour->banner = $uploadedBannerImg;
+                $tour->thumbnail_img = $uploadedThumbImg ?? null;
+                $tour->photos = $uploadedGalImg ?? null;
+                $tour->banner = $uploadedBannerImg ?? null;
                 
                 $tour->save();
 
@@ -298,42 +282,25 @@ class TourController extends Controller
                     'sale_price' => 'required',
                     'child_price' => 'required',
                     'infant_price' => 'required',
-                    'fixed_charges' => 'required',
-                    'fixed_charges_text' => 'string',
-                    'short_description' => 'string',
-                    'description' => 'string',
-                    'what_this_tour' => 'string',
-                    'important_information' => 'string',
-                    'itenarary_description' => 'string',
-                    'useful_information' => 'string',
-                    'faq_details' => 'string',
-                    'terms_condition' => 'string',
-                    'cancellation_policy_name' => 'string',
-                    'cancellation_policy_description' => 'string',
-                    'child_cacellation_policy_name' => 'string',
-                    'child_cacellation_policy_description' => 'string',
+                    'short_description' => 'string|nullable',
+                    'description' => 'string|nullable',
+                    'itenarary_description' => 'string|nullable',
+                    'faq_details' => 'string|nullable',
+                    'cancellation_policy_name' => 'string|nullable',
+                    'cancellation_policy_description' => 'string|nullable',
                     'thumbnail_img' => 'image|mimes:jpeg,png,jpg|max:1024',
                     'banner' => 'image|mimes:jpeg,png,jpg|max:1024',
                     'photo' => 'image|mimes:jpeg,png,jpg|max:1024',
-                    // 'reporting_time' => '',
-                    // 'start_time' => '',
-                    'duration' => 'string',
-                    'season' => 'string',
-                    'max_guest' => 'string',
-                    'departure_point' => 'string',
-                    'child_age' => 'string',
-                    'infant_age' => 'string',
-                    'infant_count' => 'string',
-                    'is_slot' => 'required',
-                    'cut_off_time' => 'required|string',
-                    'only_child' => 'required',
-                    'latitude' => 'string',
-                    'longitude' => 'string',
-                    'google_map' => 'string',
-                    'meal' => 'required',
-                    'status' => 'required',
-                    'featured' => 'required',
-                    'admin_approval' => 'required'
+                    'duration' => 'string|nullable',
+                    'season' => 'string|nullable',
+                    'max_guest' => 'string|nullable',
+                    'departure_point' => 'string|nullable',
+                    'child_age' => 'string|nullable',
+                    'infant_age' => 'string|nullable',
+                    'infant_count' => 'string|nullable',
+                    'latitude' => 'string|nullable',
+                    'longitude' => 'string|nullable',
+                    'google_map' => 'string|nullable'
                 ]);
 
                 if($request->org_price > $request->sale_price){
@@ -364,7 +331,7 @@ class TourController extends Controller
                 $tour->sell_price       = round($request->sale_price,2);
                 $tour->child_price      = round($request->child_price,2);
                 $tour->infant_price     = round($request->infant_price,2);
-                $tour->fixed_charges    = round($request->fixed_charges,2);
+                $tour->fixed_charges    = $request->fixed_charges ? round($request->fixed_charges,2) : '0.00';
                 $tour->fixed_charges_text       = $request->fixed_charges_text;
                 $tour->discount                 = round($discount);
                 $tour->discount_type            = 'percent';

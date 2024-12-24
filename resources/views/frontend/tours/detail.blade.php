@@ -183,7 +183,7 @@
                 @if (!empty(strip_tags($tour->cancellation_policy_description)))
                     <div class="border-bottom py-4 text-justify">
                         <h5 class="font-size-21 font-weight-bold text-dark mb-4">
-                            {!! $tour->cancellation_policy_name !!}
+                            {{ $tour->cancellation_policy_name }}
                         </h5>
                         {!! @$tour->cancellation_policy_description !!}
                     </div>

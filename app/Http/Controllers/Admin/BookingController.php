@@ -162,7 +162,6 @@ class BookingController extends Controller
             if (!empty($booking)) {
                 $booking->name = $request->name;
                 $booking->email = $request->email;
-                // $booking->phone = $request->phone;
                 $booking->address = $request->address;
                 $booking->status = $request->status;
                 $booking->payment_status = $request->payment_status;
@@ -171,20 +170,48 @@ class BookingController extends Controller
                 $booking->save();
 
                 if(@$request->status == 1){
-                    $adminPayout = new AdminPayout();
-                    $adminPayout->user_id = @$booking->vendor_id;
-                    $adminPayout->booking_id = $booking->id;
-                    $adminPayout->booking_reference = $booking->booking_reference;
-                    $adminPayout->payment_type = 'credit';
-                    $adminPayout->amount = $booking->grand_total;
-                    $adminPayout->transfer_to_admin = 0;
-                    $adminPayout->tranx_remark = "Amount to be paid for Booking Reference: ".$booking->booking_reference;
-                    $adminPayout->save();
+                    // dd($booking->booking_reference);
+                    $adminPayoutInfo = AdminPayout::where(['booking_reference' => $booking->booking_reference, 'payment_type'=>'credit', 'payment_status' => 0])->first();
+                    // dd($adminPayoutInfo);
+                    if(empty($adminPayoutInfo)){
+                        $adminPayout = new AdminPayout();
+                        $adminPayout->user_id = @$booking->vendor_id;
+                        $adminPayout->booking_id = $booking->id;
+                        $adminPayout->booking_reference = $booking->booking_reference;
+                        $adminPayout->payment_type = 'credit';
+                        $adminPayout->amount = $booking->grand_total;
+                        $adminPayout->transfer_to_admin = 0;
+                        $adminPayout->tranx_remark = "Amount to be paid for Booking Reference: ".$booking->booking_reference;
+                        $adminPayout->save();
 
-                    if(!empty($booking->vendor_id)){
-                        $vendorUser = User::where(['id' => @$booking->vendor_id])->first();
-                        $vendorUser->dues_to_admin += $booking->grand_total;
-                        $vendorUser->save();
+                        if(!empty($booking->vendor_id)){
+                            $vendorUser = User::where(['id' => @$booking->vendor_id])->first();
+                            $vendorUser->dues_to_admin += $booking->grand_total;
+                            $vendorUser->save();
+                        }
+                    }
+                }elseif(@$request->status == 0 || @$request->status == 2){
+                    $adminPayoutInfo = AdminPayout::where(['booking_reference' => $booking->booking_reference, 'payment_type'=>'credit', 'payment_status' => null])->first();
+                    // dd($adminPayoutInfo);
+                    if(!empty($adminPayoutInfo)){
+                        $adminPayout = new AdminPayout();
+                        $adminPayout->user_id = @$booking->vendor_id;
+                        $adminPayout->booking_id = $booking->id;
+                        $adminPayout->booking_reference = $booking->booking_reference;
+                        $adminPayout->payment_type = 'debit';
+                        $adminPayout->amount = $booking->grand_total;
+                        $adminPayout->payment_status = 1;
+                        $adminPayout->transfer_to_admin = 0;
+                        $adminPayout->tranx_remark = "Reverse for: ".$booking->booking_reference;
+                        $adminPayout->save();
+
+                        AdminPayout::where(['booking_reference' => $booking->booking_reference, 'payment_type'=>'credit'])->update(['payment_status' => 1]);
+
+                        if(!empty($booking->vendor_id)){
+                            $vendorUser = User::where(['id' => @$booking->vendor_id])->first();
+                            $vendorUser->dues_to_admin -= $booking->grand_total;
+                            $vendorUser->save();
+                        }
                     }
                 }
 

@@ -75,8 +75,13 @@ class PayoutController extends Controller
             $payoutTranx->save();
 
             if($request->payment_status == 1){
-                $vendorUser->dues_to_admin -= $request->amount;
-                $vendorUser->save();
+                if($request->payment_type == 'credit'){
+                    $vendorUser->dues_to_admin += $request->amount;
+                    $vendorUser->save();
+                }elseif($request->payment_type == 'debit'){
+                    $vendorUser->dues_to_admin -= $request->amount;
+                    $vendorUser->save();
+                }
             }
 
             flash()->success('Transaction Added Successfully!');

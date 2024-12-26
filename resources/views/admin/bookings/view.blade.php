@@ -276,9 +276,9 @@
                                     data-search="off" id="bookingStatus" data-placeholder="Please select booking status">
                                     <option value="1" {{ $booking->status == 1 ? 'selected' : '' }}>Completed
                                     </option>
-                                    <option value="0" {{ $booking->status == 2 ? 'selected' : '' }}>Pending
+                                    <option value="2" {{ $booking->status == 2 ? 'selected' : '' }}>Pending
                                     </option>
-                                    <option value="2" {{ $booking->status == 0 ? 'selected' : '' }}>Canceled</option>
+                                    <option value="0" {{ $booking->status == 0 ? 'selected' : '' }}>Canceled</option>
                                 </select>
                             </div>
                         </div>

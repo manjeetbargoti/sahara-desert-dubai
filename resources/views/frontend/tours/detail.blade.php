@@ -2,7 +2,7 @@
 @section('content')
 
     <!-- Breadcrumb -->
-    <div class="container">
+    {{-- <div class="container">
         <nav class="py-3" aria-label="breadcrumb">
             <ol class="breadcrumb breadcrumb-no-gutter mb-0 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="{{ route('home') }}">Home</a></li>
@@ -11,7 +11,7 @@
                 <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">{{ @$tour->name }}</li>
             </ol>
         </nav>
-    </div>
+    </div> --}}
     <!-- End Breadcrumb -->
     <div class="mb-4 mb-lg-8">
         <img class="img-fluid" src="{{ uploaded_asset(@$tour->banner) }}" alt="{{ @$tour->name }}">

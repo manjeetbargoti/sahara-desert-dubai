@@ -1,5 +1,5 @@
 <!-- ========== FOOTER ========== -->
-<footer class="footer mt-4">
+<footer class="mt-4 footer">
     <div class="space-bottom-2 space-top-1">
         <div class="container">
             <div class="row justify-content-xl-between">

@@ -171,7 +171,7 @@ class BookingController extends Controller
 
                 if(@$request->status == 1){
                     // dd($booking->booking_reference);
-                    $adminPayoutInfo = AdminPayout::where(['booking_reference' => $booking->booking_reference, 'payment_type'=>'credit', 'payment_status' => 0])->first();
+                    $adminPayoutInfo = AdminPayout::where(['booking_reference' => $booking->booking_reference, 'payment_type'=>'credit', 'payment_status' => null])->first();
                     // dd($adminPayoutInfo);
                     if(empty($adminPayoutInfo)){
                         $adminPayout = new AdminPayout();

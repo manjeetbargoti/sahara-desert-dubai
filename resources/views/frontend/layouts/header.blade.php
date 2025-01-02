@@ -1,8 +1,8 @@
 <!-- ========== HEADER ========== -->
-<header id="header" class="u-header u-header--dark-nav-links-xl u-header--static-xl u-header--show-hide-xl" data-header-fix-moment="500" data-header-fix-effect="slide">
-    <div class="u-header__section u-header__shadow-on-show-hide py-4 py-xl-0">
+<header id="header" class="u-header u-header--abs-top u-header--white-nav-links-xl u-header--bg-transparent u-header--show-hide border-bottom border-xl-bottom-0 border-color-white" data-header-fix-moment="500" data-header-fix-effect="slide">
+    <div class="u-header__section u-header__shadow-on-show-hide">
         <!-- Topbar -->
-        <div class="container-fluid u-header__hide-content u-header__topbar u-header__topbar-lg border-bottom border-color-8">
+        <div class="container-fluid u-header__hide-content u-header__topbar u-header__topbar-lg border-bottom border-color-white">
              <div class="container-fluid">
                 <div class="d-flex align-items-center">
                     <ul class="list-inline list-inline-dark u-header__topbar-nav-divider mb-0">
@@ -12,22 +12,22 @@
                     <div class="ml-auto d-flex align-items-center">
                         <ul class="list-inline mb-0 mr-2 pr-1">
                             <li class="list-inline-item">
-                                <a class="btn btn-sm btn-icon btn-pill btn-soft-dark btn-bg-transparent transition-3d-hover" href="{{ get_setting('facebook_url') }}" target="_blank">
+                                <a class="btn btn-sm btn-icon btn-pill btn-soft-white btn-bg-transparent transition-3d-hover" href="{{ get_setting('facebook_url') }}" target="_blank">
                                     <span class="fab fa-facebook-f btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn btn-sm btn-icon btn-pill btn-soft-dark btn-bg-transparent transition-3d-hover" href="{{ get_setting('twitter_url') }}" target="_blank">
+                                <a class="btn btn-sm btn-icon btn-pill btn-soft-white btn-bg-transparent transition-3d-hover" href="{{ get_setting('twitter_url') }}" target="_blank">
                                     <span class="fab fa-twitter btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn btn-sm btn-icon btn-pill btn-soft-dark btn-bg-transparent transition-3d-hover" href="{{ get_setting('instagram_url') }}" target="_blank">
+                                <a class="btn btn-sm btn-icon btn-pill btn-soft-white btn-bg-transparent transition-3d-hover" href="{{ get_setting('instagram_url') }}" target="_blank">
                                     <span class="fab fa-instagram btn-icon__inner"></span>
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn btn-sm btn-icon btn-pill btn-soft-dark btn-bg-transparent transition-3d-hover" href="{{ get_setting('linkedin_url') }}" target="_blank">
+                                <a class="btn btn-sm btn-icon btn-pill btn-soft-white btn-bg-transparent transition-3d-hover" href="{{ get_setting('linkedin_url') }}" target="_blank">
                                     <span class="fab fa-linkedin-in btn-icon__inner"></span>
                                 </a>
                             </li>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <!-- End Topbar -->
-        <div id="logoAndNav" class="container-fluid py-xl-2 border-bottom-xl">
+        <div id="logoAndNav" class="container-fluid py-1 py-xl-0">
             <!-- Nav -->
             <nav class="js-mega-menu navbar navbar-expand-xl u-header__navbar u-header__navbar--no-space">
                 <!-- Logo -->
@@ -49,6 +49,19 @@
                     <img src="{{ uploaded_asset(get_setting('website_logo')) }}" alt="{{ get_setting('website_title') }}" width="120">
                 </a>
                 <!-- End Logo -->
+
+                <!-- Handheld Logo -->
+                <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-center u-header__navbar-brand-collapsed" href="{{ route('home') }}" aria-label="{{ get_setting('website_title') }}">
+                    <img src="{{ uploaded_asset(get_setting('website_logo')) }}" alt="{{ get_setting('website_title') }}" width="120">
+                </a>
+                <!-- End Handheld Logo -->
+
+                <!-- Scroll Logo -->
+                <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-center u-header__navbar-brand-on-scroll" href="{{ route('home') }}" aria-label="{{ get_setting('website_title') }}">
+                        
+                    <img src="{{ uploaded_asset(get_setting('website_logo')) }}" alt="{{ get_setting('website_title') }}" width="120">
+                </a>
+                <!-- End Scroll Logo -->
 
                 <!-- Responsive Toggle Button -->
                 <button type="button" class="navbar-toggler btn u-hamburger u-hamburger--primary order-2 ml-3" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">

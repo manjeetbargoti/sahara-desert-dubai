@@ -10,10 +10,10 @@ class HomepageController extends Controller
 {
     public function index(){
 
-        $popularTours = Tour::where(['status'=>1,'admin_approval'=>1, 'featured' => 1])->latest()->limit(10)->get();
+        $featuredTours = Tour::where(['status'=>1,'admin_approval'=>1, 'featured' => 1])->latest()->limit(5)->get();
         $recentTours = Tour::where(['status'=>1,'admin_approval'=>1])->latest()->limit(10)->get();
 
-        return view('frontend.homepage_new', compact('popularTours', 'recentTours'));
+        return view('frontend.homepage', compact('featuredTours', 'recentTours'));
     }
 
     public function tourList(){

@@ -120,6 +120,7 @@ class TourController extends Controller
                 $tour->child_cacellation_policy_name        = $request->child_cacellation_policy_name;
                 $tour->child_cacellation_policy_description = $request->child_cacellation_policy_description;
                 $tour->reporting_time   = $request->reporting_time;
+                $tour->places           = $request->places;
                 $tour->duration         = $request->duration;
                 $tour->season           = $request->season;
                 $tour->max_guest        = $request->max_guest;
@@ -349,6 +350,7 @@ class TourController extends Controller
                 $tour->child_cacellation_policy_name        = $request->child_cacellation_policy_name;
                 $tour->child_cacellation_policy_description = $request->child_cacellation_policy_description;
                 $tour->reporting_time   = $request->reporting_time;
+                $tour->places           = $request->places;
                 $tour->duration         = $request->duration;
                 $tour->season           = $request->season;
                 $tour->max_guest        = $request->max_guest;

@@ -554,6 +554,24 @@
                                 <div class="row g-3 align-center">
                                     <div class="col-lg-4">
                                         <div class="form-group">
+                                            <label class="form-label" for="places">Emirates to Visit</label>
+                                            {{-- <span class="form-note">Please upload banner image.</span> --}}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <div class="form-control-wrap">
+                                                <input type="text" name="places" value="{{ old('places') }}" class="form-control @error('places') is-invalid @enderror" id="places">
+                                                @error('places')
+                                                    <label class="text-danger">{{ $message }}</label>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g-3 align-center">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
                                             <label class="form-label" for="duration">Duration</label>
                                             {{-- <span class="form-note">Please upload banner image.</span> --}}
                                         </div>

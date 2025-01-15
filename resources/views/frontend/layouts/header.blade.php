@@ -1,205 +1,111 @@
-<!-- ========== HEADER ========== -->
-<header id="header" class="u-header u-header--abs-top u-header--white-nav-links-xl u-header--bg-transparent u-header--show-hide border-bottom border-xl-bottom-0 border-color-white" data-header-fix-moment="500" data-header-fix-effect="slide">
-    <div class="u-header__section u-header__shadow-on-show-hide">
-        <!-- Topbar -->
-        <div class="container-fluid u-header__hide-content u-header__topbar u-header__topbar-lg border-bottom border-color-white">
-             <div class="container-fluid">
-                <div class="d-flex align-items-center">
-                    <ul class="list-inline list-inline-dark u-header__topbar-nav-divider mb-0">
-                        <li class="list-inline-item mr-0"><a href="tel:{{ get_setting('support_phone') }}" class="u-header__navbar-link">{{ get_setting('support_phone') }}</a></li>
-                        <li class="list-inline-item mr-0"><a href="mailto:{{ get_setting('support_email') }}" class="u-header__navbar-link">{{ get_setting('support_email') }}</a></li>
-                    </ul>
-                    <div class="ml-auto d-flex align-items-center">
-                        <ul class="list-inline mb-0 mr-2 pr-1">
-                            <li class="list-inline-item">
-                                <a class="btn btn-sm btn-icon btn-pill btn-soft-white btn-bg-transparent transition-3d-hover" href="{{ get_setting('facebook_url') }}" target="_blank">
-                                    <span class="fab fa-facebook-f btn-icon__inner"></span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn btn-sm btn-icon btn-pill btn-soft-white btn-bg-transparent transition-3d-hover" href="{{ get_setting('twitter_url') }}" target="_blank">
-                                    <span class="fab fa-twitter btn-icon__inner"></span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn btn-sm btn-icon btn-pill btn-soft-white btn-bg-transparent transition-3d-hover" href="{{ get_setting('instagram_url') }}" target="_blank">
-                                    <span class="fab fa-instagram btn-icon__inner"></span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn btn-sm btn-icon btn-pill btn-soft-white btn-bg-transparent transition-3d-hover" href="{{ get_setting('linkedin_url') }}" target="_blank">
-                                    <span class="fab fa-linkedin-in btn-icon__inner"></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<div class="top-bar style-2">
+    <div class="topbar-left two">
+        <div class="icon"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27">
+                <g>
+                    <path
+                        d="M9.84497 19.8136V25.0313C9.84583 25.2087 9.90247 25.3812 10.0069 25.5246C10.1112 25.6679 10.2581 25.7748 10.4266 25.8301C10.5951 25.8853 10.7767 25.8861 10.9457 25.8324C11.1147 25.7787 11.2625 25.6732 11.3682 25.5308L14.4203 21.3773L9.84497 19.8136ZM26.6468 0.156459C26.5201 0.0661815 26.3708 0.0127263 26.2155 0.00200482C26.0603 -0.00871662 25.9051 0.0237135 25.7671 0.0957086L0.454599 13.3145C0.308959 13.3914 0.188959 13.5092 0.109326 13.6535C0.0296936 13.7977 -0.00610776 13.962 0.00631628 14.1262C0.0187403 14.2905 0.0788492 14.4475 0.179266 14.5781C0.279683 14.7087 0.416039 14.8071 0.571599 14.8613L7.60847 17.2666L22.5946 4.45283L10.9981 18.4242L22.7915 22.4551C22.9085 22.4944 23.0327 22.5077 23.1554 22.4939C23.2781 22.4802 23.3963 22.4399 23.5017 22.3757C23.6072 22.3115 23.6973 22.225 23.7659 22.1223C23.8344 22.0196 23.8797 21.9032 23.8985 21.7812L26.9922 0.968709C27.0151 0.81464 26.995 0.657239 26.934 0.513898C26.8731 0.370556 26.7737 0.246854 26.6468 0.156459Z"/>
+                </g>
+            </svg>
+        </div>
+        <div class="content">
+            <span>Email:</span>
+            <a href="mailto:{{ get_setting('support_email') }}">{{ get_setting('support_email') }}</a>
+        </div>
+    </div>
+    <p>50% Off Your Next Trip. Hurry Up For your new Tour! <a href="{{ route('tour.list') }}">Book Your Tour</a> </p>
+    <div class="topbar-right">
+        <div class="social-icon-area">
+            <ul>
+                <li><a href="#"><i class="bx bxl-facebook"></i></a></li>
+                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                    <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z"/>
+                  </svg></a>
+                </li>
+                <li><a href="https://www.instagram.com/saharadesertdubai/"><i class="bx bxl-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Start header section -->
+<header class="header-area style-1">
+    <div class="header-logo d-lg-none d-flex py-2">
+        {{-- <a href="{{ route('home') }}"><img alt="image" class="img-fluid" src="{{ asset('assets/frontend/img/logo.svg') }}"></a> --}}
+        <a href="{{ route('home') }}"><img alt="{{ get_setting('website_title') }}" class="img-fluid" src="{{ uploaded_asset(get_setting('website_logo')) }}"></a>
+    </div>
+    <div class="company-logo d-lg-flex d-none py-2">
+        <a href="{{ route('home') }}"><img src="{{ uploaded_asset(get_setting('website_logo')) }}" alt="{{ get_setting('website_title') }}"></a>
+    </div>
+    <div class="main-menu">
+        <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
+            <div class="mobile-logo-wrap">
+                <a href="{{ route('home') }}"><img alt="{{ get_setting('website_title') }}" src="{{ uploaded_asset(get_setting('website_logo')) }}"></a>
+            </div>
+            <div class="menu-close-btn">
+                <i class="bi bi-x"></i>
             </div>
         </div>
-        <!-- End Topbar -->
-        <div id="logoAndNav" class="container-fluid py-1 py-xl-0">
-            <!-- Nav -->
-            <nav class="js-mega-menu navbar navbar-expand-xl u-header__navbar u-header__navbar--no-space">
-                <!-- Logo -->
-                <a class="navbar-brand u-header__navbar-brand-default u-header__navbar-brand-center u-header__navbar-brand-text-dark-xl" href="{{ route('home') }}" aria-label="{{ get_setting('website_title') }}">
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55px" height="53px" style="margin-bottom: 0;">
-                        <path fill-rule="evenodd"  class="fill-primary" d="M53.175,51.207 C50.755,53.610 46.848,53.594 44.448,51.171 L40.766,47.484 C40.378,47.082 40.378,46.443 40.766,46.041 C41.164,45.628 41.821,45.617 42.233,46.016 L45.915,49.702 C47.503,51.246 50.030,51.246 51.619,49.702 C53.243,48.125 53.283,45.528 51.708,43.902 L50.100,42.291 C49.712,41.889 49.712,41.251 50.100,40.849 C50.498,40.436 51.155,40.425 51.567,40.823 L53.174,42.433 C53.186,42.444 53.198,42.456 53.210,42.468 C55.610,44.891 55.594,48.804 53.175,51.207 ZM47.857,37.404 C47.757,37.404 47.657,37.389 47.561,37.360 C47.561,37.360 47.561,37.360 47.561,37.360 C47.012,37.196 46.700,36.617 46.864,36.068 C48.542,30.412 47.740,24.309 44.659,19.280 C38.665,9.497 25.886,6.432 16.116,12.434 C16.085,12.456 16.054,12.475 16.021,12.493 C15.518,12.767 14.888,12.581 14.614,12.077 C14.340,11.574 14.526,10.943 15.029,10.669 C18.623,8.455 22.761,7.284 26.981,7.287 C29.178,7.289 31.363,7.608 33.469,8.234 C45.556,11.831 52.442,24.559 48.851,36.662 C48.719,37.102 48.315,37.403 47.857,37.404 ZM13.802,8.022 L12.765,6.983 C12.377,6.581 12.377,5.943 12.765,5.540 C13.163,5.128 13.820,5.116 14.232,5.515 L15.269,6.553 C15.657,6.956 15.657,7.594 15.269,7.996 C14.871,8.409 14.214,8.420 13.802,8.022 ZM9.654,3.868 L9.084,3.296 C7.495,1.753 4.968,1.752 3.379,3.296 C1.755,4.873 1.715,7.470 3.291,9.096 L10.083,15.900 C10.278,16.094 10.387,16.358 10.387,16.634 C10.387,17.208 9.923,17.672 9.350,17.672 C9.075,17.672 8.812,17.563 8.617,17.368 L1.824,10.566 C1.812,10.554 1.800,10.542 1.788,10.530 C-0.611,8.107 -0.596,4.195 1.824,1.792 C4.243,-0.612 8.150,-0.596 10.550,1.827 L11.121,2.399 C11.129,2.408 11.138,2.416 11.146,2.425 C11.544,2.838 11.533,3.495 11.121,3.894 C10.709,4.292 10.052,4.280 9.654,3.868 ZM7.742,19.850 C8.260,20.095 8.480,20.715 8.234,21.233 C5.232,27.580 5.635,35.016 9.305,41.001 C15.302,50.779 28.080,53.839 37.845,47.834 C37.876,47.813 37.908,47.793 37.940,47.775 C38.444,47.501 39.073,47.687 39.347,48.191 C39.621,48.695 39.435,49.326 38.932,49.599 C35.338,51.813 31.200,52.984 26.981,52.980 C23.606,52.979 20.273,52.228 17.223,50.782 C5.829,45.379 0.966,31.751 6.360,20.342 C6.606,19.824 7.225,19.603 7.742,19.850 ZM40.262,35.347 C40.601,35.280 40.951,35.386 41.196,35.631 L43.270,37.708 C43.675,38.113 43.675,38.770 43.270,39.176 L39.551,42.900 C37.191,45.264 33.364,45.264 31.004,42.900 L24.906,36.795 L21.491,40.215 C21.086,40.620 20.430,40.620 20.025,40.215 L17.951,38.138 C17.719,37.905 17.612,37.576 17.660,37.251 L18.624,30.501 L12.590,24.460 C11.040,22.907 11.040,20.390 12.590,18.837 C14.141,17.285 16.654,17.285 18.205,18.837 L24.077,24.716 L35.851,18.820 C36.250,18.620 36.732,18.699 37.048,19.015 L39.122,21.092 C39.527,21.498 39.527,22.155 39.122,22.561 L30.521,31.173 L35.622,36.277 L40.262,35.347 ZM20.758,38.012 L23.440,35.326 L20.454,32.337 L19.784,37.036 L20.758,38.012 ZM34.541,38.138 L28.318,31.907 C27.914,31.501 27.914,30.844 28.318,30.439 L36.919,21.826 L36.107,21.013 L24.333,26.910 C23.934,27.109 23.452,27.031 23.136,26.714 L16.735,20.306 C16.379,19.949 15.897,19.749 15.394,19.749 C14.347,19.750 13.498,20.600 13.499,21.649 C13.496,22.153 13.695,22.638 14.051,22.995 L20.449,29.401 L25.635,34.593 L32.464,41.432 C34.014,42.984 36.528,42.984 38.078,41.432 L41.064,38.442 L40.115,37.492 L35.474,38.421 C35.135,38.488 34.786,38.382 34.541,38.138 Z"/>
-                    </svg>
-                    <span class="u-header__navbar-brand-text">{{ get_setting('website_title') }}</span> --}}
-                    <img src="{{ uploaded_asset(get_setting('website_logo')) }}" alt="{{ get_setting('website_title') }}" width="120">
+        <ul class="menu-list">
+            <li class="active">
+                <a href="{{ route('home') }}" class="drop-down">Home</a>
+            </li>
+            <li>
+                <a href="{{ route('tour.list') }}" class="drop-down">All Packages</a>
+            </li>
+            <li>
+                <a href="#" class="drop-down">Gallery</a>
+            </li>
+            <li>
+                <a href="{{ route('contactus') }}" class="drop-down">Contact</a>
+            </li>
+        </ul>
+        <div class="hotline-area d-lg-none d-flex">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+                    <path
+                        d="M27.2653 21.5995L21.598 17.8201C20.8788 17.3443 19.9147 17.5009 19.383 18.1798L17.7322 20.3024C17.6296 20.4377 17.4816 20.5314 17.3154 20.5664C17.1492 20.6014 16.9759 20.5752 16.8275 20.4928L16.5134 20.3196C15.4725 19.7522 14.1772 19.0458 11.5675 16.4352C8.95784 13.8246 8.25001 12.5284 7.6826 11.4893L7.51042 11.1753C7.42683 11.0269 7.39968 10.8532 7.43398 10.6864C7.46827 10.5195 7.56169 10.3707 7.69704 10.2673L9.81816 8.61693C10.4968 8.08517 10.6536 7.1214 10.1784 6.40198L6.39895 0.734676C5.91192 0.00208106 4.9348 -0.21784 4.18082 0.235398L1.81096 1.65898C1.06634 2.09672 0.520053 2.80571 0.286612 3.63733C-0.56677 6.74673 0.0752209 12.1131 7.98033 20.0191C14.2687 26.307 18.9501 27.9979 22.1677 27.9979C22.9083 28.0011 23.6459 27.9048 24.3608 27.7115C25.1925 27.4783 25.9016 26.932 26.3391 26.1871L27.7641 23.8187C28.218 23.0645 27.9982 22.0868 27.2653 21.5995ZM26.9601 23.3399L25.5384 25.7098C25.2242 26.2474 24.7142 26.6427 24.1152 26.8128C21.2447 27.6009 16.2298 26.9482 8.64053 19.3589C1.0513 11.7697 0.398595 6.75515 1.18669 3.88421C1.35709 3.28446 1.75283 2.77385 2.2911 2.45921L4.66096 1.03749C4.98811 0.840645 5.41221 0.93606 5.62354 1.25397L7.67659 4.3363L9.39976 6.92078C9.60612 7.23283 9.53831 7.65108 9.24392 7.88199L7.1223 9.53232C6.47665 10.026 6.29227 10.9193 6.68979 11.6283L6.85826 11.9344C7.45459 13.0281 8.19599 14.3887 10.9027 17.095C13.6095 19.8012 14.9696 20.5427 16.0628 21.139L16.3694 21.3079C17.0783 21.7053 17.9716 21.521 18.4653 20.8753L20.1157 18.7537C20.3466 18.4595 20.7647 18.3918 21.0769 18.5979L26.7437 22.3773C27.0618 22.5885 27.1572 23.0128 26.9601 23.3399ZM15.8658 4.66809C20.2446 4.67296 23.7931 8.22149 23.798 12.6003C23.798 12.858 24.0069 13.0669 24.2646 13.0669C24.5223 13.0669 24.7312 12.858 24.7312 12.6003C24.7257 7.7063 20.7598 3.74029 15.8658 3.73494C15.6081 3.73494 15.3992 3.94381 15.3992 4.20151C15.3992 4.45922 15.6081 4.66809 15.8658 4.66809Z" />
+                    <path
+                        d="M15.865 7.46746C18.6983 7.4708 20.9943 9.76678 20.9976 12.6001C20.9976 12.7238 21.0468 12.8425 21.1343 12.93C21.2218 13.0175 21.3404 13.0666 21.4642 13.0666C21.5879 13.0666 21.7066 13.0175 21.7941 12.93C21.8816 12.8425 21.9308 12.7238 21.9308 12.6001C21.9269 9.2516 19.2134 6.53813 15.865 6.5343C15.6073 6.5343 15.3984 6.74318 15.3984 7.00088C15.3984 7.25859 15.6073 7.46746 15.865 7.46746Z" />
+                    <path
+                        d="M15.865 10.267C17.1528 10.2686 18.1964 11.3122 18.198 12.6C18.198 12.7238 18.2472 12.8424 18.3347 12.9299C18.4222 13.0174 18.5409 13.0666 18.6646 13.0666C18.7883 13.0666 18.907 13.0174 18.9945 12.9299C19.082 12.8424 19.1312 12.7238 19.1312 12.6C19.1291 10.797 17.668 9.33589 15.865 9.33386C15.6073 9.33386 15.3984 9.54274 15.3984 9.80044C15.3984 10.0581 15.6073 10.267 15.865 10.267Z" />
+                </svg>
+            </div>
+            <div class="content">
+                <span>To More Inquiry</span>
+                <h6><a href="tel:{{ get_setting('support_phone') }}">{{ get_setting('support_phone') }}</a></h6>
+            </div>
+        </div>
+    </div>
+    <div class="nav-right d-flex jsutify-content-end align-items-center">
+        <ul class="icon-list">
+            <li class="d-lg-flex">
+                <a class="btn_book_header" href="{{ route('tour.list') }}">
+                    Book Now
                 </a>
-                <!-- End Logo -->
-
-                <!-- Handheld Logo -->
-                <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-center u-header__navbar-brand-collapsed" href="{{ route('home') }}" aria-label="{{ get_setting('website_title') }}">
-                    <img src="{{ uploaded_asset(get_setting('website_logo')) }}" alt="{{ get_setting('website_title') }}" width="120">
-                </a>
-                <!-- End Handheld Logo -->
-
-                <!-- Scroll Logo -->
-                <a class="navbar-brand u-header__navbar-brand u-header__navbar-brand-center u-header__navbar-brand-on-scroll" href="{{ route('home') }}" aria-label="{{ get_setting('website_title') }}">
-                        
-                    <img src="{{ uploaded_asset(get_setting('website_logo')) }}" alt="{{ get_setting('website_title') }}" width="120">
-                </a>
-                <!-- End Scroll Logo -->
-
-                <!-- Responsive Toggle Button -->
-                <button type="button" class="navbar-toggler btn u-hamburger u-hamburger--primary order-2 ml-3" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
-                    <span id="hamburgerTrigger" class="u-hamburger__box">
-                        <span class="u-hamburger__inner"></span>
-                    </span>
-                </button>
-                <!-- End Responsive Toggle Button -->
-
-                <!-- Navigation -->
-                <div id="navBar" class="navbar-collapse u-header__navbar-collapse u-header-right-aligned-nav collapse order-2 order-xl-0 pt-4 pt-xl-0 pl-xl-6">
-                    <ul class="navbar-nav u-header__navbar-nav position-relative">
-                        <!-- Home -->
-                        <li class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="{{ route('home') }}" aria-expanded="false">{{ __('Home') }}</a>
-                        </li>
-                        <!-- End Home -->
-
-                        <!-- Yacht -->
-                        <li class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="{{ route('tour.list') }}" aria-expanded="false" aria-labelledby="yachtSubMenu">{{ __('Tours') }}</a>
-                        </li>
-                        <!-- End Yacht -->
-
-                        <!-- Flights -->
-                        <li class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="#" aria-expanded="false" aria-labelledby="flightsSubMenu">{{ __('Gallery') }}</a>
-                        </li>
-                        <!-- End Flights -->
-
-                        <!-- Pages -->
-                        <li class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="{{ route('contactus') }}" aria-expanded="false">{{ __('Contact us') }}</a>
-                        </li>
-                        <!-- End Pages -->
-
-                    </ul>
-                </div>
-                <!-- End Navigation -->
-
-                <!-- Search Form -->
-                <div class="position-relative u-header__search-xl">
-                    {{-- <a id="searchClassicInvoker" class="btn-text-dark" href="javascript:;" role="button" aria-controls="searchClassic" aria-haspopup="true" aria-expanded="false" data-unfold-target="#searchClassic" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                        <span class="flaticon-magnifying-glass-1 font-size-20"></span>
-                    </a> --}}
-
-                    <!-- Input -->
-                    {{-- <div id="searchClassic" class="dropdown-menu dropdown-unfold dropdown-menu-right u-unfold--css-animation u-unfold--hidden" aria-labelledby="searchClassicInvoker">
-                        <form class="js-focus-state input-group px-3" style="width: 370px;">
-                            <input class="form-control" type="search" placeholder="Search MyTour">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Search</button>
-                            </div>
-                        </form>
-                    </div> --}}
-                    <!-- End Input -->
-                </div>
-                <!-- Search Form -->
-
-                <!-- Shopping Cart -->
-                {{-- <div class="pl-2 pl-md-4 ml-auto shopping-cart">
-                    <a id="shoppingCartDropdownInvoker" class="btn-text-dark py-4 position-relative" href="javascript:;" role="button" aria-controls="shoppingCartDropdown" aria-haspopup="true" aria-expanded="false" data-unfold-event="hover" data-unfold-target="#shoppingCartDropdown" data-unfold-type="css-animation" data-unfold-duration="300" data-unfold-delay="300" data-unfold-hide-on-scroll="true" data-unfold-animation-in="slideInUp" data-unfold-animation-out="fadeOut">
-                        <span class="flaticon-shopping-basket font-size-25 text-primary-max-lg"></span>
-                    </a>
-
-                    <div id="shoppingCartDropdown" class="dropdown-menu dropdown-unfold dropdown-menu-right dropdown-menu-right-fix-wd-10 p-0 mt-0 w-max-sm-100 u-unfold--css-animation font-size-16" aria-labelledby="shoppingCartDropdownInvoker" style="width: 500px; animation-duration: 300ms; right: 0px;">
-                        <div class="card">
-                            <!-- Header -->
-                            <div class="card-header border-color-8 py-3 px-5">
-                                <span class="font-weight-semi-bold">Your Cart</span>
-                            </div>
-                            <!-- End Header -->
-
-                            <!-- Body -->
-                            <div class="card-body p-0">
-                                <div class="px-2 px-md-3 py-2 py-md-1 border-bottom border-color-8">
-                                    <div class="media p-2 p-md-3">
-                                        <div class="u-avatar u-lg-avatar-md mr-2 mr-md-3">
-                                            <img class="img-fluid rounded-pill" src="{{ asset('assets/frontend/img/80x80/img1.jpg') }}" alt="Image Description">
-                                        </div>
-                                        <div class="media-body position-relative pl-md-1">
-                                            <div class="d-flex justify-content-between align-items-start mb-2 mb-md-3">
-                                                <span class="d-block text-dark font-weight-bold">Hyatt Centric Times  Square</span>
-                                                <button type="button" class="close close-rounded position-md-absolute right-0 ml-2" aria-label="Close">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                            <span class="d-block text-gray-1">Price  £590.00 </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-2 px-md-3 py-2 py-md-1 border-bottom border-color-8">
-                                    <div class="media p-2 p-md-3">
-                                        <div class="u-avatar u-lg-avatar-md mr-2 mr-md-3">
-                                            <img class="img-fluid rounded-pill" src="{{ asset('assets/frontend/img/80x80/img2.jpg') }}" alt="Image Description">
-                                        </div>
-                                        <div class="media-body position-relative pl-md-1">
-                                            <div class="d-flex justify-content-between align-items-start mb-2 mb-md-3">
-                                                <span class="d-block text-dark font-weight-bold">Hyatt Centric Times  Square</span>
-                                                <button type="button" class="close close-rounded position-md-absolute right-0 ml-2" aria-label="Close">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                            <span class="d-block text-gray-1">Price  £590.00 </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Body -->
-
-                            <!-- Footer -->
-                            <div class="card-footer border-0 p-3 px-md-5 py-md-4">
-                                <div class="mb-4 pb-md-1">
-                                    <span class="d-block font-weight-semi-bold">Subtotal: £1180.00</span>
-                                </div>
-                                <div class="d-md-flex button-inline-group-md mb-1">
-                                    <a class="btn btn-block btn-md btn-gray-1 rounded-xs font-weight-bold transition-3d-hover" href="#">
-                                        View cart
-                                    </a>
-                                    <a class="btn btn-block btn-md btn-blue-1 rounded-xs font-weight-bold transition-3d-hover mt-md-0 ml-md-5" href="#">
-                                        Check Out
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- End Footer -->
-                        </div>
-                    </div>
-                </div> --}}
-                <!-- End Shopping Cart -->
-
-                <!-- Button -->
-                {{-- <div class="pl-4 ml-2 u-header__last-item-btn u-header__last-item-btn-lg">
-                    <a class="btn btn-wide rounded-xs btn-dark transition-3d-hover" href="#" target="_blank">Become Local Expert</a>
-                </div> --}}
-                <!-- End Button -->
-            </nav>
-            <!-- End Nav -->
+            </li>
+        </ul>
+        <div class="hotline-area d-xl-flex d-none">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+                    <path
+                        d="M27.2653 21.5995L21.598 17.8201C20.8788 17.3443 19.9147 17.5009 19.383 18.1798L17.7322 20.3024C17.6296 20.4377 17.4816 20.5314 17.3154 20.5664C17.1492 20.6014 16.9759 20.5752 16.8275 20.4928L16.5134 20.3196C15.4725 19.7522 14.1772 19.0458 11.5675 16.4352C8.95784 13.8246 8.25001 12.5284 7.6826 11.4893L7.51042 11.1753C7.42683 11.0269 7.39968 10.8532 7.43398 10.6864C7.46827 10.5195 7.56169 10.3707 7.69704 10.2673L9.81816 8.61693C10.4968 8.08517 10.6536 7.1214 10.1784 6.40198L6.39895 0.734676C5.91192 0.00208106 4.9348 -0.21784 4.18082 0.235398L1.81096 1.65898C1.06634 2.09672 0.520053 2.80571 0.286612 3.63733C-0.56677 6.74673 0.0752209 12.1131 7.98033 20.0191C14.2687 26.307 18.9501 27.9979 22.1677 27.9979C22.9083 28.0011 23.6459 27.9048 24.3608 27.7115C25.1925 27.4783 25.9016 26.932 26.3391 26.1871L27.7641 23.8187C28.218 23.0645 27.9982 22.0868 27.2653 21.5995ZM26.9601 23.3399L25.5384 25.7098C25.2242 26.2474 24.7142 26.6427 24.1152 26.8128C21.2447 27.6009 16.2298 26.9482 8.64053 19.3589C1.0513 11.7697 0.398595 6.75515 1.18669 3.88421C1.35709 3.28446 1.75283 2.77385 2.2911 2.45921L4.66096 1.03749C4.98811 0.840645 5.41221 0.93606 5.62354 1.25397L7.67659 4.3363L9.39976 6.92078C9.60612 7.23283 9.53831 7.65108 9.24392 7.88199L7.1223 9.53232C6.47665 10.026 6.29227 10.9193 6.68979 11.6283L6.85826 11.9344C7.45459 13.0281 8.19599 14.3887 10.9027 17.095C13.6095 19.8012 14.9696 20.5427 16.0628 21.139L16.3694 21.3079C17.0783 21.7053 17.9716 21.521 18.4653 20.8753L20.1157 18.7537C20.3466 18.4595 20.7647 18.3918 21.0769 18.5979L26.7437 22.3773C27.0618 22.5885 27.1572 23.0128 26.9601 23.3399ZM15.8658 4.66809C20.2446 4.67296 23.7931 8.22149 23.798 12.6003C23.798 12.858 24.0069 13.0669 24.2646 13.0669C24.5223 13.0669 24.7312 12.858 24.7312 12.6003C24.7257 7.7063 20.7598 3.74029 15.8658 3.73494C15.6081 3.73494 15.3992 3.94381 15.3992 4.20151C15.3992 4.45922 15.6081 4.66809 15.8658 4.66809Z" />
+                    <path
+                        d="M15.865 7.46746C18.6983 7.4708 20.9943 9.76678 20.9976 12.6001C20.9976 12.7238 21.0468 12.8425 21.1343 12.93C21.2218 13.0175 21.3404 13.0666 21.4642 13.0666C21.5879 13.0666 21.7066 13.0175 21.7941 12.93C21.8816 12.8425 21.9308 12.7238 21.9308 12.6001C21.9269 9.2516 19.2134 6.53813 15.865 6.5343C15.6073 6.5343 15.3984 6.74318 15.3984 7.00088C15.3984 7.25859 15.6073 7.46746 15.865 7.46746Z" />
+                    <path
+                        d="M15.865 10.267C17.1528 10.2686 18.1964 11.3122 18.198 12.6C18.198 12.7238 18.2472 12.8424 18.3347 12.9299C18.4222 13.0174 18.5409 13.0666 18.6646 13.0666C18.7883 13.0666 18.907 13.0174 18.9945 12.9299C19.082 12.8424 19.1312 12.7238 19.1312 12.6C19.1291 10.797 17.668 9.33589 15.865 9.33386C15.6073 9.33386 15.3984 9.54274 15.3984 9.80044C15.3984 10.0581 15.6073 10.267 15.865 10.267Z" />
+                </svg>
+            </div>
+            <div class="content">
+                <span>To More Inquiry</span>
+                <h6><a href="tel:+971525469933">{{ get_setting('support_phone') }}</a></h6>
+            </div>
+        </div>
+        <div class="sidebar-button mobile-menu-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
+                <path
+                    d="M0 4.46439C0 4.70119 0.0940685 4.92829 0.261511 5.09574C0.428955 5.26318 0.656057 5.35725 0.892857 5.35725H24.1071C24.3439 5.35725 24.571 5.26318 24.7385 5.09574C24.9059 4.92829 25 4.70119 25 4.46439C25 4.22759 24.9059 4.00049 24.7385 3.83305C24.571 3.6656 24.3439 3.57153 24.1071 3.57153H0.892857C0.656057 3.57153 0.428955 3.6656 0.261511 3.83305C0.0940685 4.00049 0 4.22759 0 4.46439ZM4.46429 11.6072H24.1071C24.3439 11.6072 24.571 11.7013 24.7385 11.8688C24.9059 12.0362 25 12.2633 25 12.5001C25 12.7369 24.9059 12.964 24.7385 13.1315C24.571 13.2989 24.3439 13.393 24.1071 13.393H4.46429C4.22749 13.393 4.00038 13.2989 3.83294 13.1315C3.6655 12.964 3.57143 12.7369 3.57143 12.5001C3.57143 12.2633 3.6655 12.0362 3.83294 11.8688C4.00038 11.7013 4.22749 11.6072 4.46429 11.6072ZM12.5 19.643H24.1071C24.3439 19.643 24.571 19.737 24.7385 19.9045C24.9059 20.0719 25 20.299 25 20.5358C25 20.7726 24.9059 20.9997 24.7385 21.1672C24.571 21.3346 24.3439 21.4287 24.1071 21.4287H12.5C12.2632 21.4287 12.0361 21.3346 11.8687 21.1672C11.7012 20.9997 11.6071 20.7726 11.6071 20.5358C11.6071 20.299 11.7012 20.0719 11.8687 19.9045C12.0361 19.737 12.2632 19.643 12.5 19.643Z" />
+            </svg>
         </div>
     </div>
 </header>
-<!-- ========== End HEADER ========== -->
+<!-- End header section -->

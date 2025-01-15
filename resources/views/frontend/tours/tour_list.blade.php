@@ -1,235 +1,115 @@
 @extends('frontend.layouts.main')
 @section('content')
 
-    <!-- Hero Section -->
-    <div class="bg-img-hero text-center mb-5 mb-lg-8"
-        style="background-image: url('https://firebasestorage.googleapis.com/v0/b/sahara-desert-dubai.appspot.com/o/all-packages.png?alt=media&token=6183720f-f4d9-49e5-9722-c389bc665abb');">
-        <div class="container space-top-xl-3 pt-10 py-xl-0">
-            <div class="row justify-content-center py-xl-4">
-                <!-- Info -->
-                <div class="py-xl-10 py-5">
-                    <h1 class="font-size-40 font-size-xs-30 text-white font-weight-bold mb-0">Tours</h1>
-                    <p class="font-size-14 text-white px-3">Here you can find all the Standard tours offered by our team</p>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb breadcrumb-no-gutter justify-content-center mb-0">
-                            <li class="breadcrumb-item font-size-14"> <a class="text-white"
-                                    href="{{ route('home') }}">Home</a> </li>
-                            <li class="breadcrumb-item custom-breadcrumb-item font-size-14 text-white active"
-                                aria-current="page">Tours</li>
-                        </ol>
-                    </nav>
-                </div>
-                <!-- End Info -->
-            </div>
-        </div>
-    </div>
-    <!-- End Hero Section -->
-
+<div class="breadcrumb-section" style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0.3) 101.02%), url({{ asset('assets/frontend/img/all-packages-bg.png') }});">  
     <div class="container">
-        <div class="row mb-5 mb-md-8 pb-md-1">
-            <div class="col-lg-12 col-xl-12 order-md-2 order-lg-3">
-                <!-- Shop-control-bar Title -->
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h3 class="font-size-21 font-weight-bold mb-0 text-lh-1">{{ @$tour_count }} <small>Tours Results
-                            Showing</small></h3>
-                    <ul class="nav tab-nav-shop flex-nowrap" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link font-size-22 p-0" id="pills-three-example1-tab" data-toggle="pill"
-                                href="#pills-three-example1" role="tab" aria-controls="pills-three-example1"
-                                aria-selected="true">
-                                <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                    <i class="fa fa-list"></i>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link font-size-22 p-0 ml-2 active" id="pills-one-example1-tab" data-toggle="pill"
-                                href="#pills-one-example1" role="tab" aria-controls="pills-one-example1"
-                                aria-selected="false">
-                                <div class="d-md-flex justify-content-md-center align-items-md-center">
-                                    <i class="fa fa-th"></i>
-                                </div>
-                            </a>
-                        </li>
+        <div class="row">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <div class="banner-content">
+                    <h1>All Packages</h1>
+                    <p class="text-white">Here you can find all the Standard tour packages offered by our team</p>
+                    <ul class="breadcrumb-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li>All Packages</li>
                     </ul>
                 </div>
-                <!-- End shop-control-bar Title -->
-
-                <!-- Slick Tab carousel -->
-                <div class="u-slick__tab">
-                    @if (!empty($tours))
-                        <!-- Tab Content -->
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade" id="pills-three-example1" role="tabpanel"
-                                aria-labelledby="pills-three-example1-tab" data-target-group="groups">
-                                <ul class="d-block list-unstyled products-group prodcut-list-view">
-                                    @foreach ($tours as $key => $tour)
-                                        <li class="card mb-5 overflow-hidden">
-                                            <div class="product-item__outer w-100">
-                                                <div class="row">
-                                                    <div class="col-md-5 col-xl-4">
-                                                        <div class="product-item__header">
-                                                            <div class="position-relative">
-                                                                <div class="js-slick-carousel u-slick u-slick--equal-height u-slick--gutters-3"
-                                                                    data-slides-show="1" data-slides-scroll="1"
-                                                                    data-arrows-classes="d-none d-lg-inline-block u-slick__arrow-classic v4 u-slick__arrow-classic--v4 u-slick__arrow-centered--y rounded-circle"
-                                                                    data-arrow-left-classes="flaticon-back u-slick__arrow-classic-inner u-slick__arrow-classic-inner--left"
-                                                                    data-arrow-right-classes="flaticon-next u-slick__arrow-classic-inner u-slick__arrow-classic-inner--right">
-                                                                    <div class="js-slide">
-                                                                        <a href="{{ route('tour.detail', @$tour->slug) }}"
-                                                                            class="d-block gradient-overlay-half-bg-gradient-v5"><img
-                                                                                class="img-fluid min-height-230"
-                                                                                src="{{ uploaded_asset(@$tour->thumbnail_img) }}"></a>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-7 col-xl-5 flex-horizontal-center">
-                                                        <div class="w-100 position-relative m-4 m-md-0">
-                                                            <div class="mb-2 pb-1">
-                                                                @if (@$tour->featured == 1)
-                                                                    <span
-                                                                        class="badge badge-pill bg-blue-1 text-white px-4 py-1 font-size-14 font-weight-normal text-lh-1dot6 mb-1">Featured</span>
-                                                                @endif
-                                                                @if (@$tour->discount > 1)
-                                                                    <span
-                                                                        class="badge badge-pill bg-success text-white px-3 py-1 font-size-14 font-weight-normal text-lh-1dot6 mb-1 ml-2">{{ @$tour->discount }}%
-                                                                        OFF</span>
-                                                                @endif
-                                                            </div>
-                                                            <a href="{{ route('tour.detail', @$tour->slug) }}">
-                                                                <span
-                                                                    class="font-weight-bold font-size-17 text-dark d-flex mb-1">{{ @$tour->name }}</span>
-                                                            </a>
-                                                            <div class="card-body p-0">
-                                                                <a href="{{ route('tour.detail', @$tour->slug) }}"
-                                                                    class="d-block mb-3">
-                                                                    <div
-                                                                        class="d-flex flex-wrap flex-xl-nowrap align-items-center font-size-14 text-gray-1">
-                                                                        <span class="fas fa-cloud-sun-rain"></span>&nbsp;
-                                                                        {{ @$tour->season }}
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="col col-xl-3 align-self-center py-4 py-xl-0 border-top border-xl-top-0">
-                                                        <div class="border-xl-left border-color-7">
-                                                            <div class="ml-md-4 ml-xl-0">
-                                                                <div
-                                                                    class="text-center text-md-left text-xl-center d-flex flex-column mb-2 pb-1 ml-md-3 ml-xl-0">
-                                                                    <div class="d-flex flex-column mb-2">
-                                                                        {{-- <span class="font-weight-normal font-size-14 text-gray-1 mb-2 pb-1 ml-md-2 ml-xl-0">Multi-day Tours</span> --}}
-                                                                        <span
-                                                                            class="font-weight-normal font-size-14 text-gray-1"><i
-                                                                                class="icon flaticon-clock-circular-outline mr-2 text-muted font-size-14"></i>
-                                                                            {{ @$tour->duration }}</span>
-                                                                    </div>
-                                                                    <div class="mb-0">
-                                                                        @if (@$tour->child_price > 1)
-                                                                            <span
-                                                                                class="mr-1 font-size-14 text-gray-1">From</span>
-                                                                            <span
-                                                                                class="font-weight-bold font-size-22 text-success">{{ single_price(@$tour->child_price) }}</span>
-                                                                        @else
-                                                                            <span
-                                                                                class="mr-1 font-size-14 text-gray-1">From</span>
-                                                                            <span
-                                                                                class="font-weight-bold font-size-22 text-success">{{ single_price(@$tour->sell_price) }}</span>
-                                                                        @endif
-                                                                    </div>
-                                                                </div>
-                                                                <div
-                                                                    class="d-flex justify-content-center justify-content-md-start justify-content-xl-center">
-                                                                    <a href="{{ route('tour.detail', @$tour->slug) }}"
-                                                                        class="btn btn-outline-primary d-flex align-items-center justify-content-center font-weight-bold min-height-50 border-radius-3 border-width-2 px-2 px-5 py-2">View
-                                                                        Detail</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="tab-pane fade show active" id="pills-one-example1" role="tabpanel"
-                                aria-labelledby="pills-one-example1-tab" data-target-group="groups">
-                                <div class="row">
-                                    @foreach ($tours as $key => $tour)
-                                        <div class="col-md-3 col-xl-3 mb-3 mb-md-4 pb-1">
-                                            <div class="card mb-1 transition-3d-hover shadow-hover-2 tab-card h-100">
-                                                <div class="position-relative mb-2">
-                                                    <a href="{{ route('tour.detail', @$tour->slug) }}"
-                                                        class="d-block gradient-overlay-half-bg-gradient-v5">
-                                                        <img class="min-height-230 bg-img-hero card-img-top"
-                                                            src="{{ uploaded_asset($tour->thumbnail_img) }}"
-                                                            alt="img">
-                                                    </a>
-                                                    <div class="position-absolute top-0 left-0 pt-5 pl-3">
-                                                        @if (@$tour->featured == 1)
-                                                            <span
-                                                                class="badge badge-pill bg-white text-primary px-4 py-2 font-size-14 font-weight-normal">Featured</span>
-                                                        @endif
-                                                        @if (@$tour->discount > 1)
-                                                            <span
-                                                                class="badge badge-pill bg-white text-danger px-3 ml-3 py-2 font-size-14 font-weight-normal">{{ @$tour->discount }}%
-                                                                OFF</span>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="card-body px-4 py-2">
-                                                    <a href="{{ route('tour.detail', @$tour->slug) }}" class="d-block">
-                                                        <div
-                                                            class="mb-1 d-flex align-items-center font-size-14 text-primary">
-                                                            <span class="fas fa-cloud-sun-rain"></span>&nbsp;
-                                                            {{ @$tour->season }}
-                                                        </div>
-                                                    </a>
-                                                    <a href="{{ route('tour.detail', @$tour->slug) }}"
-                                                        class="card-title font-size-17 font-weight-bold mb-0 text-dark"
-                                                        style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;min-height: 3em;">{{ @$tour->name }}</a>
-                                                    <div class="font-size-14 text-muted pt-2">
-                                                        <i
-                                                            class="icon flaticon-clock-circular-outline mr-2 text-muted font-size-14"></i>
-                                                        {{ @$tour->duration }}
-                                                    </div>
-
-                                                    <div class="bottom-0 left-0 right-0">
-                                                        <div class="pb-2">
-                                                            @if (@$tour->child_price > 1)
-                                                                <h2
-                                                                    class="h5 text-success mb-0 font-weight-bold font-size-17">
-                                                                    <small
-                                                                        class="mr-2">From</small>{{ single_price(@$tour->child_price) }}
-                                                                </h2>
-                                                            @else
-                                                                <h2
-                                                                    class="h5 text-success mb-0 font-weight-bold font-size-17">
-                                                                    <small
-                                                                        class="mr-2">From</small>{{ single_price(@$tour->sell_price) }}
-                                                                </h2>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Tab Content -->
-                    @endif
-                </div>
-                {{ @$tours->links() }}
-                <!-- Slick Tab carousel -->
             </div>
         </div>
     </div>
+</div>
+
+@if(@$tour_count > 0)
+<!-- Start Package Grid section -->
+<div class="package-grid-section pt-50 mb-80">
+    <div class="container">
+        <div class="row gy-5 mb-70">
+            @foreach($tours as $key => $tour)
+            <div class="col-lg-4 col-md-6">
+                <div class="package-card">
+                    <div class="package-card-img-wrap">
+                        <a href="{{ route('tour.detail', @$tour->slug) }}" class="card-img"><img src="{{ uploaded_asset(@$tour->thumbnail_img) }}" alt=""></a>
+                        <div class="batch">
+                            @if(!empty($tour->subtitle))
+                            <span class="date">{{ @$tour->subtitle }}</span>
+                            @endif
+                            <div class="location">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                    <path d="M8.99939 0C5.40484 0 2.48047 2.92437 2.48047 6.51888C2.48047 10.9798 8.31426 17.5287 8.56264 17.8053C8.79594 18.0651 9.20326 18.0646 9.43613 17.8053C9.68451 17.5287 15.5183 10.9798 15.5183 6.51888C15.5182 2.92437 12.5939 0 8.99939 0ZM8.99939 9.79871C7.19088 9.79871 5.71959 8.32739 5.71959 6.51888C5.71959 4.71037 7.19091 3.23909 8.99939 3.23909C10.8079 3.23909 12.2791 4.71041 12.2791 6.51892C12.2791 8.32743 10.8079 9.79871 8.99939 9.79871Z"></path>
+                                </svg>
+                                <ul class="location-list">
+                                    @if(!empty($tour->places))
+                                        <li><a href="#">{{ @$tour->places }}</a></li>
+                                    @endif
+                                    @if(!empty($tour->duration))
+                                        <li><a href="#">{{ @$tour->duration }}</a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="package-card-content">
+                        <div class="card-content-top">
+                            <h5><a href="{{ route('tour.detail', @$tour->slug) }}">{{ @$tour->name }}</a></h5>
+                            <div class="location-area">
+                                <ul class="location-list scrollTextAni">
+                                    <li><a href="#">Pick-Up &amp; Drop-Off</a></li>
+                                    <li><a href="#">Dune Bashing</a></li>
+                                    <li><a href="#">SandBoarding</a></li>
+                                    <li><a href="#">Camel Riding</a></li>
+                                    <li><a href="#">Live Entertainment</a></li>
+                                    <li><a href="#">BBQ Dinner</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                         <div class="card-content-bottom">
+                             <div class="price-area">
+                                 <h6>Starting Form:</h6>
+                                 @if(@$tour->child_price > 1)
+                                    <span>{{ single_price(@$tour->child_price) }}</span>
+                                @else
+                                    <span>{{ single_price(@$tour->sell_price) }}</span>
+                                @endif
+                                 <p>TAXES INCL/PERS</p>
+                             </div>
+                             <a href="{{ route('tour.detail', @$tour->slug) }}" class="primary-btn2">Book a Trip</a>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <nav class="inner-pagination-area">
+                    <ul class="pagination-list">
+                        <li>
+                            <a href="#" class="shop-pagi-btn"><i class="bi bi-chevron-left"></i></a>
+                        </li>
+                        <li>
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="active">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="bi bi-three-dots"></i></a>
+                        </li>
+                        <li>
+                            <a href="#">6</a>
+                        </li>
+                        <li>
+                            <a href="#" class="shop-pagi-btn"><i class="bi bi-chevron-right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Package Grid section -->
+@endif
 
 @endsection
